@@ -1,0 +1,15 @@
+body {
+    width: 650px;
+    font-size: xx-large;
+    background: #fff;
+    padding: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: auto;
+    border-radius: 35px 35px 0 35px;
+}
+
+html {
+    background: aliceblue;
+}
