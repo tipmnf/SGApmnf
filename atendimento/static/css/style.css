@@ -1,5 +1,5 @@
 body {
-    width: 650px;
+    width: 50%;
     font-size: xx-large;
     background: #fff;
     padding: 55px;
@@ -11,5 +11,27 @@ body {
 }
 
 html {
-    background: aliceblue;
+    background: #3875a3;
 }
+
+table {
+    width: 100%;
+}
+
+tbody#tbody {
+    text-align-last: center;
+}
+
+a {
+    display: grid;
+    padding: 10px 20px;
+    background: #59c25d;
+    color: #fff;
+    justify-content: center;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
+
+}
+
+h1 {text-align: center;margin-top: -20px;}
