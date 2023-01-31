@@ -3,10 +3,6 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
 
-class Atendente(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cabine = models.CharField(max_length=100)
-
 class TipoAtendimento(models.Model):
     prefixo = models.CharField(max_length=4)
     nome = models.CharField(max_length=100)
@@ -14,7 +10,11 @@ class TipoAtendimento(models.Model):
 
     def __str__(self):
         return self.nome
-    
+
+class Atendente(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    cabine = models.CharField(max_length=100)
+    tipo_atendimento = models.ForeignKey(TipoAtendimento, on_delete=models.PROTECT)    
 
 class Atendimento(models.Model):
     nome_cliente = models.CharField(max_length=255, verbose_name='Digite seu nome')

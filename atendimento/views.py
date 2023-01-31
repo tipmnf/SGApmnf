@@ -23,14 +23,14 @@ def gerar_senha(request):
 
 @login_required
 def chamar_proxima_senha(request):
-    atendente = Atendente.objects.get(user=request.user)    
-    if request.method == 'POST':        
-        atendente.cabine = request.POST.get('cabine')
-        atendente.save()
+    atendente = Atendente.objects.get(user=request.user)        
     try:
-        senha_atual = Atendimento.objects.filter(status_atendimento='fila').order_by('data_atendimento').first()
+        senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
         if not senha_atual:
-            senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Preferencial').order_by('data_atendimento').first()    
+            if atendente.tipo_atendimento.nome == 'Preferencial':
+                senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
+            elif not atendente.tipo_atendimento.nome == "Processos":
+                senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Preferencial').order_by('data_atendimento').first()    
         else: print(senha_atual)
         senha_atual.status_atendimento = 'chamando'
         senha_atual.atendente = atendente    
