@@ -12,18 +12,23 @@
         <!-- <th>Data e hora da chamada</th> -->
       </tr>
     </thead>
-    <tbody id="tbody">
-      {% for senha in senhas %}
-      <tr>
-        <td>{{ senha.tipo_atendimento.prefixo }}{{senha.numero_senha}}</td>
-        <td>{{ senha.nome_cliente }}</td>
-        <td>{{ senha.cabine }}</td>
-        <!-- <td>{{ senha.data_chamada }}</td> -->
-      </tr>
-      {% endfor %}
+    <tbody id="tbody">     
     </tbody>
   </table>
-  <img src="/static/images/pinguin.png" alt="">
+</div>
+<div id="anteriores">
+  <table>
+    <thead>
+      <tr>
+        <th>Senha</th>
+        <th>Nome do cliente</th>
+        <th>Cabine</th>
+        <!-- <th>Data e hora da chamada</th> -->
+      </tr>
+    </thead>
+    <tbody id="tbodyanteriores">
+    </tbody>
+  </table>
 </div>
 <script src="/static/js/chamado.js"></script>
 {% endblock %}

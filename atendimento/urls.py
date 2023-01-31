@@ -21,6 +21,7 @@ urlpatterns = [
     path('', views.senhas_chamadas, name='senhas_chamadas'),
     
     path('tabela-dados/', views.tabela_dados, name='tabela_dados'),
+    path('tabela-dados-anteriores/', views.tabela_dados_anteriores, name='tabela_dados_anteriores'),
     path('tabela-dados-fila/', views.tabela_dados_fila, name='tabela_dados_fila'),
     path('tabela-dados-fila/<prefixo>', views.tabela_dados_fila_especifica, name='tabela_dados_fila_especifica'),
 ]
