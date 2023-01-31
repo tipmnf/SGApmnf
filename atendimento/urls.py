@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('gerar-senha/', views.gerar_senha, name='gerar_senha'),
     
-    path('atendente/', views.ocioso, name='atendente'),
+    path('', views.ocioso, name='atendente'),
     path('atendente/<prefixo>', views.ocioso_especifico, name='atendente_especifico'),
     
     path('chamar-proxima-senha/', views.chamar_proxima_senha, name='chamar_proxima_senha'),
@@ -18,7 +18,7 @@ urlpatterns = [
     path('finalizar-atendimento/<id>/', views.finalizarAtendimento, name='finalizar-atendimento'),
     path('finalizar-atendimento/<id>/<prefixo>', views.finalizarAtendimentoEspecifico, name='finalizar-atendimento-especifico'),
     
-    path('', views.senhas_chamadas, name='senhas_chamadas'),
+    path('display/', views.senhas_chamadas, name='senhas_chamadas'),
     
     path('tabela-dados/', views.tabela_dados, name='tabela_dados'),
     path('tabela-dados-anteriores/', views.tabela_dados_anteriores, name='tabela_dados_anteriores'),
