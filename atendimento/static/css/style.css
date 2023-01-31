@@ -16,6 +16,7 @@ html {
 
 table {
     width: 100%;
+
 }
 
 tbody#tbody {
@@ -25,13 +26,56 @@ tbody#tbody {
 a {
     display: grid;
     padding: 10px 20px;
-    background: #59c25d;
+    background: #59c289;
     color: #fff;
     justify-content: center;
     border-radius: 20px;
     text-decoration: none;
     margin-bottom: 10px;
-
 }
 
 h1 {text-align: center;margin-top: -20px;}
+ 
+form {
+    display: none;
+}body {
+    width: 50%;
+    font-size: xx-large;
+    background: #fff;
+    padding: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: auto;
+    border-radius: 35px 35px 0 35px;
+}
+
+html {
+    background: #3875a3;
+}
+
+table {
+    width: 100%;
+
+}
+
+tbody#tbody {
+    text-align-last: center;
+}
+
+a {
+    display: grid;
+    padding: 10px 20px;
+    background: #59c289;
+    color: #fff;
+    justify-content: center;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+h1 {text-align: center;margin-top: -20px;}
+ 
+form {
+    display: none;
+}
