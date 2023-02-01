@@ -1,8 +1,10 @@
+<div class="gerar-senha">
 {% extends 'template.html' %}
 {% block subtitulo %}
 - Gerar Senha
 {% endblock %}
 {% block content %}
+
     <form method="POST">
         {% csrf_token %}
         {% comment %} <label for="nome">Nome:</label>
@@ -20,4 +22,6 @@
         <br>
         <input type="submit" value="Gerar senha">
       </form>
+
 {% endblock %}
+</div>

@@ -1,3 +1,4 @@
+<div class="senhas-chamadas">
 {% extends 'template.html' %}
 {% block subtitulo %}
 {% endblock %}
@@ -6,9 +7,9 @@
   <table class="ultima-senha">
     <thead>
       <tr>
-        <th>Senha</th>
-        <th>Nome do cliente</th>
-        <th>Cabine</th>
+        <th class="senha">Senha</th>
+        <th class="nome">Nome</th>
+        <th class="cabine">Cabine</th>
         <!-- <th>Data e hora da chamada</th> -->
       </tr>
     </thead>
@@ -27,4 +28,5 @@
   </table>
 </div>
 <script src="/static/js/chamado.js"></script>
-{% endblock %}
+{% endblock %} 
+</div>
