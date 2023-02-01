@@ -8,12 +8,9 @@ function contaFila(dados) {
         }
     });    
     
-    pessoasFila.innerHTML = str(numPessoas);
+    pessoasFila.innerHTML = numPessoas;
 
     }
-
-
-
 
 function getFilas(){
     fetch("/tabela-dados-fila/")
@@ -24,3 +21,7 @@ function getFilas(){
             contaFila(dados);
         });
 }
+
+setInterval(function() {
+    getFilas()
+}, 5000);

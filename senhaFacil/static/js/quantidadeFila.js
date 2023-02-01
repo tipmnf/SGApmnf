@@ -8,7 +8,7 @@ function contaFila(dados) {
         }
     });    
     
-    pessoasFila.innerHTML = str(numPessoas);
+    pessoasFila.innerHTML = numPessoas;
 
     }
 

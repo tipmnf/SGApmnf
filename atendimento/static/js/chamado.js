@@ -13,9 +13,9 @@ corpoTabela.innerHTML = '';
 dados.forEach(function(dado) {
     var linha = document.createElement("tr");
 
-    var senha = document.createElement("td");
-    senha.innerHTML = dado.senha;
-    linha.appendChild(senha);
+    // var senha = document.createElement("td");
+    // senha.innerHTML = dado.senha;
+    // linha.appendChild(senha);
     
     var cliente = document.createElement("td");
     cliente.innerHTML = dado.cliente;
@@ -44,9 +44,9 @@ function montaTabelaAnteriores(dados) {
     dados.forEach(function(dado) {
         var linha = document.createElement("tr");
     
-        var senha = document.createElement("td");
-        senha.innerHTML = dado.senha;
-        linha.appendChild(senha);
+        // var senha = document.createElement("td");
+        // senha.innerHTML = dado.senha;
+        // linha.appendChild(senha);
         
         var cliente = document.createElement("td");
         cliente.innerHTML = dado.cliente;
