@@ -80,4 +80,5 @@ function getFilas(){
             .then(function(dados) {
                 montaTabelaAnteriores(dados);
             });
+        
     }
