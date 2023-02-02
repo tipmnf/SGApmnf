@@ -1,5 +1,5 @@
 body {
-    width: 50%;
+    width: 80%;
     font-size: xx-large;
     background: #fff;
     padding: 55px;
@@ -35,4 +35,38 @@ a {
 }
 
 h1 {text-align: center;margin-top: -20px;}
- 
+ /* Senhas Chamadas */
+.senhas-chamadas tbody#tbody {
+    font-size: 150px;
+    color: red;
+}
+
+.senhas-chamadas thead {
+    font-size: 64px;
+}
+
+.senhas-chamadas p.titulo-anterior {
+    text-align: center;
+    text-align: -webkit-center;
+}
+
+.senhas-chamadas .senha-anterior {
+    width: 50%;
+    float: left;
+}
+
+.senhas-chamadas video {
+    width: 50%;
+    float: right;
+    margin-top: 45px;
+}
+
+.senhas-chamadas table {
+    font-size: -webkit-xxx-large;
+    font-size: xxx-large;
+}
+
+.senhas-chamadas p.titulo-anterior {
+    font-size: xxx-large;
+}
+/*  */
