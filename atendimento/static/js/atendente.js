@@ -32,4 +32,4 @@ function busca(){
 busca()
 setInterval(function() {
     busca()
-}, 10000);
+}, 5000);

@@ -116,6 +116,8 @@ def tabela_dados_anteriores(request):
 def tabela_dados_fila(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
     atendimentos = Atendimento.objects.all()
+    atendimentos = sorted(atendimentos, key=lambda atendimento: atendimento.atendente.tipo_atendimento.nome)
+
     dados = [
         {
             'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),            
@@ -124,6 +126,7 @@ def tabela_dados_fila(request):
         }
         for atendimento in atendimentos if atendimento.status_atendimento == 'fila'
     ]
+    
     return JsonResponse(dados, safe=False)
 
 @login_required
