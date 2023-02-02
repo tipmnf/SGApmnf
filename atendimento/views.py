@@ -116,7 +116,8 @@ def tabela_dados_anteriores(request):
 def tabela_dados_fila(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
     atendimentos = Atendimento.objects.all()
-    atendimentos = sorted(atendimentos, key=lambda atendimento: atendimento.atendente.tipo_atendimento.nome)
+    atendente = Atendente.objects.get(user=request.user)
+    atendimentos = sorted(atendimentos, key=lambda atendimento: (atendimento.tipo_atendimento.nome == atendente.tipo_atendimento.nome, -atendimento.numero_senha))  
 
     dados = [
         {
@@ -127,7 +128,7 @@ def tabela_dados_fila(request):
         for atendimento in atendimentos if atendimento.status_atendimento == 'fila'
     ]
     
-    return JsonResponse(dados, safe=False)
+    return JsonResponse(dados[::-1], safe=False)
 
 @login_required
 def tabela_dados_fila_especifica(request, prefixo):

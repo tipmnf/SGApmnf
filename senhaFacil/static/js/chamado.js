@@ -3,7 +3,7 @@ function speak(text, cabine) {
     speech.text = text+", por favor se dirija à cabine"+cabine;
     speech.lang = 'pt-BR';
     speech.volume = 1;
-    speech.rate = 1;
+    speech.rate = 0.5;
     speech.pitch = 1;
     window.speechSynthesis.speak(speech);
 }

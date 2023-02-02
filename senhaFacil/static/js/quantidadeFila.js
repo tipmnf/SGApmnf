@@ -12,9 +12,6 @@ function contaFila(dados) {
 
     }
 
-
-
-
 function getFilas(){
     fetch("/tabela-dados-fila/")
         .then(function(response) {
@@ -24,3 +21,7 @@ function getFilas(){
             contaFila(dados);
         });
 }
+
+setInterval(function() {
+    getFilas()
+}, 5000);
