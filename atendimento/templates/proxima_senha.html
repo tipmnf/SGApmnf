@@ -1,10 +1,15 @@
-<div class"proxima-senha">
+<div class="proxima-senha">
 {% extends 'template.html' %}
 {% block subtitulo %}
 - Atendimento
 {% endblock %}
 {% block content %}
-
+<form method="post">
+    {% csrf_token %}
+    <label for="cabine">Defina a sua cabine</label>
+    <input type="text" name="cabine" value="{{ cabine }}">
+    <input type="submit" value="Definir cabine">
+</form>
   {% if senha %}
   <h1>Chamando</h1>
   {% else %}
