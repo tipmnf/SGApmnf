@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -33,6 +32,7 @@ class Atendimento(models.Model):
                 self.numero_senha = 1
         else:
             self.numero_senha = 1
+
         return f'{self.tipo_atendimento.prefixo}{str(self.numero_senha).zfill(3)}'
     
     def emAtendimento(self):

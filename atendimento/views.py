@@ -3,6 +3,7 @@ from .forms import GerarSenhaForm
 from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from escpos.printer import Usb
 # Create your views here.
 
 @login_required
@@ -17,8 +18,11 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
+            imprimeSenha(request)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
+
+    
     return render(request, 'gerar_senha.html', context)
 
 @login_required
@@ -199,3 +203,25 @@ def proximo(request):
 @login_required
 def finalizarSemAtendimento(request):
     return redirect('chamar_proxima_senha')
+
+@login_required
+def imprimeSenha(request):
+
+    printer = Usb(0x4b8, 0xe03)
+
+    printer.text("DEU BOM")
+    printer.cut()
+
+    printer.close()
+
+
+
+# @login_required
+# def getSenhaAtual(request):
+#     senhasChamando = Atendimento.objects.filter(status_atendimento='chamando').order_by('-data_atendimento')
+#     if len(senhasChamando) == 0:
+#         temChamando = False
+#     else:
+#         temChamando = True
+
+#     return JsonResponse({'temChamando': temChamando})

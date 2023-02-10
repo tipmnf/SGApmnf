@@ -69,4 +69,13 @@ h1 {text-align: center;margin-top: -20px;}
 .senhas-chamadas p.titulo-anterior {
     font-size: xxx-large;
 }
-/*  */
+/* Proxima senha  */
+.proxima-senha table {
+    font-size: xxx-large;
+    font-size: -webkit-xxx-large;
+}
+
+/* display */
+.senhas-chamadas {
+    display: table;
+} 
