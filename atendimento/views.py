@@ -204,6 +204,7 @@ def proximo(request):
 def finalizarSemAtendimento(request):
     return redirect('chamar_proxima_senha')
 
+from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
@@ -213,7 +214,7 @@ def imprimeSenha(request, atendimento):
     printer.set(align='center', width=6, height=6)
     printer.text(senha)
     
-    # printer.image("/atendimento/static/img/logo.png")
+    printer.image(PROJECT_ROOT+"/static/img/logo.png")
     printer.cut()
 
     printer.close()
