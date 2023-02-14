@@ -211,7 +211,8 @@ def imprimeSenha(request, atendimento):
     senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
 
     printer.set(align='center', width=6, height=6)
-    printer.textln(senha)
+    printer.text(senha)
+    printer.ln(count=2)
     printer.image("/static/img/logo.png")
     printer.cut()
 
