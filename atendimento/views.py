@@ -212,7 +212,7 @@ def imprimeSenha(request, atendimento):
 
     printer.set(align='center', width=6, height=6)
     printer.text(senha)
-    printer.ln(count=2)
+    
     printer.image("/static/img/logo.png")
     printer.cut()
 
