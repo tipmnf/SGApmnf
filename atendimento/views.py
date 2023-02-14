@@ -210,7 +210,7 @@ def imprimeSenha(request, atendimento):
     printer = Usb(0x4b8, 0xe03)
     senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
 
-    printer.text("{\\L}{\\H1}" + senha + "{\\L}{\\H}\n")
+    printer.text("{\\H1}" + senha + "{\\H}")
     printer.cut()
 
     printer.close()
