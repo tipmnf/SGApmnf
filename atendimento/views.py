@@ -214,7 +214,7 @@ def imprimeSenha(request, atendimento):
     printer.set(align='center', width=6, height=6)
     printer.text(senha)
     
-    printer.image(PROJECT_ROOT+"/static/img/logo.png")
+    printer.image(img_source=PROJECT_ROOT+"/static/img/logo.png", impl="graphics")
     printer.cut()
 
     printer.close()
