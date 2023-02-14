@@ -208,13 +208,13 @@ from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
-    printer = Usb(0x4b8, 0xe03)
+    printer = Usb(0x4b8, 0xe03, profile='TM-T20')
     senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
 
     printer.set(align='center', width=6, height=6)
     printer.text(senha)
-    
-    printer.image(img_source=PROJECT_ROOT+"/static/img/logo.png", impl="graphics")
+    printer.text(senha)    
+    printer.image(img_source=PROJECT_ROOT+"/static/img/logo.png")
     printer.cut()
 
     printer.close()
