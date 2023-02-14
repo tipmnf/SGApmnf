@@ -4,6 +4,7 @@ from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb
+from jinja2 import Template
 # Create your views here.
 
 @login_required
@@ -208,9 +209,15 @@ def finalizarSemAtendimento(request):
 def imprimeSenha(request, atendimento):
 
     printer = Usb(0x4b8, 0xe03)
-    senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
 
-    printer.text("{ESC|bC}{ESC|!2C}" + senha + "{ESC|!0C}{ESC|!0C}\n")
+    template_str = """
+        <span style="font-size: 24pt">{{ atendimento.tipo_atendimento.prefixo }}{{ atendimento.numero_senha }}</span>
+    """
+
+    template = Template(template_str)
+    output = template.render(atendimento=atendimento)
+
+    printer.text(output + "\n")
     printer.cut()
 
     printer.close()
