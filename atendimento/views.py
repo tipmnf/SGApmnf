@@ -18,7 +18,7 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            imprimeSenha(request)
+            imprimeSenha(request, atendimento)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -205,11 +205,12 @@ def finalizarSemAtendimento(request):
     return redirect('chamar_proxima_senha')
 
 @login_required
-def imprimeSenha(request):
+def imprimeSenha(request, atendimento):
 
     printer = Usb(0x4b8, 0xe03)
+    senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
 
-    printer.text("DEU BOM")
+    printer.text("{\\L}{\\H1}" + senha + "{\\L}{\\H}\n")
     printer.cut()
 
     printer.close()
