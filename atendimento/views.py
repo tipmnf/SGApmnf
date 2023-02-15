@@ -213,14 +213,16 @@ def imprimeSenha(request, atendimento):
 
     printer.set(align='center', width=1, height=1)
     printer.text("SENHA:")
+    printer.ln(count=2)
 
     printer.set(align='center', width=6, height=8)
-    printer.text(senha)  
+    printer.text(senha)
+    printer.ln(count=2)  
 
     # printer.image(img_source=PROJECT_ROOT+"/static/img/logo-min.jpg")
     printer.set(align='center', width=1, height=1)
     printer.text("Prefeitura Municipal de Nova Friburgo")
-    
+
     printer.cut()
 
     printer.close()
