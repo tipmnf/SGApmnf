@@ -7,18 +7,18 @@
 
     <form method="POST">
         {% csrf_token %}
-        {% comment %} <label for="nome">Nome:</label>
-        <input type="text" id="nome_cliente" name="nome_cliente" required>
-        <br>
+        <!-- <label for="nome">Nome:</label>
+        <input type="text" id="nome_cliente" name="nome_cliente" required> -->
+        <!-- <br> -->
         <label for="tipo_atendimento">Tipo de atendimento:</label>
         <select id="tipo_atendimento" name="tipo_atendimento" required>
           {% for tipo in tipos_atendimento %}
           <option value="{{ tipo.id }}">{{ tipo.nome }}</option>
           {% endfor %}
-        </select> {% endcomment %}
-        <table>
+        </select> 
+        <!-- <table>
           {{form.as_table}}  
-        </table>
+        </table> -->
         <br>
         <input type="submit" value="Gerar senha">
     </form>

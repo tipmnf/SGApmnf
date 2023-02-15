@@ -16,7 +16,7 @@ class Atendente(models.Model):
     tipo_atendimento = models.ForeignKey(TipoAtendimento, on_delete=models.PROTECT)    
 
 class Atendimento(models.Model):
-    nome_cliente = models.CharField(max_length=255, verbose_name='Digite seu nome')
+    nome_cliente = models.CharField(max_length=255, verbose_name='Digite seu nome', null=True,   blank=True)
     data_atendimento = models.DateField(auto_now_add=True)    
     status_atendimento = models.CharField(max_length=255, default='fila')
     numero_senha = models.IntegerField()
