@@ -3,7 +3,7 @@ from .forms import GerarSenhaForm
 from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from escpos.printer import Usb
+from escpos.printer import Usb, Escpos
 # Create your views here.
 
 @login_required
@@ -212,12 +212,12 @@ def imprimeSenha(request, atendimento):
     senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
 
     printer.set(align='center', width=1, height=1)
-    printer.text("SENHA:")
-    printer.ln(count=2)
+    printer.text("SENHA:"+"\n\n")
+    # printer.ln(count=2)
 
     printer.set(align='center', width=6, height=8)
-    printer.text(senha)
-    printer.ln(count=2)  
+    printer.text(senha + "\n\n")
+    # printer.ln(count=2)  
 
     # printer.image(img_source=PROJECT_ROOT+"/static/img/logo-min.jpg")
     printer.set(align='center', width=1, height=1)
