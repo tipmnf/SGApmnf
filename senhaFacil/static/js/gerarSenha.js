@@ -1,14 +1,32 @@
 function contaFila(dados) {    
     var pessoasFila = document.getElementById("quantFila");
     pessoasFila.innerHTML = '';
-    var numPessoas = 0
+    var pessoasPref = document.getElementById("quantPref");
+    pessoasPref.innerHTML = '';
+    var pessoasProc = document.getElementById("quantProc");
+    pessoasProc.innerHTML = '';
+
+    var numPessoas = 0;
+    var numPessoasPref = 0;
+    var numPessoasProc = 0
+
     dados.forEach(function(dado) {
         if(dado.status == 'fila'){
-            numPessoas = numPessoas + 1;
+            if(dado.tipo == 'Geral'){
+                numPessoas = numPessoas + 1;
+            }
+            if(dado.tipo == 'Preferencial'){
+                numPessoasPref = numPessoasPref + 1;
+            }
+            if(dado.tipo == 'Processos'){
+                numPessoasProc = numPessoasProc + 1;
+            }
         }
     });    
     
     pessoasFila.innerHTML = numPessoas;
+    pessoasPref.innerHTML = numPessoasPref;
+    pessoasProc.innerHTML = numPessoasProc;
 
 }
 

@@ -127,7 +127,8 @@ def tabela_dados_fila(request):
         {
             'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),            
             'cliente': atendimento.nome_cliente,
-            'status': atendimento.status_atendimento
+            'status': atendimento.status_atendimento,
+            'tipo': atendimento.tipo_atendimento.nome
         }
         for atendimento in atendimentos if atendimento.status_atendimento == 'fila'
     ]
