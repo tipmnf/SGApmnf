@@ -212,7 +212,7 @@ def imprimeSenha(request, atendimento):
     senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
 
     printer.set(align='center', width=1, height=1, bold=True)
-    printer.text("SENHA:"+"\n\n")
+    printer.text("\b SENHA:"+"\b\n\n")
     # printer.ln(count=2)
 
     printer.set(align='center', width=6, height=8)
@@ -221,7 +221,7 @@ def imprimeSenha(request, atendimento):
 
     # printer.image(img_source=PROJECT_ROOT+"/static/img/logo-min.jpg")
     printer.set(align='center', width=1, height=1, bold=True)
-    printer.text("Prefeitura Municipal de Nova Friburgo")
+    printer.text("\bPrefeitura Municipal de Nova Friburgo\b")
 
     printer.cut()
 
