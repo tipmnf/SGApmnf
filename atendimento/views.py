@@ -211,9 +211,16 @@ def imprimeSenha(request, atendimento):
     printer = Usb(0x4b8, 0xe03)
     senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
 
+    printer.set(align='center', width=1, height=1)
+    printer.text("SENHA:")
+
     printer.set(align='center', width=6, height=8)
     printer.text(senha)  
+
     # printer.image(img_source=PROJECT_ROOT+"/static/img/logo-min.jpg")
+    printer.set(align='center', width=1, height=1)
+    printer.text("Prefeitura Municipal de Nova Friburgo")
+    
     printer.cut()
 
     printer.close()
