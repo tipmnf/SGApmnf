@@ -7,10 +7,14 @@ function montaTabela(dados) {
         var senha = document.createElement("td");
         senha.innerHTML = dado.senha;
         linha.appendChild(senha);
+
+        var tipo = document.createElement("td");
+        tipo.innerHTML = dado.tipo;
+        linha.appendChild(tipo);
         
-        var cliente = document.createElement("td");
-        cliente.innerHTML = dado.cliente;
-        linha.appendChild(cliente);
+        // var cliente = document.createElement("td");
+        // cliente.innerHTML = dado.cliente;
+        // linha.appendChild(cliente);
       
         // var status = document.createElement("td");
         // status.innerHTML = dado.status;

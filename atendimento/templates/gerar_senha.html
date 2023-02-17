@@ -9,13 +9,17 @@
         {% csrf_token %}
         <!-- <label for="nome">Nome:</label>
         <input type="text" id="nome_cliente" name="nome_cliente" required> -->
-        <!-- <br> -->
+        <!-- <br> --> 
         <label for="tipo_atendimento">Tipo de atendimento:</label>
-        <select id="tipo_atendimento" name="tipo_atendimento" required>
+        {% for tipo in tipos_atendimento %}
+        <input type="radio" name="atendimento" value="{{tipo.id}}" id="{{tipo.nome}}">
+        <label for="{{tipo.id}}">{{tipo.nome}}</label><br>  
+        {% endfor %}
+        <!-- <select id="tipo_atendimento" name="tipo_atendimento" required>
           {% for tipo in tipos_atendimento %}
           <option value="{{ tipo.id }}">{{ tipo.nome }}</option>
           {% endfor %}
-        </select> 
+        </select>  -->
         <!-- <table>
           {{form.as_table}}  
         </table> -->
