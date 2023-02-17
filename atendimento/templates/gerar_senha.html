@@ -12,7 +12,7 @@
         <!-- <br> --> 
         <label for="tipo_atendimento">Tipo de atendimento:</label>
         {% for tipo in tipos_atendimento %}
-        <input type="radio" name="atendimento" value="{{tipo.id}}" id="{{tipo.nome}}">
+        <input type="radio" name="tipo_atendimento" value="{{tipo.id}}" id="tipo_atendimento" class="{{tipo.nome}}">
         <label for="{{tipo.id}}">{{tipo.nome}}</label><br>  
         {% endfor %}
         <!-- <select id="tipo_atendimento" name="tipo_atendimento" required>
