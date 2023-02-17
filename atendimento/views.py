@@ -92,7 +92,7 @@ def tabela_dados(request):
     atendimentos = Atendimento.objects.all()
     dados = [
         {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
             'cabine': atendimento.atendente.cabine,
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
@@ -107,7 +107,7 @@ def tabela_dados_anteriores(request):
     atendimentos = Atendimento.objects.all()
     dados = [
         {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
             'cabine': atendimento.atendente.cabine,
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
@@ -125,7 +125,7 @@ def tabela_dados_fila(request):
 
     dados = [
         {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),            
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),            
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento,
             'tipo': atendimento.tipo_atendimento.nome
@@ -141,7 +141,7 @@ def tabela_dados_fila_especifica(request, prefixo):
     atendimentos = Atendimento.objects.all()
     dados = [
         {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),            
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),            
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
         }
@@ -210,7 +210,7 @@ from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 def imprimeSenha(request, atendimento):
 
     printer = Usb(0x4b8, 0xe03)
-    senha = f"{atendimento.tipo_atendimento.prefixo}{atendimento.numero_senha}"
+    senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
 
     printer.set(align='center', width=1, height=1)
     printer.text("\b SENHA:"+"\b\n\n")
