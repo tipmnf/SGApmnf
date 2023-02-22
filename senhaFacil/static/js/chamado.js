@@ -82,27 +82,36 @@ function getFilas(){
 
 function cresceVideo(){
     var video = document.getElementById("videoDisplay");
-    video.width = window.innerWidth;
-    video.height = window.innerHeight;
+    video.style.width = '100%';
+    video.style.height = '100%';
 }
 
 function encolheVideo(){
     var video = document.getElementById("videoDisplay");
-    video.width = video.parentElement.offsetWidth * 50/100;
+    video.style.width = '50%';
+    video.style.float = 'right';
+    video.style.marginTop = '45px';
 }
 
 var taChamando = false;
+var auxChamando = false;
+
 function getChamando(){
     fetch("/ta-chamando/")
     .then(function(response) {
         return response.json();
     })
     .then(function(taChamando) {
-        if(taChamando){
-            encolheVideo();
-        }else{
-            cresceVideo();
+        
+        if(taChamando !== auxChamando){
+            if(taChamando){
+                encolheVideo();
+            }else{
+                cresceVideo();
+            }
+            auxChamando = taChamando;
         }
+
     });
 }
 
