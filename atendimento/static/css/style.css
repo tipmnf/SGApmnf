@@ -55,11 +55,11 @@ h1 {text-align: center;margin-top: -20px;}
     float: left;
 }
 
-.senhas-chamadas video {
+/* .senhas-chamadas video {
     width: 50%;
     float: right;
     margin-top: 45px;
-}
+} */
 
 .senhas-chamadas table {
     font-size: -webkit-xxx-large;

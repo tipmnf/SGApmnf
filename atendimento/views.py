@@ -3,6 +3,7 @@ from .forms import GerarSenhaForm
 from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from escpos.printer import Usb, Escpos
 # Create your views here.
 
 @login_required
@@ -17,8 +18,11 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
+            imprimeSenha(request, atendimento)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
+
+    
     return render(request, 'gerar_senha.html', context)
 
 @login_required
@@ -88,7 +92,7 @@ def tabela_dados(request):
     atendimentos = Atendimento.objects.all()
     dados = [
         {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
             'cabine': atendimento.atendente.cabine,
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
@@ -103,7 +107,7 @@ def tabela_dados_anteriores(request):
     atendimentos = Atendimento.objects.all()
     dados = [
         {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
             'cabine': atendimento.atendente.cabine,
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
@@ -121,9 +125,10 @@ def tabela_dados_fila(request):
 
     dados = [
         {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),            
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),            
             'cliente': atendimento.nome_cliente,
-            'status': atendimento.status_atendimento
+            'status': atendimento.status_atendimento,
+            'tipo': atendimento.tipo_atendimento.nome
         }
         for atendimento in atendimentos if atendimento.status_atendimento == 'fila'
     ]
@@ -136,7 +141,7 @@ def tabela_dados_fila_especifica(request, prefixo):
     atendimentos = Atendimento.objects.all()
     dados = [
         {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(4),            
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),            
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
         }
@@ -199,3 +204,38 @@ def proximo(request):
 @login_required
 def finalizarSemAtendimento(request):
     return redirect('chamar_proxima_senha')
+
+from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
+@login_required
+def imprimeSenha(request, atendimento):
+
+    printer = Usb(0x4b8, 0xe03)
+    senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
+
+    printer.set(align='center', width=1, height=1)
+    printer.text("\b SENHA:"+"\b\n\n")
+    # printer.ln(count=2)
+
+    printer.set(align='center', width=6, height=8)
+    printer.text(senha + "\n\n")
+    # printer.ln(count=2)  
+
+    # printer.image(img_source=PROJECT_ROOT+"/static/img/logo-min.jpg")
+    printer.set(align='center', width=1, height=1)
+    printer.text("\bPrefeitura Municipal de Nova Friburgo\b")
+
+    printer.cut()
+
+    printer.close()
+
+
+
+@login_required
+def getSenhaAtual(request):
+    senhasChamando = Atendimento.objects.filter(status_atendimento='chamando').order_by('-data_atendimento')
+    if len(senhasChamando) == 0:
+        temChamando = False
+    else:
+        temChamando = True
+
+    return JsonResponse(temChamando, safe=False)

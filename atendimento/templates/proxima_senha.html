@@ -4,12 +4,7 @@
 - Atendimento
 {% endblock %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <label for="cabine">Defina a sua cabine</label>
-    <input type="text" name="cabine" value="{{ cabine }}">
-    <input type="submit" value="Definir cabine">
-</form>
+
   {% if senha %}
   <h1>Chamando</h1>
   {% else %}
@@ -35,7 +30,7 @@
       <thead>
         <tr>
           <th>Senha</th>
-          <th>Nome do cliente</th>          
+          <th>Tipo de Atendimento</th>          
           <!-- <th>Data e hora da chamada</th> -->
         </tr>
       </thead>

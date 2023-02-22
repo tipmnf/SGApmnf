@@ -13,13 +13,13 @@ corpoTabela.innerHTML = '';
 dados.forEach(function(dado) {
     var linha = document.createElement("tr");
 
-    // var senha = document.createElement("td");
-    // senha.innerHTML = dado.senha;
-    // linha.appendChild(senha);
+    var senha = document.createElement("td");
+    senha.innerHTML = dado.senha;
+    linha.appendChild(senha);
     
-    var cliente = document.createElement("td");
-    cliente.innerHTML = dado.cliente;
-    linha.appendChild(cliente);
+    // var cliente = document.createElement("td");
+    // cliente.innerHTML = dado.cliente;
+    // linha.appendChild(cliente);
 
     var cabine = document.createElement("td");
     cabine.innerHTML = dado.cabine;
@@ -34,23 +34,19 @@ dados.forEach(function(dado) {
 });    
 }
 
-setInterval(function() {
-    getFilas();
-}, 5000);
-
 function montaTabelaAnteriores(dados) {    
     var corpoTabela = document.getElementById("tbodyanteriores");
     corpoTabela.innerHTML = '';
     dados.forEach(function(dado) {
         var linha = document.createElement("tr");
     
-        // var senha = document.createElement("td");
-        // senha.innerHTML = dado.senha;
-        // linha.appendChild(senha);
+        var senha = document.createElement("td");
+        senha.innerHTML = dado.senha;
+        linha.appendChild(senha);
         
-        var cliente = document.createElement("td");
-        cliente.innerHTML = dado.cliente;
-        linha.appendChild(cliente);
+        // var cliente = document.createElement("td");
+        // cliente.innerHTML = dado.cliente;
+        // linha.appendChild(cliente);
     
         var cabine = document.createElement("td");
         cabine.innerHTML = dado.cabine;
@@ -82,3 +78,39 @@ function getFilas(){
             });
         
     }
+
+
+function cresceVideo(){
+    var video = document.getElementById("videoDisplay");
+    video.width = window.innerWidth;
+    video.height = window.innerHeight;
+}
+
+function encolheVideo(){
+    var video = document.getElementById("videoDisplay");
+    video.width = video.parentElement.offsetWidth * 50/100;
+}
+
+var taChamando = false;
+function getChamando(){
+    fetch("/ta-chamando/")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(taChamando) {
+        if(taChamando){
+            encolheVideo();
+        }else{
+            cresceVideo();
+        }
+    });
+}
+
+// setInterval(function() {
+//     getChamando();
+// }, 1000);
+
+setInterval(function() {
+    getFilas();
+    console.log("help");
+}, 5000);
