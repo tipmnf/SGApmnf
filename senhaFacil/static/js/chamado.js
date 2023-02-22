@@ -34,10 +34,6 @@ dados.forEach(function(dado) {
 });    
 }
 
-setInterval(function() {
-    getFilas();
-}, 5000);
-
 function montaTabelaAnteriores(dados) {    
     var corpoTabela = document.getElementById("tbodyanteriores");
     corpoTabela.innerHTML = '';
@@ -83,24 +79,38 @@ function getFilas(){
         
     }
 
-// var video = document.getElementById("videoDisplay");
-// function cresceVideo(){
-//     video.width = window.innerWidth;
-//     video.height = window.innerHeight;
-// }
-// function encolheVideo(){
-//     video.width = video.parentElement.offsetWidth * 50/100;
-// }
 
-// setInterval(function() {
-//     $.getJSON('ta-chamando/', function(data) {
-//         taChamando = data.temChamando;
-//     });
+function cresceVideo(){
+    var video = document.getElementById("videoDisplay");
+    video.width = window.innerWidth;
+    video.height = window.innerHeight;
+}
 
-//     if(taChamando){
-//         encolheVideo();
-//     }else{
-//         cresceVideo();
-//     }
+function encolheVideo(){
+    var video = document.getElementById("videoDisplay");
+    video.width = video.parentElement.offsetWidth * 50/100;
+}
 
-// }, 1000);
+var taChamando = false;
+function getChamando(){
+    fetch("/ta-chamando/")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(taChamando) {
+        if(taChamando){
+            encolheVideo();
+        }else{
+            cresceVideo();
+        }
+    });
+}
+
+setInterval(function() {
+    getChamando();
+}, 1000);
+
+setInterval(function() {
+    getFilas();
+    console.log("help");
+}, 5000);

@@ -230,12 +230,12 @@ def imprimeSenha(request, atendimento):
 
 
 
-# @login_required
-# def getSenhaAtual(request):
-#     senhasChamando = Atendimento.objects.filter(status_atendimento='chamando').order_by('-data_atendimento')
-#     if len(senhasChamando) == 0:
-#         temChamando = False
-#     else:
-#         temChamando = True
+@login_required
+def getSenhaAtual(request):
+    senhasChamando = Atendimento.objects.filter(status_atendimento='chamando').order_by('-data_atendimento')
+    if len(senhasChamando) == 0:
+        temChamando = False
+    else:
+        temChamando = True
 
-#     return JsonResponse({'temChamando': temChamando})
+    return JsonResponse(temChamando, safe=False)
