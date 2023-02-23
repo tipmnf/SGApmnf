@@ -75,14 +75,17 @@ body {background: #0D578E;color: #fff;}
 .senhas-chamadas div#minha-div {
     float: left;
     width: 30%;
-    height: 55%;
+    height: 76%;
     background: #fff;
     border-radius: 0 30px 30px 0;
 }
 
 .senhas-chamadas video#videoDisplay {
     float: right;
-    width: 68%;
+    width: 67%;
+    height: auto;
+    position: absolute;
+    margin-left: 40px;
 }
 
 .senhas-chamadas table.ultima-senha {
@@ -102,3 +105,52 @@ body {background: #0D578E;color: #fff;}
 .senhas-chamadas table.ultima-senha tbody#tbody {
     color: red;
 }
+
+.senhas-chamadas .header-display {
+    height: 180px;
+    display: flex;
+    padding: 24px;
+    justify-content: center;
+}
+.senhas-chamadas .header-display {
+    height: 180px;
+    display: flex;
+    padding: 24px;
+    justify-content: center;
+}
+
+.senhas-chamadas tbody tr:nth-child(odd){
+  background-color: #bcd2f8;
+
+}
+.senhas-chamadas tr:nth-child(even) {
+    background-color: #e4eeff;
+}
+
+/* proxima senha */
+.proxima-senha {
+    background: #fff;
+    color: #000;
+    font-size: 40px;
+    width: fit-content;
+    padding: 2% 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 35px;
+}
+
+.proxima-senha h1 {
+    margin: 15px;
+}
+
+.proxima-senha a {background: #3dac3b;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+
+.proxima-senha div table {
+    margin-top: 40px;
+    color: #000;
+    display: grid;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.proxima-senha div table th {padding: 0 30px;}
