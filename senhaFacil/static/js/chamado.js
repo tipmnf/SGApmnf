@@ -113,6 +113,7 @@ function getChamando(){
         
         if(taChamando > auxChamando){
             cresceSenha();
+            auxChamando = taChamando;
         }else{
             auxChamando = taChamando;
         }      
@@ -121,9 +122,5 @@ function getChamando(){
 
 setInterval(function() {
     getChamando();
-}, 1000);
-
-setInterval(function() {
     getFilas();
-    console.log("help");
-}, 5000);
+}, 1000);
