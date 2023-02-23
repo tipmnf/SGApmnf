@@ -2,22 +2,23 @@ html {overflow-y: hidden;overflow-x: hidden;}
 body {background: #0D578E;color: #fff;}
 
 /* Gerar Senha */
-.gerar-senha .pessoas-fila p {
-    display: flex;
-    place-content: center;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    flex-direction: column;
-}
 
 .gerar-senha {
     font-size: 50px;
     display: table;
+    background: #fff;
+    color: #000;
+    padding: 40px;
+    border-radius: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 90%;
 }
 
 .gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 100px;}
 
-.gerar-senha form {display: inline-flex;flex-direction: row;align-items: center;width: 100%;width: -webkit-fill-available;}
+.gerar-senha form {display: inline-flex;flex-direction: row;align-items: center;width: 100%;width: -webkit-fill-available;flex-wrap: wrap;}
 
 .gerar-senha form label {
     background: #fff;
@@ -29,26 +30,25 @@ body {background: #0D578E;color: #fff;}
     width: 100%;
     margin: auto 10px;
 }
-.gerar-senha form input:checked +   label{
+.gerar-senha form input:checked +  label{
     background: #0d578e;
     color: #ffffff;
 }
 
 .gerar-senha input[type="submit"] {
-    position: absolute;
-    top: 211px;
+    /* position: absolute; */
     width: 100%;
     height: 80px;
-    background: #3875a3;
+    background: #57B956;
     color: #fff;
     font-size: 33px;
+    border: unset;
+    font-size: 50px;
 }
 
 .gerar-senha label[for="tipo_atendimento"] {
     display: none;
 }
-
-
 
 .gerar-senha form > input {
     display: none;
@@ -57,19 +57,29 @@ body {background: #0D578E;color: #fff;}
 .gerar-senha input[type="submit"] {
     display: flex;
     justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    border-radius: 45px;
+    margin-bottom: -86px;
+    height: 110px;
 }
 
+.gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 100px;padding-left: 20px;}
 
 
-.gerar-senha p.pessoas-frente {position: absolute;bottom: 47px;}
+
 
 .gerar-senha .pessoas-fila {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    font-size: 36px;
-    top: 163px;
-    position: relative;
+    font-size: 40px;
+    justify-content: center;
+}
+
+.gerar-senha p.pessoas-frente {
+    padding-right: 70px;
 }
 
 /* display */
