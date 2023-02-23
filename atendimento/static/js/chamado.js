@@ -84,12 +84,12 @@ function cresceSenha(){
     var senha = document.getElementById("minha-div");
     aumentaSenha = [
         {width:'30%'},
-        {width:'100%', offset: 0.3},
-        {width:'100%', offset: 0.7},
+        {width:'100%', offset: 0.2},
+        {width:'100%', offset: 0.8},
         {width:'30%', offset: 1},
     ];
     
-    senha.animate(aumentaSenha, {duration: 8000});
+    senha.animate(aumentaSenha, {duration: 5000});
 }
 
 // function encolheSenha(){
@@ -100,6 +100,22 @@ function cresceSenha(){
 //     video.style.width = '70%';
 //     video.style.height = '45%';
 // }
+
+function piscaSenha(){
+
+    var senha = document.getElementById("tabela-senhas");
+    
+    senha.animate([
+        { opacity: 0 },
+        { opacity: 1 },
+        { opacity: 0 }
+    ], {
+        duration: 1000,
+        iterations: 3
+    });
+
+
+}
 
 var taChamando = 0;
 var auxChamando = 0;
@@ -113,10 +129,14 @@ function getChamando(){
         
         if(taChamando > auxChamando){
             cresceSenha();
+            setTimeout(function(){
+                piscaSenha();
+            }, 1000);
             auxChamando = taChamando;
         }else{
             auxChamando = taChamando;
-        }      
+        }
+        
     });
 }
 
@@ -124,3 +144,4 @@ setInterval(function() {
     getChamando();
     getFilas();
 }, 1000);
+
