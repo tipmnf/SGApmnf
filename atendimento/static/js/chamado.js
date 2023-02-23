@@ -80,21 +80,29 @@ function getFilas(){
     }
 
 
-function cresceVideo(){
-    var video = document.getElementById("videoDisplay");
-    video.style.width = '100%';
-    video.style.height = '100%';
+function cresceSenha(){
+    var senha = document.getElementById("minha-div");
+    aumentaSenha = [
+        {width:'30%'},
+        {width:'100%', offset: 0.3},
+        {width:'100%', offset: 0.7},
+        {width:'30%', offset: 1},
+    ];
+    
+    senha.animate(aumentaSenha, {duration: 8000});
 }
 
-function encolheVideo(){
-    var video = document.getElementById("videoDisplay");
-    video.style.width = '50%';
-    video.style.float = 'right';
-    video.style.marginTop = '45px';
-}
+// function encolheSenha(){
+//     var senha = document.getElementById("minha-div");
+//     var video = document.getElementById("videoDisplay");
+//     senha.style.width = '30%';
+//     senha.style.height = '55%';
+//     video.style.width = '70%';
+//     video.style.height = '45%';
+// }
 
-var taChamando = false;
-var auxChamando = false;
+var taChamando = 0;
+var auxChamando = 0;
 
 function getChamando(){
     fetch("/ta-chamando/")
@@ -103,15 +111,11 @@ function getChamando(){
     })
     .then(function(taChamando) {
         
-        if(taChamando !== auxChamando){
-            if(taChamando){
-                encolheVideo();
-            }else{
-                cresceVideo();
-            }
+        if(taChamando > auxChamando){
+            cresceSenha();
+        }else{
             auxChamando = taChamando;
-        }
-
+        }      
     });
 }
 
