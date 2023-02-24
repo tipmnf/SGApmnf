@@ -67,8 +67,6 @@ body {background: #0D578E;color: #fff;}
 .gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 45px;padding-left: 20px;}
 
 
-
-
 .gerar-senha .pessoas-fila {
     display: flex;
     flex-direction: row;
@@ -131,11 +129,15 @@ body {background: #0D578E;color: #fff;}
 
 .senhas-chamadas tbody tr:nth-child(odd){
   background-color: #bcd2f8;
-
 }
 .senhas-chamadas tr:nth-child(even) {
     background-color: #e4eeff;
 }
+.senhas-chamadas tbody#tbody {
+    font-size: 110px;
+}
+
+
 
 /* proxima senha */
 .proxima-senha {
@@ -156,7 +158,7 @@ body {background: #0D578E;color: #fff;}
 .proxima-senha a {background: #3dac3b;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
 
 .proxima-senha div table {
-    margin-top: 40px;
+    margin-top: 20px;
     color: #000;
     display: grid;
     justify-content: center;
@@ -164,6 +166,25 @@ body {background: #0D578E;color: #fff;}
 }
 
 .proxima-senha div table th {padding: 0 30px;}
+
+
+
+.proxima-senha tbody#tbody tr {
+    display: flex;
+    justify-content: space-around;
+}
+
+.proxima-senha thead {
+    /* display: flex; */
+    justify-content: space-aroun;
+}
+
+.proxima-senha thead tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
 
 /* Em atendimento */
 .em-atendimento {
