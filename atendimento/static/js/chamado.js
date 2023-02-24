@@ -1,36 +1,41 @@
 function speak(text, cabine) {
     var speech = new SpeechSynthesisUtterance();
-    speech.text = text+", por favor se dirija à cabine"+cabine;
+    speech.text = "senha"+text+", por favor se dirija à cabine"+cabine;
     speech.lang = 'pt-BR';
     speech.volume = 1;
     speech.rate = 1;
     speech.pitch = 1;
-    window.speechSynthesis.speak(speech);
+    console.log(window.speechSynthesis.pending);
+    if(window.speechSynthesis.pending == false){
+        window.speechSynthesis.speak(speech);
+    }
 }
+
 function montaTabela(dados) {    
-var corpoTabela = document.getElementById("tbody");
-corpoTabela.innerHTML = '';
-dados.forEach(function(dado) {
-    var linha = document.createElement("tr");
+    var corpoTabela = document.getElementById("tbody");
+    corpoTabela.innerHTML = '';
+    dados.forEach(function(dado) { 
+        
+        var linha = document.createElement("tr");
 
-    var senha = document.createElement("td");
-    senha.innerHTML = dado.senha;
-    linha.appendChild(senha);
+        var senha = document.createElement("td");
+        senha.innerHTML = dado.senha;
+        linha.appendChild(senha);
+        
+        // var cliente = document.createElement("td");
+        // cliente.innerHTML = dado.cliente;
+        // linha.appendChild(cliente);
+
+        var cabine = document.createElement("td");
+        cabine.innerHTML = dado.cabine;
+        linha.appendChild(cabine);
     
-    // var cliente = document.createElement("td");
-    // cliente.innerHTML = dado.cliente;
-    // linha.appendChild(cliente);
+        // var status = document.createElement("td");
+        // status.innerHTML = dado.status;
+        // linha.appendChild(status);
 
-    var cabine = document.createElement("td");
-    cabine.innerHTML = dado.cabine;
-    linha.appendChild(cabine);
-  
-    // var status = document.createElement("td");
-    // status.innerHTML = dado.status;
-    // linha.appendChild(status);
-
-    corpoTabela.appendChild(linha);  
-    speak(dado.cliente, dado.cabine)      
+        corpoTabela.appendChild(linha);
+        // speak(dado.senha, dado.cabine);       
 });    
 }
 
@@ -131,6 +136,7 @@ function getChamando(){
             cresceSenha();
             setTimeout(function(){
                 piscaSenha();
+                document.getElementById('toque').play();
             }, 1000);
             auxChamando = taChamando;
         }else{
@@ -144,4 +150,5 @@ setInterval(function() {
     getChamando();
     getFilas();
 }, 1000);
+
 
