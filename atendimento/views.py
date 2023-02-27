@@ -18,7 +18,7 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            imprimeSenha(request, atendimento)
+            # imprimeSenha(request, atendimento)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -27,7 +27,8 @@ def gerar_senha(request):
 
 @login_required
 def chamar_proxima_senha(request):
-    atendente = Atendente.objects.get(user=request.user)        
+    atendente = Atendente.objects.get(user=request.user) 
+    limpaChamados(request)       
     try:
         senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
         if not senha_atual:
@@ -236,3 +237,15 @@ def getSenhaAtual(request):
     temChamando = len(senhasChamando)
 
     return JsonResponse(temChamando, safe=False)
+
+@login_required
+def limpaChamados(request):
+    atendente = Atendente.objects.get(user=request.user) 
+    senhasChamando = Atendimento.objects.filter(status_atendimento='chamando', atendente=atendente ).order_by('-data_atendimento')
+
+    for x in range (len(senhasChamando)):
+        senhasChamando[x].finalizar()
+
+
+
+    
