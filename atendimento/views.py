@@ -4,6 +4,7 @@ from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Escpos
+from datetime import date
 # Create your views here.
 
 @login_required
@@ -18,7 +19,7 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            # imprimeSenha(request, atendimento)
+            imprimeSenha(request, atendimento)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -115,7 +116,7 @@ def tabela_dados_anteriores(request):
         }
         for atendimento in atendimentos if atendimento.status_atendimento == 'finalizado'
     ]
-    return JsonResponse(dados[::-1][:5], safe=False)
+    return JsonResponse(dados[::-1][:3], safe=False)
 
 @login_required
 def tabela_dados_fila(request):
@@ -212,6 +213,8 @@ def imprimeSenha(request, atendimento):
 
     printer = Usb(0x4b8, 0xe03)
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
+    data = date.today()
+    dataStr = data.strftime("Data: %d%m%Y\n")
 
     printer.set(align='center', width=1, height=1)
     printer.text("\b SENHA:"+"\b\n\n")
@@ -223,7 +226,8 @@ def imprimeSenha(request, atendimento):
 
     # printer.image(img_source=PROJECT_ROOT+"/static/img/logo-min.jpg")
     printer.set(align='center', width=1, height=1)
-    printer.text("\bPrefeitura Municipal de Nova Friburgo\b")
+    printer.text("\bPrefeitura Municipal de Nova Friburgo\b\n")
+    printer.text(dataStr)
 
     printer.cut()
 
