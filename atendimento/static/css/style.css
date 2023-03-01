@@ -83,18 +83,20 @@ body {background: #0D578E;color: #fff;}
 /* display */
 .senhas-chamadas div#minha-div {
     float: left;
-    width: 30%;
-    height: 76%;
+    width: 50%;
+    height: 100%;
     background: #fff;
     border-radius: 0 30px 30px 0;
 }
 
 .senhas-chamadas video#videoDisplay {
     float: right;
-    width: 67%;
+    width: 50%;
     height: auto;
     position: absolute;
     margin-left: 40px;
+    right: 0;
+    bottom: 140px;
 }
 
 .senhas-chamadas table.ultima-senha {
@@ -112,6 +114,9 @@ body {background: #0D578E;color: #fff;}
 
 .senhas-chamadas table.ultima-senha tbody#tbody {
     color: red;
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: black;
+    font-family: sans-serif;
 }
 
 .senhas-chamadas .header-display {
@@ -134,7 +139,7 @@ body {background: #0D578E;color: #fff;}
     background-color: #e4eeff;
 }
 .senhas-chamadas tbody#tbody {
-    font-size: 110px;
+    font-size: 175px;
 }
 
 
