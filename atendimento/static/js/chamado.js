@@ -53,16 +53,17 @@ function montaTabelaAnteriores(dados) {
         // cliente.innerHTML = dado.cliente;
         // linha.appendChild(cliente);
     
-        var cabine = document.createElement("td");
-        cabine.innerHTML = dado.cabine;
-        linha.appendChild(cabine);
+        // var cabine = document.createElement("td");
+        // cabine.innerHTML = dado.cabine;
+        // linha.appendChild(cabine);
       
         // var status = document.createElement("td");
         // status.innerHTML = dado.status;
         // linha.appendChild(status);
     
         corpoTabela.appendChild(linha);      
-    });    
+    });
+        
     }
 
 function getFilas(){
