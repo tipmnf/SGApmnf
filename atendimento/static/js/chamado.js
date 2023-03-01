@@ -88,10 +88,10 @@ function getFilas(){
 function cresceSenha(){
     var senha = document.getElementById("minha-div");
     aumentaSenha = [
-        {width:'30%'},
+        {width:'50%'},
         {width:'100%', offset: 0.2},
         {width:'100%', offset: 0.8},
-        {width:'30%', offset: 1},
+        {width:'50%', offset: 1},
     ];
     
     senha.animate(aumentaSenha, {duration: 5000});
