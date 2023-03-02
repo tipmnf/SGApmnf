@@ -74,13 +74,13 @@ function getFilas(){
                 montaTabela(dados);
             });
         
-        // fetch("/tabela-dados-anteriores/")
-        //     .then(function(response) {
-        //         return response.json();
-        //     })
-        //     .then(function(dados) {
-        //         montaTabelaAnteriores(dados);
-        //     });
+        fetch("/tabela-dados-anteriores/")
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(dados) {
+                montaTabelaAnteriores(dados);
+            });
         
     }
 

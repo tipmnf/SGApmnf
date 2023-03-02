@@ -19,7 +19,10 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            imprimeSenha(request, atendimento)
+            try:
+                imprimeSenha(request, atendimento)
+            except:
+                print("algo deu errado")
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -119,6 +122,23 @@ def tabela_dados_anteriores(request):
     return JsonResponse(dados[::-1][:3], safe=False)
 
 @login_required
+def tabela_dados_anteriores(request):
+    # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
+    atendimentos = Atendimento.objects.all()
+    dados = [
+        {
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
+            'cabine': atendimento.atendente.cabine,
+            'cliente': atendimento.nome_cliente,
+            'status': atendimento.status_atendimento,
+            'tipo': atendimento.tipo_atendimento.nome
+        }
+        for atendimento in atendimentos if atendimento.status_atendimento == 'finalizado'
+    ]
+    return JsonResponse(dados[::-1], safe=False)
+
+
+@login_required
 def tabela_dados_fila(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
     atendimentos = Atendimento.objects.all()
@@ -214,7 +234,7 @@ def imprimeSenha(request, atendimento):
     printer = Usb(0x4b8, 0xe03)
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
     data = date.today()
-    dataStr = data.strftime("Data: %d%m%Y\n")
+    dataStr = data.strftime("Data: %d/%m/%Y\n")
 
     printer.set(align='center', width=1, height=1)
     printer.text("\b SENHA:"+"\b\n\n")

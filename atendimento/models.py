@@ -13,7 +13,10 @@ class TipoAtendimento(models.Model):
 class Atendente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cabine = models.CharField(max_length=100)
-    tipo_atendimento = models.ForeignKey(TipoAtendimento, on_delete=models.PROTECT)    
+    tipo_atendimento = models.ForeignKey(TipoAtendimento, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.user.username
 
 class Atendimento(models.Model):
     nome_cliente = models.CharField(max_length=255, verbose_name='Digite seu nome', null=True,   blank=True)
@@ -42,3 +45,6 @@ class Atendimento(models.Model):
     def finalizar(self):
         self.status_atendimento = 'finalizado'
         self.save()
+
+    def __str__(self):
+        return self.numero_senha
