@@ -19,7 +19,10 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            imprimeSenha(request, atendimento)
+            try:
+                imprimeSenha(request, atendimento)
+            except:
+                print("algo deu errado")
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
