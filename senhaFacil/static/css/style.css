@@ -87,16 +87,16 @@ body {background: #0D578E;color: #fff;}
     height: 100%;
     background: #fff;
     border-radius: 0 30px 30px 0;
+    z-index: 4;
+    position: absolute;
 }
 
 .senhas-chamadas video#videoDisplay {
     float: right;
-    width: 50%;
+    width: 48%;
     height: auto;
-    position: absolute;
-    margin-left: 40px;
-    right: 0;
-    bottom: 140px;
+    position: relative;
+    z-index: 1;
 }
 
 .senhas-chamadas table.ultima-senha {
@@ -160,7 +160,7 @@ body {background: #0D578E;color: #fff;}
     margin: 15px;
 }
 
-.proxima-senha a {background: #3dac3b;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+.proxima-senha a {background: #b9b820;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
 
 .proxima-senha div table {
     margin-top: 20px;
@@ -218,3 +218,59 @@ body {background: #0D578E;color: #fff;}
 }
 
 .em-atendimento div table th {padding: 0 30px;}
+
+/* fix largura ultimas senhas */
+.senha-anterior {
+    display: inline-flex;
+    align-items: center;
+    bottom: 24px;
+    flex-direction: row;
+    width: 48%;
+    font-size: 40px;
+    justify-content: center;
+    font-family: sans-serif;
+    position: absolute;
+    right: 0;
+}
+
+thead#tHeader {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 29px;
+}
+
+tbody#tbodyanteriores {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 62px;
+}
+
+thead#tHeader th {
+    margin: 0 10px;
+}
+
+tbody#tbodyanteriores tr {
+    margin: 0 10px;
+}
+
+tbody#tbodyanteriores tr {
+    background: unset;
+    color: red;
+}
+
+/* pagina de erro */
+
+.caixa-erro{
+    background: #fff;
+    color: #000;
+    font-size: 40px;
+    width: fit-content;
+    padding: 2% 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 35px;
+}

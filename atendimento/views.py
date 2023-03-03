@@ -22,7 +22,7 @@ def gerar_senha(request):
             try:
                 imprimeSenha(request, atendimento)
             except:
-                print("algo deu errado")
+                return render(request, 'erro.html', context)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -226,6 +226,9 @@ def proximo(request):
 @login_required
 def finalizarSemAtendimento(request):
     return redirect('chamar_proxima_senha')
+
+def voltaDoErro(request):
+    return redirect('gerar-senha')
 
 from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
