@@ -1,0 +1,16 @@
+{% extends 'template.html' %}
+{% block subtitulo %}
+- Erro
+{% endblock %}
+{% block content %}
+<div class="caixa-erro">
+
+    <p id="erro-titulo">Algo deu errado com a impressora.</p>
+    <p>Verifique se não está faltando papel ou se a impressora está conectada</p>
+
+    <a href="{% url 'gerar_senha' %}" class="botao-voltar">Voltar</a>
+
+</div>
+
+
+{% endblock %}
