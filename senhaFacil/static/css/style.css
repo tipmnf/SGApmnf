@@ -13,12 +13,11 @@ body {background: #0D578E;color: #fff;}
     margin-left: auto;
     margin-right: auto;
     width: 90%;
-    height: 90%;
 }
 
 .gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 100px;}
 
-.gerar-senha form {display: inline-flex;flex-direction: row;align-items: center;width: 100%;width: -webkit-fill-available;flex-wrap: wrap;}
+.gerar-senha form {display: flex;flex-direction: row;width: 100%;width: -webkit-fill-available;flex-wrap: wrap;align-content: center;align-items: center;}
 
 .gerar-senha form label {
     background: #fff;
@@ -65,38 +64,39 @@ body {background: #0D578E;color: #fff;}
     height: 110px;
 }
 
-.gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 100px;padding-left: 20px;}
-
-
+.gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 45px;padding-left: 20px;}
 
 
 .gerar-senha .pessoas-fila {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    font-size: 40px;
+    font-size: 35px;
     justify-content: center;
+    margin-top: -25px;
 }
 
 .gerar-senha p.pessoas-frente {
-    padding-right: 70px;
+    padding-right: 30px;
 }
 
 /* display */
 .senhas-chamadas div#minha-div {
     float: left;
-    width: 30%;
-    height: 76%;
+    width: 50%;
+    height: 100%;
     background: #fff;
     border-radius: 0 30px 30px 0;
+    z-index: 4;
+    position: absolute;
 }
 
 .senhas-chamadas video#videoDisplay {
     float: right;
-    width: 67%;
+    width: 48%;
     height: auto;
-    position: absolute;
-    margin-left: 40px;
+    position: relative;
+    z-index: 1;
 }
 
 .senhas-chamadas table.ultima-senha {
@@ -114,6 +114,9 @@ body {background: #0D578E;color: #fff;}
 
 .senhas-chamadas table.ultima-senha tbody#tbody {
     color: red;
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: black;
+    font-family: sans-serif;
 }
 
 .senhas-chamadas .header-display {
@@ -131,11 +134,15 @@ body {background: #0D578E;color: #fff;}
 
 .senhas-chamadas tbody tr:nth-child(odd){
   background-color: #bcd2f8;
-
 }
 .senhas-chamadas tr:nth-child(even) {
     background-color: #e4eeff;
 }
+.senhas-chamadas tbody#tbody {
+    font-size: 175px;
+}
+
+
 
 /* proxima senha */
 .proxima-senha {
@@ -153,10 +160,10 @@ body {background: #0D578E;color: #fff;}
     margin: 15px;
 }
 
-.proxima-senha a {background: #3dac3b;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+.proxima-senha a {background: #b9b820;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
 
 .proxima-senha div table {
-    margin-top: 40px;
+    margin-top: 20px;
     color: #000;
     display: grid;
     justify-content: center;
@@ -164,6 +171,25 @@ body {background: #0D578E;color: #fff;}
 }
 
 .proxima-senha div table th {padding: 0 30px;}
+
+
+
+.proxima-senha tbody#tbody tr {
+    display: flex;
+    justify-content: space-around;
+}
+
+.proxima-senha thead {
+    /* display: flex; */
+    justify-content: space-aroun;
+}
+
+.proxima-senha thead tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
 
 /* Em atendimento */
 .em-atendimento {
@@ -192,3 +218,59 @@ body {background: #0D578E;color: #fff;}
 }
 
 .em-atendimento div table th {padding: 0 30px;}
+
+/* fix largura ultimas senhas */
+.senha-anterior {
+    display: inline-flex;
+    align-items: center;
+    bottom: 24px;
+    flex-direction: row;
+    width: 48%;
+    font-size: 40px;
+    justify-content: center;
+    font-family: sans-serif;
+    position: absolute;
+    right: 0;
+}
+
+thead#tHeader {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 29px;
+}
+
+tbody#tbodyanteriores {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 62px;
+}
+
+thead#tHeader th {
+    margin: 0 10px;
+}
+
+tbody#tbodyanteriores tr {
+    margin: 0 10px;
+}
+
+tbody#tbodyanteriores tr {
+    background: unset;
+    color: red;
+}
+
+/* pagina de erro */
+
+.caixa-erro{
+    background: #fff;
+    color: #000;
+    font-size: 40px;
+    width: fit-content;
+    padding: 2% 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 35px;
+}

@@ -83,18 +83,20 @@ body {background: #0D578E;color: #fff;}
 /* display */
 .senhas-chamadas div#minha-div {
     float: left;
-    width: 30%;
-    height: 76%;
+    width: 50%;
+    height: 100%;
     background: #fff;
     border-radius: 0 30px 30px 0;
+    z-index: 4;
+    position: absolute;
 }
 
 .senhas-chamadas video#videoDisplay {
     float: right;
-    width: 67%;
+    width: 48%;
     height: auto;
-    position: absolute;
-    margin-left: 40px;
+    position: relative;
+    z-index: 1;
 }
 
 .senhas-chamadas table.ultima-senha {
@@ -112,6 +114,9 @@ body {background: #0D578E;color: #fff;}
 
 .senhas-chamadas table.ultima-senha tbody#tbody {
     color: red;
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: black;
+    font-family: sans-serif;
 }
 
 .senhas-chamadas .header-display {
@@ -134,7 +139,7 @@ body {background: #0D578E;color: #fff;}
     background-color: #e4eeff;
 }
 .senhas-chamadas tbody#tbody {
-    font-size: 110px;
+    font-size: 175px;
 }
 
 
@@ -155,7 +160,7 @@ body {background: #0D578E;color: #fff;}
     margin: 15px;
 }
 
-.proxima-senha a {background: #3dac3b;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+.proxima-senha a {background: #b9b820;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
 
 .proxima-senha div table {
     margin-top: 20px;
@@ -213,3 +218,80 @@ body {background: #0D578E;color: #fff;}
 }
 
 .em-atendimento div table th {padding: 0 30px;}
+
+/* fix largura ultimas senhas */
+.senha-anterior {
+    display: inline-flex;
+    align-items: center;
+    bottom: 24px;
+    flex-direction: row;
+    width: 48%;
+    font-size: 40px;
+    justify-content: center;
+    font-family: sans-serif;
+    position: absolute;
+    right: 0;
+}
+
+thead#tHeader {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 29px;
+}
+
+tbody#tbodyanteriores {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 62px;
+}
+
+thead#tHeader th {
+    margin: 0 10px;
+}
+
+tbody#tbodyanteriores tr {
+    margin: 0 10px;
+}
+
+tbody#tbodyanteriores tr {
+    background: unset;
+    color: red;
+}
+
+/* pagina de erro */
+
+div.caixa-erro{
+    background: #fff;
+    color: #000;
+    font-size: 40px;
+    width: fit-content;
+    padding: 2% 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 35px;
+}
+
+a.botao-voltar {
+    width: 100%;
+    height: 80px;
+    background: #57B956;
+    color: #fff;
+    font-size: 33px;
+    border: unset;
+    font-size: 50px;
+    border-radius: 45px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+p#erro-titulo {
+    color: red;
+    text-align: center; 
+    font-size: 80px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}

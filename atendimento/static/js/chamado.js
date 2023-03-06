@@ -41,29 +41,100 @@ function montaTabela(dados) {
 
 function montaTabelaAnteriores(dados) {    
     var corpoTabela = document.getElementById("tbodyanteriores");
+    var cabecaTabela = document.getElementById("tHeader");
+    cabecaTabela.innerHTML = '';
     corpoTabela.innerHTML = '';
-    dados.forEach(function(dado) {
-        var linha = document.createElement("tr");
-    
-        var senha = document.createElement("td");
-        senha.innerHTML = dado.senha;
-        linha.appendChild(senha);
+
+    for (i=0; i<dados.length; i++){
+        var dado = dados[i];
+        if(dado.tipo == "Geral"){
+            var linha = document.createElement("tr");
+            
+            var header = document.createElement("th");
+            header.innerHTML = "Geral";
+            cabecaTabela.appendChild(header);
+            
+            var senha = document.createElement("td");
+            senha.innerHTML = dado.senha;
+            linha.appendChild(senha);
+            
+            // var cliente = document.createElement("td");
+            // cliente.innerHTML = dado.cliente;
+            // linha.appendChild(cliente);
         
-        // var cliente = document.createElement("td");
-        // cliente.innerHTML = dado.cliente;
-        // linha.appendChild(cliente);
-    
-        var cabine = document.createElement("td");
-        cabine.innerHTML = dado.cabine;
-        linha.appendChild(cabine);
-      
-        // var status = document.createElement("td");
-        // status.innerHTML = dado.status;
-        // linha.appendChild(status);
-    
-        corpoTabela.appendChild(linha);      
-    });    
-    }
+            // var cabine = document.createElement("td");
+            // cabine.innerHTML = dado.cabine;
+            // linha.appendChild(cabine);
+        
+            // var status = document.createElement("td");
+            // status.innerHTML = dado.status;
+            // linha.appendChild(status);
+            
+            corpoTabela.appendChild(linha);
+            break;
+        }      
+    };
+        
+    for (i=0; i<dados.length; i++){
+        var dado = dados[i];
+        if(dado.tipo == "Preferencial"){
+            var linha = document.createElement("tr");
+        
+            var header = document.createElement("th");
+            header.innerHTML = "Preferencial";
+            cabecaTabela.appendChild(header);
+
+            var senha = document.createElement("td");
+            senha.innerHTML = dado.senha;
+            linha.appendChild(senha);
+            
+            // var cliente = document.createElement("td");
+            // cliente.innerHTML = dado.cliente;
+            // linha.appendChild(cliente);
+        
+            // var cabine = document.createElement("td");
+            // cabine.innerHTML = dado.cabine;
+            // linha.appendChild(cabine);
+        
+            // var status = document.createElement("td");
+            // status.innerHTML = dado.status;
+            // linha.appendChild(status);
+        
+            corpoTabela.appendChild(linha);
+            break;
+        }      
+    };
+
+    for (i=0; i<dados.length; i++){
+        var dado = dados[i];
+        if(dado.tipo == "Processos"){
+            var linha = document.createElement("tr");
+        
+            var header = document.createElement("th");
+            header.innerHTML = "Processos";
+            cabecaTabela.appendChild(header);
+
+            var senha = document.createElement("td");
+            senha.innerHTML = dado.senha;
+            linha.appendChild(senha);
+            
+            // var cliente = document.createElement("td");
+            // cliente.innerHTML = dado.cliente;
+            // linha.appendChild(cliente);
+        
+            // var cabine = document.createElement("td");
+            // cabine.innerHTML = dado.cabine;
+            // linha.appendChild(cabine);
+        
+            // var status = document.createElement("td");
+            // status.innerHTML = dado.status;
+            // linha.appendChild(status);
+        
+            corpoTabela.appendChild(linha);
+            break;
+        }      
+    };
+}
 
 function getFilas(){
         fetch("/tabela-dados/")
@@ -74,13 +145,13 @@ function getFilas(){
                 montaTabela(dados);
             });
         
-        // fetch("/tabela-dados-anteriores/")
-        //     .then(function(response) {
-        //         return response.json();
-        //     })
-        //     .then(function(dados) {
-        //         montaTabelaAnteriores(dados);
-        //     });
+        fetch("/tabela-dados-anteriores/")
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(dados) {
+                montaTabelaAnteriores(dados);
+            });
         
     }
 
@@ -88,10 +159,10 @@ function getFilas(){
 function cresceSenha(){
     var senha = document.getElementById("minha-div");
     aumentaSenha = [
-        {width:'30%'},
+        {width:'50%'},
         {width:'100%', offset: 0.2},
         {width:'100%', offset: 0.8},
-        {width:'30%', offset: 1},
+        {width:'50%', offset: 1},
     ];
     
     senha.animate(aumentaSenha, {duration: 5000});

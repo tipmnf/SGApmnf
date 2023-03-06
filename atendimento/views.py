@@ -4,6 +4,7 @@ from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Escpos
+from datetime import date
 # Create your views here.
 
 @login_required
@@ -18,7 +19,10 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            imprimeSenha(request, atendimento)
+            try:
+                imprimeSenha(request, atendimento)
+            except:
+                return render(request, 'erro.html', context)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -27,7 +31,8 @@ def gerar_senha(request):
 
 @login_required
 def chamar_proxima_senha(request):
-    atendente = Atendente.objects.get(user=request.user)        
+    atendente = Atendente.objects.get(user=request.user) 
+    limpaChamados(request)       
     try:
         senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
         if not senha_atual:
@@ -114,7 +119,24 @@ def tabela_dados_anteriores(request):
         }
         for atendimento in atendimentos if atendimento.status_atendimento == 'finalizado'
     ]
-    return JsonResponse(dados[::-1][:5], safe=False)
+    return JsonResponse(dados[::-1][:3], safe=False)
+
+@login_required
+def tabela_dados_anteriores(request):
+    # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
+    atendimentos = Atendimento.objects.all()
+    dados = [
+        {
+            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
+            'cabine': atendimento.atendente.cabine,
+            'cliente': atendimento.nome_cliente,
+            'status': atendimento.status_atendimento,
+            'tipo': atendimento.tipo_atendimento.nome
+        }
+        for atendimento in atendimentos if atendimento.status_atendimento == 'finalizado'
+    ]
+    return JsonResponse(dados[::-1], safe=False)
+
 
 @login_required
 def tabela_dados_fila(request):
@@ -205,12 +227,17 @@ def proximo(request):
 def finalizarSemAtendimento(request):
     return redirect('chamar_proxima_senha')
 
+def voltaDoErro(request):
+    return redirect('gerar-senha')
+
 from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
     printer = Usb(0x4b8, 0xe03)
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
+    data = date.today()
+    dataStr = data.strftime("Data: %d/%m/%Y\n")
 
     printer.set(align='center', width=1, height=1)
     printer.text("\b SENHA:"+"\b\n\n")
@@ -222,7 +249,8 @@ def imprimeSenha(request, atendimento):
 
     # printer.image(img_source=PROJECT_ROOT+"/static/img/logo-min.jpg")
     printer.set(align='center', width=1, height=1)
-    printer.text("\bPrefeitura Municipal de Nova Friburgo\b")
+    printer.text("\bPrefeitura Municipal de Nova Friburgo\b\n")
+    printer.text(dataStr)
 
     printer.cut()
 
@@ -236,3 +264,15 @@ def getSenhaAtual(request):
     temChamando = len(senhasChamando)
 
     return JsonResponse(temChamando, safe=False)
+
+@login_required
+def limpaChamados(request):
+    atendente = Atendente.objects.get(user=request.user) 
+    senhasChamando = Atendimento.objects.filter(status_atendimento='chamando', atendente=atendente ).order_by('-data_atendimento')
+
+    for x in range (len(senhasChamando)):
+        senhasChamando[x].finalizar()
+
+
+
+    
