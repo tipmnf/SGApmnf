@@ -240,7 +240,9 @@ def imprimeSenha(request, atendimento):
     data = date.today()
     dataStr = data.strftime("Data: %d/%m/%Y\n")
 
-    printer.open()
+    if not printer.is_open:
+        printer.open()
+        
     printer.set(align='center', width=1, height=1)
     printer.text("\b SENHA:"+"\b\n\n")
     # printer.ln(count=2)
