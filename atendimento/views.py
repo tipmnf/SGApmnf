@@ -4,6 +4,7 @@ from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Serial
+import serial
 from datetime import date
 # Create your views here.
 
@@ -234,7 +235,8 @@ from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
-    printer = Serial(devfile='/dev/ttyS0', baudrate='115200', parity='N', stopbits=1)
+    ser = serial.Serial(port='/dev/ttyS0', baudrate=115200, parity='N', stopbits=1)
+    printer = Serial(ser)
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
     data = date.today()
     dataStr = data.strftime("Data: %d/%m/%Y\n")
