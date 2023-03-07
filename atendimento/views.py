@@ -235,7 +235,7 @@ from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
-    printer = Serial(baudrate='115200', parity='N', stopbits=1)
+    printer = Serial(devfile="/dev/ttyS0", baudrate='115200', parity='N', stopbits=1)
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
     data = date.today()
     dataStr = data.strftime("Data: %d/%m/%Y\n")
