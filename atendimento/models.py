@@ -47,4 +47,4 @@ class Atendimento(models.Model):
         self.save()
 
     def __str__(self):
-        return self.numero_senha
+        return str(self.numero_senha)

@@ -4,7 +4,7 @@ from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Serial
-import serial
+from serial import Serial
 from datetime import date
 # Create your views here.
 
