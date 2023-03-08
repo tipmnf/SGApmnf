@@ -4,7 +4,7 @@ from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Serial
-from serial import Serial
+import serial
 from datetime import date
 # Create your views here.
 
@@ -235,30 +235,26 @@ from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
-    printer = Serial(devfile="/dev/ttyS1", baudrate='115200', parity='N', stopbits=1)
+    printer = serial.Serial(port='/dev/ttyS1', baudrate=115200, parity='N', stopbits=serial.STOPBITS_ONE)
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
     data = date.today()
-    dataStr = data.strftime("Data: %d/%m/%Y\n")
+    dataStr = data.strftime("Data: %d/%m/%Y\n").encode('utf-8')
 
     if not printer.is_open:
         printer.open()
-        
-    printer.set(align='center', width=1, height=1)
-    printer.text("\b SENHA:"+"\b\n\n")
-    # printer.ln(count=2)
 
-    printer.set(align='center', width=6, height=8)
-    printer.text(senha + "\n\n")
-    # printer.ln(count=2)  
+    printer.write("\b SENHA:\n\n".encode('utf-8'))
 
-    # printer.image(img_source=PROJECT_ROOT+"/static/img/logo-min.jpg")
-    printer.set(align='center', width=1, height=1)
-    printer.text("\bPrefeitura Municipal de Nova Friburgo\b\n")
-    printer.text(dataStr)
+    printer.write("\x1b\x21\x11".encode('utf-8'))
+    printer.write((senha + "\n\n").encode('utf-8'))
 
-    printer.cut()
+    printer.write("\bPrefeitura Municipal de Nova Friburgo\b\n".encode('utf-8'))
+    printer.write(dataStr)
+
+    printer.write("\n\n\n\n\n".encode('utf-8'))
 
     printer.close()
+
 
 
 
