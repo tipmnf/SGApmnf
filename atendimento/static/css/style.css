@@ -155,7 +155,7 @@ body {background: #0D578E;color: #fff;}
     margin: 15px;
 }
 
-.proxima-senha a {background: #3dac3b;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+.proxima-senha a {background: #cebd27;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
 
 .proxima-senha a[href="/chamar-proxima-senha/"] {
     background: #20b92c !important;
