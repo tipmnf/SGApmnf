@@ -108,7 +108,7 @@ def tabela_dados(request):
         }
         for atendimento in atendimentos if atendimento.status_atendimento == 'em atendimento' or atendimento.status_atendimento == 'finalizado'
     ]
-    return JsonResponse(dados[::-1], safe=False)
+    return JsonResponse(dados[::-1][12], safe=False)
 
 # @login_required
 # def tabela_dados_anteriores(request):
