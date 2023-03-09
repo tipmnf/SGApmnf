@@ -41,12 +41,16 @@ def chamar_proxima_senha(request):
             elif not atendente.tipo_atendimento.nome == "Processos":
                 senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Preferencial').order_by('data_atendimento').first()    
         else: print(senha_atual)
-        senha_atual.status_atendimento = 'chamando'
+        senha_atual.emAtendimento()
         senha_atual.atendente = atendente    
         senha_atual.save()
     except:
-        senha_atual=Atendimento.objects.filter(status_atendimento='chamando', atendente=atendente).order_by('data_atendimento').first()
-    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'cabine': atendente.cabine})
+        senha_atual=Atendimento.objects.filter(status_atendimento='em atendimento', atendente=atendente).order_by('data_atendimento').first()
+    
+    if not senha_atual:
+        return render(request, 'proxima_senha.html', {'senha': senha_atual})
+
+    return render(request, 'em-atendimento.html', {'senha': senha_atual, 'cabine': atendente.cabine})
 
 @login_required
 def chamar_proxima_senha_especifica(request, prefixo):
@@ -102,9 +106,9 @@ def tabela_dados(request):
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
         }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'chamando' or atendimento.status_atendimento == 'finalizado'
+        for atendimento in atendimentos if atendimento.status_atendimento == 'em atendimento' or atendimento.status_atendimento == 'finalizado'
     ]
-    return JsonResponse(dados, safe=False)
+    return JsonResponse(dados[::-1], safe=False)
 
 # @login_required
 # def tabela_dados_anteriores(request):
@@ -260,7 +264,7 @@ def imprimeSenha(request, atendimento):
 
 @login_required
 def getSenhaAtual(request):
-    senhasChamando = Atendimento.objects.filter(status_atendimento='chamando').order_by('-data_atendimento')
+    senhasChamando = Atendimento.objects.filter(status_atendimento='em atendimento').order_by('-data_atendimento')
     temChamando = len(senhasChamando)
 
     return JsonResponse(temChamando, safe=False)
@@ -268,7 +272,7 @@ def getSenhaAtual(request):
 @login_required
 def limpaChamados(request):
     atendente = Atendente.objects.get(user=request.user) 
-    senhasChamando = Atendimento.objects.filter(status_atendimento='chamando', atendente=atendente ).order_by('-data_atendimento')
+    senhasChamando = Atendimento.objects.filter(status_atendimento='em atendimento', atendente=atendente ).order_by('-data_atendimento')
 
     for x in range (len(senhasChamando)):
         senhasChamando[x].finalizar()
