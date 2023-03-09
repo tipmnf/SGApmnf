@@ -102,24 +102,24 @@ def tabela_dados(request):
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
         }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'chamando'
+        for atendimento in atendimentos if atendimento.status_atendimento == 'chamando' or atendimento.status_atendimento == 'finalizado'
     ]
     return JsonResponse(dados, safe=False)
 
-@login_required
-def tabela_dados_anteriores(request):
-    # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
-    atendimentos = Atendimento.objects.all()
-    dados = [
-        {
-            'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
-            'cabine': atendimento.atendente.cabine,
-            'cliente': atendimento.nome_cliente,
-            'status': atendimento.status_atendimento
-        }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'finalizado'
-    ]
-    return JsonResponse(dados[::-1][:3], safe=False)
+# @login_required
+# def tabela_dados_anteriores(request):
+#     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
+#     atendimentos = Atendimento.objects.all()
+#     dados = [
+#         {
+#             'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
+#             'cabine': atendimento.atendente.cabine,
+#             'cliente': atendimento.nome_cliente,
+#             'status': atendimento.status_atendimento
+#         }
+#         for atendimento in atendimentos if atendimento.status_atendimento == 'finalizado'
+#     ]
+#     return JsonResponse(dados[::-1][:3], safe=False)
 
 @login_required
 def tabela_dados_anteriores(request):
