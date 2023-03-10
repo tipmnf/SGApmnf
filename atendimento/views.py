@@ -91,7 +91,7 @@ def ocioso_especifico(request, prefixo):
 
 @login_required
 def senhas_chamadas(request):
-    senhas = Atendimento.objects.filter(status_atendimento='chamando').order_by('-data_atendimento')[:10]
+    senhas = Atendimento.objects.filter(status_atendimento='em atendimento').order_by('-data_atendimento')[:10]
     context = {'senhas': senhas}
     return render(request, 'senhas_chamadas.html', context)
 
@@ -108,7 +108,7 @@ def tabela_dados(request):
         }
         for atendimento in atendimentos if atendimento.status_atendimento == 'em atendimento' or atendimento.status_atendimento == 'finalizado'
     ]
-    return JsonResponse(dados[::-1], safe=False)
+    return JsonResponse(dados[::-1][:12], safe=False)
 
 # @login_required
 # def tabela_dados_anteriores(request):
@@ -272,7 +272,7 @@ def getSenhaAtual(request):
 @login_required
 def limpaChamados(request):
     atendente = Atendente.objects.get(user=request.user) 
-    senhasChamando = Atendimento.objects.filter(status_atendimento='em atendimento', atendente=atendente ).order_by('-data_atendimento')
+    senhasChamando = Atendimento.objects.filter(status_atendimento='em atendimento', atendente=atendente ).order_by('data_atendimento')
 
     for x in range (len(senhasChamando)):
         senhasChamando[x].finalizar()

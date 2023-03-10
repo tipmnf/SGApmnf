@@ -62,7 +62,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
 
-        'NAME': 'senhas_facil',
+        'NAME': 'dev_senhas_facil',
         'PORT': '3306',
 
         'USER': 'yan',
