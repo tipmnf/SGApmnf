@@ -239,7 +239,7 @@ from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
-    printer = serial.Serial('COM1', 9600)
+    printer = serial.Serial('LPT1', 9600)
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
     data = date.today()
     dataStr = data.strftime("Data: %d/%m/%Y\n").encode('utf-8')
