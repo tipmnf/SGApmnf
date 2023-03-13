@@ -83,18 +83,31 @@ body {background: #0D578E;color: #fff;}
 /* display */
 .senhas-chamadas div#minha-div {
     float: left;
+<<<<<<< HEAD
     width: 50%;
+=======
+    width: 60%;
+>>>>>>> 880aa8f53d13b7394c5d87788033d6640ade63d5
     height: 100%;
     background: #fff;
     border-radius: 0 30px 30px 0;
     z-index: 4;
     position: absolute;
+<<<<<<< HEAD
+=======
+    top: 15%;
+>>>>>>> 880aa8f53d13b7394c5d87788033d6640ade63d5
 }
 
 .senhas-chamadas video#videoDisplay {
     float: right;
+<<<<<<< HEAD
     width: 48%;
     height: auto;
+=======
+    width: 35%;
+    height: 100%;
+>>>>>>> 880aa8f53d13b7394c5d87788033d6640ade63d5
     position: relative;
     z-index: 1;
 }
@@ -113,33 +126,44 @@ body {background: #0D578E;color: #fff;}
  
 
 .senhas-chamadas table.ultima-senha tbody#tbody {
+<<<<<<< HEAD
     color: red;
     -webkit-text-stroke-width: 4px;
+=======
+    color: #f88a19;
+    -webkit-text-stroke-width: 2px;
+>>>>>>> 880aa8f53d13b7394c5d87788033d6640ade63d5
     -webkit-text-stroke-color: black;
     font-family: sans-serif;
 }
 
 .senhas-chamadas .header-display {
-    height: 180px;
+    height: 125px;
     display: flex;
-    padding: 24px;
-    justify-content: center;
-}
-.senhas-chamadas .header-display {
-    height: 180px;
-    display: flex;
-    padding: 24px;
-    justify-content: center;
+    padding-left: 15%;
+    padding-bottom: 1%;
+    float: left;
 }
 
 .senhas-chamadas tbody tr:nth-child(odd){
-  background-color: #bcd2f8;
+    background-color: #bcd2f8;
 }
 .senhas-chamadas tr:nth-child(even) {
     background-color: #e4eeff;
 }
 .senhas-chamadas tbody#tbody {
+<<<<<<< HEAD
     font-size: 175px;
+=======
+    font-size: 75px;
+}
+
+.senhas-chamadas tbody tr:nth-child(-n+2){
+    color: #f82219;
+    font-size: 150px;
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: black;
+>>>>>>> 880aa8f53d13b7394c5d87788033d6640ade63d5
 }
 
 
@@ -160,7 +184,15 @@ body {background: #0D578E;color: #fff;}
     margin: 15px;
 }
 
+<<<<<<< HEAD
 .proxima-senha a {background: #b9b820;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+=======
+.proxima-senha a {background: #cebd27;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+
+.proxima-senha a[href="/chamar-proxima-senha/"] {
+    background: #20b92c !important;
+}
+>>>>>>> 880aa8f53d13b7394c5d87788033d6640ade63d5
 
 .proxima-senha div table {
     margin-top: 20px;
