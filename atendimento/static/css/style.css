@@ -89,12 +89,13 @@ body {background: #0D578E;color: #fff;}
     border-radius: 0 30px 30px 0;
     z-index: 4;
     position: absolute;
+    top: 15%;
 }
 
 .senhas-chamadas video#videoDisplay {
     float: right;
-    width: 48%;
-    height: auto;
+    width: 35%;
+    height: 100%;
     position: relative;
     z-index: 1;
 }
