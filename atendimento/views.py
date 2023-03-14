@@ -239,30 +239,19 @@ from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
-    printer = parallel.Parallel('LPT1')
+    printer = Serial(devfile='LPT1', baudrate=115200)
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
     data = date.today()
-    dataStr = data.strftime("Data: %d/%m/%Y\n").encode('utf-8')
+    dataStr = data.strftime("Data: %d/%m/%Y\n")
 
-    printer.setData(0)
-    printer.setAutoFeed(0)
-    printer.setSelect(0)
-
-    printer.write("\b SENHA:\n\n".encode('utf-8'))
-
-    printer.write("\x1b\x21\x11".encode('utf-8'))
-    printer.write((senha + "\n\n").encode('utf-8'))
-
-    printer.write("\bPrefeitura Municipal de Nova Friburgo\b\n".encode('utf-8'))
-    printer.write(dataStr)
-
-    printer.write("\n\n\n\n\n".encode('utf-8'))
-
-    printer.setData(0)
-    printer.setAutoFeed(1)
-    printer.setSelect(0)
+    printer.text("\b SENHA:\n\n")
+    printer.set(align='center', font='b', height=2, width=2)
+    printer.text(senha + "\n\n")
+    printer.set(align='center')
+    printer.text("Prefeitura Municipal de Nova Friburgo\n")
+    printer.text(dataStr + "\n\n\n\n\n")
+    printer.cut()
     printer.close()
-
 
 @login_required
 def getSenhaAtual(request):
