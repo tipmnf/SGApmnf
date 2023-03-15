@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Serial
 from datetime import date
+import win32print
+import os
 # Create your views here.
 
 @login_required
@@ -238,19 +240,20 @@ from senhaFacil.settings import BASE_DIR, PROJECT_ROOT
 @login_required
 def imprimeSenha(request, atendimento):
 
-    printer = Serial(devfile='LPT1', baudrate=115200)
+    printer_name = "LPT1:"
     senha = atendimento.tipo_atendimento.prefixo + str(atendimento.numero_senha).zfill(3)
     data = date.today()
     dataStr = data.strftime("Data: %d/%m/%Y\n")
 
-    printer.text("\b SENHA:\n\n")
-    printer.set(align='center', font='b', height=2, width=2)
-    printer.text(senha + "\n\n")
-    printer.set(align='center')
-    printer.text("Prefeitura Municipal de Nova Friburgo\n")
-    printer.text(dataStr + "\n\n\n\n\n")
-    printer.cut()
-    printer.close()
+    with win32print.OpenPrinter(printer_name) as printer:
+        with win32print.StartDocPrinter(printer, 1, ('Test print', None, "RAW")) as job:
+            win32print.WritePrinter(printer, "\b SENHA:\n\n".encode('utf-8'))
+            win32print.WritePrinter(printer, "\x1B|bC".encode('utf-8')) # bold font
+            win32print.WritePrinter(printer, f"{senha}\n\n".encode('utf-8'))
+            win32print.WritePrinter(printer, "\x1B|nL".encode('utf-8')) # normal font
+            win32print.WritePrinter(printer, "Prefeitura Municipal de Nova Friburgo\n".encode('utf-8'))
+            win32print.WritePrinter(printer, f"{dataStr}\n\n\n\n\n".encode('utf-8'))
+            win32print.EndDocPrinter(printer)
 
 @login_required
 def getSenhaAtual(request):
