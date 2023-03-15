@@ -250,9 +250,9 @@ def imprimeSenha(request, atendimento):
         job = win32print.StartDocPrinter(printer, 1, ('Test print', None, "RAW"))
         try:
             win32print.WritePrinter(printer, "\x1B!\x01".encode('utf-8'))
-            win32print.WritePrinter(printer, "\x1Ba".encode('utf-8'))
+            win32print.WritePrinter(printer, "\x1Ba\x01".encode('utf-8'))
             win32print.WritePrinter(printer, "\b SENHA:\n\n".encode('utf-8'))
-            win32print.WritePrinter(printer, "\x1B!\x99".encode('utf-8')) 
+            win32print.WritePrinter(printer, "\x1B!\x14".encode('utf-8')) 
             win32print.WritePrinter(printer, "\x1BE".encode('utf-8')) # bold font
             win32print.WritePrinter(printer, f"{senha}\n\n".encode('utf-8'))
             win32print.WritePrinter(printer, "\x1B!\x01".encode('utf-8'))
