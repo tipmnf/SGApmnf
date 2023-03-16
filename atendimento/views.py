@@ -249,10 +249,10 @@ def imprimeSenha(request, atendimento):
     try:
         job = win32print.StartDocPrinter(printer, 1, ('Test print', None, "RAW"))
         try:
-           
+            win32print.WritePrinter(printer, "\x1B\x21\x01".encode('utf-8')) # set font size back to normal
             win32print.WritePrinter(printer, "\x1B\x61\x01".encode('utf-8')) # center text
             win32print.WritePrinter(printer, "SENHA:\n\n".encode('utf-8'))
-            win32print.WritePrinter(printer, "\x1B\x21\x10".encode('utf-8')) # set font size to 2x
+            win32print.WritePrinter(printer, "\x1B\x21\x50".encode('utf-8')) # set font size to 2x
             win32print.WritePrinter(printer, f"{senha}\n\n".encode('utf-8'))
             win32print.WritePrinter(printer, "\x1B\x21\x01".encode('utf-8')) # set font size back to normal
             win32print.WritePrinter(printer, "Prefeitura Municipal de Nova Friburgo\n".encode('utf-8'))
