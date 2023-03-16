@@ -252,7 +252,7 @@ def imprimeSenha(request, atendimento):
             win32print.WritePrinter(printer, "\x1B\x21\x01".encode('utf-8')) # set font size back to normal
             win32print.WritePrinter(printer, "\x1B\x61\x01".encode('utf-8')) # center text
             win32print.WritePrinter(printer, "SENHA:\n\n".encode('utf-8'))
-            win32print.WritePrinter(printer, "\x1B\x21\x50".encode('utf-8')) # set font size to 2x
+            win32print.WritePrinter(printer, "\x1B\x21\x99".encode('utf-8')) # set font size to 2x
             win32print.WritePrinter(printer, f"{senha}\n\n".encode('utf-8'))
             win32print.WritePrinter(printer, "\x1B\x21\x01".encode('utf-8')) # set font size back to normal
             win32print.WritePrinter(printer, "Prefeitura Municipal de Nova Friburgo\n".encode('utf-8'))
