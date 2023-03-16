@@ -60,14 +60,8 @@ WSGI_APPLICATION = 'senhaFacil.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-
-        'NAME': 'senhas_facil',
-        'PORT': '3306',
-
-        'USER': 'yan',
-        'PASSWORD': '1617021115fam9@@',
-        'HOST': '192.168.1.159',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
