@@ -34,16 +34,23 @@ body {background: #0D578E;color: #fff;}
     color: #ffffff;
 }
 
+
+
 .gerar-senha input[type="submit"] {
     /* position: absolute; */
     width: 100%;
     height: 80px;
-    background: #57B956;
+    background-color: rgba(245, 245, 245, 0.959);
     color: #fff;
     font-size: 33px;
     border: unset;
     font-size: 50px;
 }
+
+.gerar-senha input:focus {
+    border-color: #0099ff;
+    transition: border-color 0.3s ease-in-out;
+  }
 
 .gerar-senha label[for="tipo_atendimento"] {
     display: none;
