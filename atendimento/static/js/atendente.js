@@ -24,7 +24,7 @@ function montaTabela(dados) {
     });    
 }
 function busca(){
-  fetch("/tabela-dados-fila/")
+    fetch("/tabela-dados-fila/")
         .then(function(response) {
             return response.json();
         })
