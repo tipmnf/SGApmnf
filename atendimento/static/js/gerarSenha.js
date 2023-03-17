@@ -63,10 +63,12 @@ function animateShakeInScreen(){
 for(let i = 0; i < radio.length; i++){
     radio[i].addEventListener('change', function(){
         setTimeout(function(){
+            animateShakeInScreen()
+        }, 200)
+        setTimeout(function(){
             submitInput.style.backgroundColor = 'green'
             animateShowInScreen()
         }, 200)  
-        animateShakeInScreen() 
     })
 }
 

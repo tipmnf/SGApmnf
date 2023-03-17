@@ -15,6 +15,15 @@ body {background: #0D578E;color: #fff;}
     width: 90%;
 }
 
+label[for = "2"]::after{
+    content: url('/static/img/preferencial-img_resized_resized.png');
+    width: 0px;
+    height: auto;
+    display: inline;
+    padding-left: 15px;
+}
+
+
 .gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 100px;}
 
 .gerar-senha form {display: flex;flex-direction: row;width: 100%;width: -webkit-fill-available;flex-wrap: wrap;align-content: center;align-items: center;}
