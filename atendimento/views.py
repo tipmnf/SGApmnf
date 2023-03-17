@@ -247,7 +247,8 @@ def imprimeSenha(request, atendimento):
 
 
     font = {
-        "height": 8,
+        "height": 50,
+        "width": 50
     }
     with win32printing.Printer(linegap=1) as printer:
         printer.text("title1", font_config=font)
