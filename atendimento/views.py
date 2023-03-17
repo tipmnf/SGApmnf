@@ -245,10 +245,20 @@ def imprimeSenha(request, atendimento):
     data = date.today()
     dataStr = data.strftime("Data: %d/%m/%Y\n")
 
-    printer = win32printing.PrinterBase()
 
-    printer.start()
-    printer.text("isso é um teste",align="center")
+    font = {
+        "height": 8,
+    }
+    with win32printing.Printer(linegap=1) as printer:
+        printer.text("title1", font_config=font)
+        printer.text("title2", font_config=font)
+        printer.text("title3", font_config=font)
+        printer.text("title4", font_config=font)
+        printer.new_page()
+        printer.text("title5", font_config=font)
+        printer.text("title6", font_config=font)
+        printer.text("title7", font_config=font)
+        printer.text("title8", font_config=font)
     
     # try:
     #     job = win32print.StartDocPrinter(printer, 1, ('Test print', None, "RAW"))
