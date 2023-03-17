@@ -15,6 +15,15 @@ body {background: #0D578E;color: #fff;}
     width: 90%;
 }
 
+label[for = "2"]::after{
+    content: url('/static/img/preferencial-img_resized_resized.png');
+    width: 0px;
+    height: auto;
+    display: inline;
+    padding-left: 15px;
+}
+
+
 .gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 100px;}
 
 .gerar-senha form {display: flex;flex-direction: row;width: 100%;width: -webkit-fill-available;flex-wrap: wrap;align-content: center;align-items: center;}
@@ -34,16 +43,23 @@ body {background: #0D578E;color: #fff;}
     color: #ffffff;
 }
 
+
+
 .gerar-senha input[type="submit"] {
     /* position: absolute; */
     width: 100%;
     height: 80px;
-    background: #57B956;
+    background-color: rgba(245, 245, 245, 0.959);
     color: #fff;
     font-size: 33px;
     border: unset;
     font-size: 50px;
 }
+
+.gerar-senha input:focus {
+    border-color: #0099ff;
+    transition: border-color 0.3s ease-in-out;
+  }
 
 .gerar-senha label[for="tipo_atendimento"] {
     display: none;

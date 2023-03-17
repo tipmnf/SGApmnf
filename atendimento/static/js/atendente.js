@@ -33,7 +33,7 @@ function busca(){
         });
     }
 
-busca()
-setInterval(function() {
-    busca()
-}, 5000);
+// busca()
+// setInterval(function() {
+//     busca()
+// }, 5000);
