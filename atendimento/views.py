@@ -261,6 +261,7 @@ def imprimeSenha(request, atendimento):
         printer.text("Prefeitura Municipal de Nova Friburgo", align="center", font_config=font)
         printer.text(dataStr, align="center", font_config=font)
         printer.text("\x1Bm")
+        printer.end()
 
     
     # try:
