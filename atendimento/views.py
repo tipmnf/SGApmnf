@@ -251,8 +251,8 @@ def imprimeSenha(request, atendimento):
     }
 
     fontSenha = {
-        "height": 50,
-        "width": 25
+        "height": 70,
+        "width": 30
     }
 
     with win32printing.Printer(linegap=1) as printer:
@@ -260,6 +260,7 @@ def imprimeSenha(request, atendimento):
         printer.text(senha, align="center", font_config=fontSenha)
         printer.text("Prefeitura Municipal de Nova Friburgo", align="center", font_config=font)
         printer.text(dataStr, align="center", font_config=font)
+        printer.text("\x1Bm")
 
     
     # try:
