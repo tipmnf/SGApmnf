@@ -245,21 +245,22 @@ def imprimeSenha(request, atendimento):
     data = date.today()
     dataStr = data.strftime("Data: %d/%m/%Y\n")
 
-
-    font = {
-        "height": 50,
-        "width": 50
+    font={
+        "height": 10,
+        "width": 5
     }
+
+    fontSenha = {
+        "height": 50,
+        "width": 25
+    }
+
     with win32printing.Printer(linegap=1) as printer:
-        printer.text("title1", font_config=font)
-        printer.text("title2", font_config=font)
-        printer.text("title3", font_config=font)
-        printer.text("title4", font_config=font)
-        printer.new_page()
-        printer.text("title5", font_config=font)
-        printer.text("title6", font_config=font)
-        printer.text("title7", font_config=font)
-        printer.text("title8", font_config=font)
+        printer.text("Senha:", align="center", font_config=font)
+        printer.text(senha, align="center", font_config=fontSenha)
+        printer.text("Prefeitura Municipal de Nova Friburgo", align="center", font_config=font)
+        printer.text(dataStr, align="center", font_config=font)
+
     
     # try:
     #     job = win32print.StartDocPrinter(printer, 1, ('Test print', None, "RAW"))
