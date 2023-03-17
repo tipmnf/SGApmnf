@@ -256,6 +256,7 @@ def imprimeSenha(request, atendimento):
     }
 
     with win32printing.Printer(linegap=1) as printer:
+        win32printing.Position(-20, -20)
         printer.text("Senha:", align="center", font_config=font)
         printer.text(senha, align="center", font_config=fontSenha)
         printer.text("Prefeitura Municipal de Nova Friburgo", align="center", font_config=font)
