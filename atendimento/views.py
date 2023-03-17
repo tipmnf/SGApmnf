@@ -267,6 +267,7 @@ def imprimeSenha(request, atendimento):
     try:
         job = win32print.StartDocPrinter(printer_cut, 1, ('Test print', None, "RAW"))
         try:
+            win32print.WritePrinter(printer_cut, "\n\n\n".encode('utf-8'))
             win32print.WritePrinter(printer_cut, "\x1Bm".encode('utf-8'))
         finally:
             win32print.EndPagePrinter(printer_cut)
