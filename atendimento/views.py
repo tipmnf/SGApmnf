@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Serial
 from datetime import date
-import win32print
+import win32printing
 import os
 # Create your views here.
 
@@ -245,24 +245,28 @@ def imprimeSenha(request, atendimento):
     data = date.today()
     dataStr = data.strftime("Data: %d/%m/%Y\n")
 
-    printer = win32print.OpenPrinter(printer_name)
-    try:
-        job = win32print.StartDocPrinter(printer, 1, ('Test print', None, "RAW"))
-        try:
-            win32print.WritePrinter(printer, "\x1B\x21\x01".encode('utf-8')) # set font size back to normal
-            win32print.WritePrinter(printer, "\x1B\x61\x01".encode('utf-8')) # center text
-            win32print.WritePrinter(printer, "SENHA:\n\n".encode('utf-8'))
-            win32print.WritePrinter(printer, "\x1B\x2B\xFF".encode('utf-8')) # set font size to 10x
-            win32print.WritePrinter(printer, f"{senha}\n\n".encode('utf-8'))
-            win32print.WritePrinter(printer, "\x1B\x21\x01".encode('utf-8')) # set font size back to normal
-            win32print.WritePrinter(printer, "Prefeitura Municipal de Nova Friburgo\n".encode('utf-8'))
-            win32print.WritePrinter(printer, f"{dataStr}\n\n".encode('utf-8'))
-            win32print.WritePrinter(printer, "\x1Bm".encode('utf-8'))
-        finally:
-            win32print.EndPagePrinter(printer)
-            win32print.EndDocPrinter(printer)
-    finally:
-        win32print.ClosePrinter(printer)
+    printer = win32printing.PrinterBase()
+
+    printer.start()
+    printer.text("isso é um teste",align="center")
+    
+    # try:
+    #     job = win32print.StartDocPrinter(printer, 1, ('Test print', None, "RAW"))
+    #     try:
+    #         win32print.WritePrinter(printer, "\x1B\x21\x01".encode('utf-8')) # set font size back to normal
+    #         win32print.WritePrinter(printer, "\x1B\x61\x01".encode('utf-8')) # center text
+    #         win32print.WritePrinter(printer, "SENHA:\n\n".encode('utf-8'))
+    #         win32print.WritePrinter(printer, "\x1B\x2B\xFF".encode('utf-8')) # set font size to 10x
+    #         win32print.WritePrinter(printer, f"{senha}\n\n".encode('utf-8'))
+    #         win32print.WritePrinter(printer, "\x1B\x21\x01".encode('utf-8')) # set font size back to normal
+    #         win32print.WritePrinter(printer, "Prefeitura Municipal de Nova Friburgo\n".encode('utf-8'))
+    #         win32print.WritePrinter(printer, f"{dataStr}\n\n".encode('utf-8'))
+    #         win32print.WritePrinter(printer, "\x1Bm".encode('utf-8'))
+    #     finally:
+    #         win32print.EndPagePrinter(printer)
+    #         win32print.EndDocPrinter(printer)
+    # finally:
+    #     win32print.ClosePrinter(printer)
 
 
 @login_required
