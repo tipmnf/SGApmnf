@@ -82,16 +82,6 @@ label[for = "2"]::after{
 
 .gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 45px;padding-left: 20px;}
 
-
-.gerar-senha .pessoas-fila {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 35px;
-    justify-content: center;
-    margin-top: -25px;
-}
-
 .gerar-senha p.pessoas-frente {
     padding-right: 30px;
 }
@@ -213,6 +203,31 @@ label[for = "2"]::after{
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+
+.proxima-senha .pessoas-fila {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 35px;
+    justify-content: center;
+    margin-top: -25px;
+}
+#paragrafo-G{
+    text-align: right;
+}
+#paragrafo-P{
+    text-align: center;
+}
+#paragrafo-C{
+   text-align: left;
+}
+#quantFila{
+    align-self: end;
+    position: relative;
+    padding-right: 45px;
+    padding-left: 20px;
+}
+
 
 /* Em atendimento */
 .em-atendimento {

@@ -1,6 +1,7 @@
 from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 class TipoAtendimento(models.Model):
     prefixo = models.CharField(max_length=4)
@@ -20,7 +21,9 @@ class Atendente(models.Model):
 
 class Atendimento(models.Model):
     nome_cliente = models.CharField(max_length=255, verbose_name='Digite seu nome', null=True,   blank=True)
-    data_atendimento = models.DateTimeField(auto_now_add=True)    
+    data_atendimento = models.DateTimeField(auto_now_add=True)
+    data_inicio = models.DateTimeField(null=True, default=None)
+    data_fim = models.DateTimeField(null=True, default=None)    
     status_atendimento = models.CharField(max_length=255, default='fila')
     numero_senha = models.IntegerField()
     atendente = models.ForeignKey(Atendente, on_delete=models.PROTECT, null=True,blank= True)
@@ -40,10 +43,12 @@ class Atendimento(models.Model):
     
     def emAtendimento(self):
         self.status_atendimento = 'em atendimento'
+        self.data_inicio = datetime.now()
         self.save()
     
     def finalizar(self):
         self.status_atendimento = 'finalizado'
+        self.data_fim = datetime.now()
         self.save()
 
     def __str__(self):
