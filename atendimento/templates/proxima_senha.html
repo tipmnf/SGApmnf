@@ -25,19 +25,29 @@
   </a>
   {% endif %}
   
-  <div>
+  <!-- <div>
     <table>
       <thead>
         <tr>
           <th>Senha</th>
           <th>Tipo de Atendimento</th>          
-          <!-- <th>Data e hora da chamada</th> -->
+           <th>Data e hora da chamada</th>
         </tr>
       </thead>
       <tbody id="tbody">        
       </tbody>
     </table>
-  </div>
+  </div> -->
+
+  <div class="pessoas-fila">
+    <p>Geral:</p>
+    <p id="quantFila"></p>
+    <p>Prefencial:</p>
+    <p id="quantPref"></p>
+    <p>Processos:</p>
+    <p id="quantProc"></p>
+  </div> 
+
 <script src="/static/js/atendente.js"></script>
   
 {% endblock %}
