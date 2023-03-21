@@ -98,7 +98,7 @@ def senhas_chamadas(request):
 @login_required
 def tabela_dados(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
-    atendimentos = Atendimento.objects.all().order_by('data_inicio')
+    atendimentos = Atendimento.objects.all()
     dados = [
         {
             'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
