@@ -23,15 +23,15 @@ function montaTabela(dados) {
         corpoTabela.appendChild(linha);        
     });    
 }
-function busca(){
-  fetch("/tabela-dados-fila/")
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(dados) {
-            montaTabela(dados);
-        });
-    }
+// function busca(){
+//   fetch("/tabela-dados-fila/")
+//         .then(function(response) {
+//             return response.json();
+//         })
+//         .then(function(dados) {
+//             montaTabela(dados);
+//         });
+//     }
 
 // conta as filas para mostrar ao atendente
 function contaFila(dados) {    
@@ -59,6 +59,15 @@ function contaFila(dados) {
             if(dado.tipo == 'Processos'){
                 numPessoasProc = numPessoasProc + 1;
             }
+        }
+        let btnCall = document.getElementById('btnCall')
+        if (numPessoas == 0 && numPessoasPref == 0 && numPessoasProc == 0) {
+            btnCall.style.backgroundColor = 'gray';
+            console.log('ta')
+        }
+        else {
+            btnCall.style.backgroundColor = '#04fc18';
+            console.log('ok')
         }
     });    
     
