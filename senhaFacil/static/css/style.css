@@ -1,6 +1,16 @@
-html {overflow-y: hidden;overflow-x: hidden;}
-body {background: #0D578E;color: #fff;}
+html {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
 
+body {
+    background: #0D578E;
+    color: #fff;
+}
+
+hr{
+    margin-top: 0px;
+}
 /* Gerar Senha */
 
 .gerar-senha {
@@ -15,7 +25,7 @@ body {background: #0D578E;color: #fff;}
     width: 90%;
 }
 
-label[for = "2"]::after{
+label[for="2"]::after {
     content: url('/static/img/preferencial-img_resized_resized.png');
     width: 0px;
     height: auto;
@@ -24,9 +34,23 @@ label[for = "2"]::after{
 }
 
 
-.gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 100px;}
+.gerar-senha p#quantFila,
+p#quantPref,
+p#quantProc {
+    align-self: end;
+    position: relative;
+    padding-right: 100px;
+}
 
-.gerar-senha form {display: flex;flex-direction: row;width: 100%;width: -webkit-fill-available;flex-wrap: wrap;align-content: center;align-items: center;}
+.gerar-senha form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    width: -webkit-fill-available;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
 
 .gerar-senha form label {
     background: #fff;
@@ -38,7 +62,8 @@ label[for = "2"]::after{
     width: 100%;
     margin: auto 10px;
 }
-.gerar-senha form input:checked +  label{
+
+.gerar-senha form input:checked+label {
     background: #0d578e;
     color: #ffffff;
 }
@@ -59,13 +84,13 @@ label[for = "2"]::after{
 .gerar-senha input:focus {
     border-color: #0099ff;
     transition: border-color 0.3s ease-in-out;
-  }
+}
 
 .gerar-senha label[for="tipo_atendimento"] {
     display: none;
 }
 
-.gerar-senha form > input {
+.gerar-senha form>input {
     display: none;
 }
 
@@ -80,16 +105,13 @@ label[for = "2"]::after{
     height: 110px;
 }
 
-.gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 45px;padding-left: 20px;}
-
-
-.gerar-senha .pessoas-fila {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 35px;
-    justify-content: center;
-    margin-top: -25px;
+.gerar-senha p#quantFila,
+p#quantPref,
+p#quantProc {
+    align-self: end;
+    position: relative;
+    padding-right: 45px;
+    padding-left: 20px;
 }
 
 .gerar-senha p.pessoas-frente {
@@ -127,7 +149,7 @@ label[for = "2"]::after{
 .senhas-chamadas table.ultima-senha th {
     padding-left: 15px;
 }
- 
+
 
 .senhas-chamadas table.ultima-senha tbody#tbody {
     color: #f88a19;
@@ -144,17 +166,19 @@ label[for = "2"]::after{
     float: left;
 }
 
-.senhas-chamadas tbody tr:nth-child(odd){
+.senhas-chamadas tbody tr:nth-child(odd) {
     background-color: #bcd2f8;
 }
+
 .senhas-chamadas tr:nth-child(even) {
     background-color: #e4eeff;
 }
+
 .senhas-chamadas tbody#tbody {
     font-size: 75px;
 }
 
-.senhas-chamadas tbody tr:nth-child(-n+2){
+.senhas-chamadas tbody tr:nth-child(-n+2) {
     color: #f82219;
     font-size: 150px;
     -webkit-text-stroke-width: 4px;
@@ -177,9 +201,29 @@ label[for = "2"]::after{
 
 .proxima-senha h1 {
     margin: 15px;
+    margin-bottom: 0px;
 }
 
-.proxima-senha a {background: #cebd27;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+.proxima-senha p {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.proxima-senha a {
+    background: #cebd27;
+    color: #fff;
+    padding: 5% 1%;
+    border-radius: 45px;
+    text-decoration-line: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.proxima-senha a[href="/chamar-proxima-senha/"]:hover{
+    text-decoration: underline;
+    background: #04fc18 !important;
+}
 
 .proxima-senha a[href="/chamar-proxima-senha/"] {
     background: #20b92c !important;
@@ -193,7 +237,13 @@ label[for = "2"]::after{
     font-size: 30px;
 }
 
-.proxima-senha div table th {padding: 0 30px;}
+.peopleFila p {
+    margin-top: 10px;
+}
+
+.proxima-senha div table th {
+    padding: 0 30px;
+}
 
 
 
@@ -214,6 +264,40 @@ label[for = "2"]::after{
     justify-content: flex-start;
 }
 
+.qtdFila {
+    margin-top: -30px;
+}
+
+.proxima-senha .pessoas-fila {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 35px;
+    justify-content: center;
+    margin-top: -60px;
+    height: 80px;
+}
+
+#paragrafo-G {
+    text-align: right;
+}
+
+#paragrafo-P {
+    text-align: center;
+}
+
+#paragrafo-C {
+    text-align: left;
+}
+
+#quantFila {
+    align-self: end;
+    position: relative;
+    padding-right: 45px;
+    padding-left: 20px;
+}
+
+
 /* Em atendimento */
 .em-atendimento {
     background: #fff;
@@ -228,9 +312,36 @@ label[for = "2"]::after{
 
 .em-atendimento h1 {
     margin: 15px;
+    margin-bottom: 0px;
 }
 
-.em-atendimento a {background: #ac3b3b;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+.em-atendimento p {
+    text-align: center;
+}
+
+.em-atendimento a:hover{
+    text-decoration: underline;
+    background: #aa1414;
+}
+
+.em-atendimento .spanAtend {
+    font-size: 65px;
+    color: rgba(26, 185, 26, 0.959);
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
+}
+
+.em-atendimento a {
+    background: #ac3b3b;
+    color: #fff;
+    padding: 5% 1%;
+    border-radius: 45px;
+    text-decoration-line: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 .em-atendimento div table {
     margin-top: 40px;
@@ -240,7 +351,9 @@ label[for = "2"]::after{
     font-size: 30px;
 }
 
-.em-atendimento div table th {padding: 0 30px;}
+.em-atendimento div table th {
+    padding: 0 30px;
+}
 
 /* fix largura ultimas senhas */
 .senha-anterior {
@@ -287,7 +400,7 @@ tbody#tbodyanteriores tr {
 
 /* pagina de erro */
 
-div.caixa-erro{
+div.caixa-erro {
     background: #fff;
     color: #000;
     font-size: 40px;
@@ -313,7 +426,7 @@ a.botao-voltar {
 
 p#erro-titulo {
     color: red;
-    text-align: center; 
+    text-align: center;
     font-size: 80px;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
