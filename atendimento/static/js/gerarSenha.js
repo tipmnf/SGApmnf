@@ -32,15 +32,15 @@ function contaFila(dados) {
 
 
 
-function getFilas() {
-    fetch("/tabela-dados-fila/")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (dados) {
-            contaFila(dados);
-        });
-}
+// function getFilas() {
+//     fetch("/tabela-dados-fila/")
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (dados) {
+//             contaFila(dados);
+//         });
+// }
 
 let radio = document.querySelectorAll('[type="radio"]');
 let submitInput = document.getElementById('submitButton')
