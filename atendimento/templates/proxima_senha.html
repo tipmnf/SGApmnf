@@ -5,11 +5,8 @@
 {% endblock %}
 {% block content %}
 
-  {% if senha %}
-  <h1>Chamando</h1>
-  {% else %}
   <h1>Em espera</h1>
-  {% endif %}
+  <hr>
   <p>Tipo de atendimento: {{ senha.tipo_atendimento.nome }}</p>
   <p>Senha: {{ senha.numero_senha }}</p>
   <p>Nome do cliente: {{ senha.nome_cliente }}</p>
@@ -20,24 +17,36 @@
     Atender
   </a>
   {% else %}
-  <a href="/chamar-proxima-senha/{{prefixo}}">
+  <a id="btnCall" href="/chamar-proxima-senha/{{prefixo}}">
     Chamar próximo da fila
   </a>
   {% endif %}
   
-  <div>
+  <!-- <div>
     <table>
       <thead>
         <tr>
           <th>Senha</th>
           <th>Tipo de Atendimento</th>          
-          <!-- <th>Data e hora da chamada</th> -->
+           <th>Data e hora da chamada</th>
         </tr>
       </thead>
       <tbody id="tbody">        
       </tbody>
     </table>
+  </div> -->
+  <div class="peopleFila">
+    <p>Quantidade de pessoas na fila:</p>
   </div>
+  <div class="pessoas-fila">
+    <p id="Paragrafo-G">G:</p>
+    <p id="quantFila"></p>
+    <p id="Paragrafo-P">P:</p>
+    <p id="quantPref"></p>
+    <p id="Paragrafo-C">C:</p>
+    <p id="quantProc"></p>
+  </div> 
+
 <script src="/static/js/atendente.js"></script>
   
 {% endblock %}

@@ -1,6 +1,16 @@
-html {overflow-y: hidden;overflow-x: hidden;}
-body {background: #0D578E;color: #fff;}
+html {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
 
+body {
+    background: #0D578E;
+    color: #fff;
+}
+
+hr{
+    margin-top: 0px;
+}
 /* Gerar Senha */
 
 .gerar-senha {
@@ -15,9 +25,32 @@ body {background: #0D578E;color: #fff;}
     width: 90%;
 }
 
-.gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 100px;}
+label[for="2"]::after {
+    content: url('/static/img/preferencial-img_resized_resized.png');
+    width: 0px;
+    height: auto;
+    display: inline;
+    padding-left: 15px;
+}
 
-.gerar-senha form {display: flex;flex-direction: row;width: 100%;width: -webkit-fill-available;flex-wrap: wrap;align-content: center;align-items: center;}
+
+.gerar-senha p#quantFila,
+p#quantPref,
+p#quantProc {
+    align-self: end;
+    position: relative;
+    padding-right: 100px;
+}
+
+.gerar-senha form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    width: -webkit-fill-available;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
 
 .gerar-senha form label {
     background: #fff;
@@ -29,27 +62,35 @@ body {background: #0D578E;color: #fff;}
     width: 100%;
     margin: auto 10px;
 }
-.gerar-senha form input:checked +  label{
+
+.gerar-senha form input:checked+label {
     background: #0d578e;
     color: #ffffff;
 }
+
+
 
 .gerar-senha input[type="submit"] {
     /* position: absolute; */
     width: 100%;
     height: 80px;
-    background: #57B956;
+    background-color: rgba(245, 245, 245, 0.959);
     color: #fff;
     font-size: 33px;
     border: unset;
     font-size: 50px;
 }
 
+.gerar-senha input:focus {
+    border-color: #0099ff;
+    transition: border-color 0.3s ease-in-out;
+}
+
 .gerar-senha label[for="tipo_atendimento"] {
     display: none;
 }
 
-.gerar-senha form > input {
+.gerar-senha form>input {
     display: none;
 }
 
@@ -64,16 +105,13 @@ body {background: #0D578E;color: #fff;}
     height: 110px;
 }
 
-.gerar-senha p#quantFila, p#quantPref, p#quantProc {align-self: end;position: relative;padding-right: 45px;padding-left: 20px;}
-
-
-.gerar-senha .pessoas-fila {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 35px;
-    justify-content: center;
-    margin-top: -25px;
+.gerar-senha p#quantFila,
+p#quantPref,
+p#quantProc {
+    align-self: end;
+    position: relative;
+    padding-right: 45px;
+    padding-left: 20px;
 }
 
 .gerar-senha p.pessoas-frente {
@@ -83,18 +121,19 @@ body {background: #0D578E;color: #fff;}
 /* display */
 .senhas-chamadas div#minha-div {
     float: left;
-    width: 50%;
+    width: 60%;
     height: 100%;
     background: #fff;
     border-radius: 0 30px 30px 0;
     z-index: 4;
     position: absolute;
+    top: 15%;
 }
 
 .senhas-chamadas video#videoDisplay {
     float: right;
-    width: 48%;
-    height: auto;
+    width: 35%;
+    height: 100%;
     position: relative;
     z-index: 1;
 }
@@ -110,36 +149,40 @@ body {background: #0D578E;color: #fff;}
 .senhas-chamadas table.ultima-senha th {
     padding-left: 15px;
 }
- 
+
 
 .senhas-chamadas table.ultima-senha tbody#tbody {
-    color: red;
-    -webkit-text-stroke-width: 4px;
+    color: #f88a19;
+    -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
     font-family: sans-serif;
 }
 
 .senhas-chamadas .header-display {
-    height: 180px;
+    height: 125px;
     display: flex;
-    padding: 24px;
-    justify-content: center;
-}
-.senhas-chamadas .header-display {
-    height: 180px;
-    display: flex;
-    padding: 24px;
-    justify-content: center;
+    padding-left: 15%;
+    padding-bottom: 1%;
+    float: left;
 }
 
-.senhas-chamadas tbody tr:nth-child(odd){
-  background-color: #bcd2f8;
+.senhas-chamadas tbody tr:nth-child(odd) {
+    background-color: #bcd2f8;
 }
+
 .senhas-chamadas tr:nth-child(even) {
     background-color: #e4eeff;
 }
+
 .senhas-chamadas tbody#tbody {
-    font-size: 175px;
+    font-size: 75px;
+}
+
+.senhas-chamadas tbody tr:nth-child(-n+2) {
+    color: #f82219;
+    font-size: 150px;
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: black;
 }
 
 
@@ -158,9 +201,33 @@ body {background: #0D578E;color: #fff;}
 
 .proxima-senha h1 {
     margin: 15px;
+    margin-bottom: 0px;
 }
 
-.proxima-senha a {background: #b9b820;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+.proxima-senha p {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.proxima-senha a {
+    background: #cebd27;
+    color: #fff;
+    padding: 5% 1%;
+    border-radius: 45px;
+    text-decoration-line: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.proxima-senha a[href="/chamar-proxima-senha/"]:hover{
+    text-decoration: underline;
+    background: #04fc18 !important;
+}
+
+.proxima-senha a[href="/chamar-proxima-senha/"] {
+    background: #20b92c !important;
+}
 
 .proxima-senha div table {
     margin-top: 20px;
@@ -170,7 +237,13 @@ body {background: #0D578E;color: #fff;}
     font-size: 30px;
 }
 
-.proxima-senha div table th {padding: 0 30px;}
+.peopleFila p {
+    margin-top: 10px;
+}
+
+.proxima-senha div table th {
+    padding: 0 30px;
+}
 
 
 
@@ -191,6 +264,40 @@ body {background: #0D578E;color: #fff;}
     justify-content: flex-start;
 }
 
+.qtdFila {
+    margin-top: -30px;
+}
+
+.proxima-senha .pessoas-fila {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 35px;
+    justify-content: center;
+    margin-top: -60px;
+    height: 80px;
+}
+
+#paragrafo-G {
+    text-align: right;
+}
+
+#paragrafo-P {
+    text-align: center;
+}
+
+#paragrafo-C {
+    text-align: left;
+}
+
+#quantFila {
+    align-self: end;
+    position: relative;
+    padding-right: 45px;
+    padding-left: 20px;
+}
+
+
 /* Em atendimento */
 .em-atendimento {
     background: #fff;
@@ -205,9 +312,36 @@ body {background: #0D578E;color: #fff;}
 
 .em-atendimento h1 {
     margin: 15px;
+    margin-bottom: 0px;
 }
 
-.em-atendimento a {background: #ac3b3b;color: #fff;padding: 5% 1%;border-radius: 45px;text-decoration-line: none;width: 100%;display: flex;justify-content: center;}
+.em-atendimento p {
+    text-align: center;
+}
+
+.em-atendimento a:hover{
+    text-decoration: underline;
+    background: #aa1414;
+}
+
+.em-atendimento .spanAtend {
+    font-size: 65px;
+    color: rgba(26, 185, 26, 0.959);
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
+}
+
+.em-atendimento a {
+    background: #ac3b3b;
+    color: #fff;
+    padding: 5% 1%;
+    border-radius: 45px;
+    text-decoration-line: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 .em-atendimento div table {
     margin-top: 40px;
@@ -217,7 +351,9 @@ body {background: #0D578E;color: #fff;}
     font-size: 30px;
 }
 
-.em-atendimento div table th {padding: 0 30px;}
+.em-atendimento div table th {
+    padding: 0 30px;
+}
 
 /* fix largura ultimas senhas */
 .senha-anterior {
@@ -264,7 +400,7 @@ tbody#tbodyanteriores tr {
 
 /* pagina de erro */
 
-.caixa-erro{
+div.caixa-erro {
     background: #fff;
     color: #000;
     font-size: 40px;
@@ -273,4 +409,25 @@ tbody#tbodyanteriores tr {
     margin-left: auto;
     margin-right: auto;
     border-radius: 35px;
+}
+
+a.botao-voltar {
+    width: 100%;
+    height: 80px;
+    background: #57B956;
+    color: #fff;
+    font-size: 33px;
+    border: unset;
+    font-size: 50px;
+    border-radius: 45px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+p#erro-titulo {
+    color: red;
+    text-align: center;
+    font-size: 80px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
