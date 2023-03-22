@@ -70,17 +70,23 @@ function contaFila(dados) {
     pessoasProc.innerHTML = numPessoasProc;
 
     let btnCall = document.querySelector('#btnCall');
-    console.log(typeof (btnCall));
     if (numPessoas != 0 || numPessoasPref != 0 || numPessoasProc != 0) {
-        addEventListener('hover', function(){
+        btnCall.addEventListener('mouseover', function(){
             btnCall.style.backgroundColor = '#04fc18'
+            console.log("passou")
         })
-        btnCall.style.backgroundColor = '#20b92c';
-        console.log('ta')
+        btnCall.addEventListener('mouseout', function(){
+            btnCall.style.backgroundColor = '#20b92c';
+            console.log("saiu")
+        })
     }
     else {
-        btnCall.style.backgroundColor = 'gray';
-        console.log('ok')
+        btnCall.addEventListener('mouseover', function(){
+            btnCall.style.backgroundColor = "#4e4e4e"
+        })
+        btnCall.addEventListener('mouseout', function(){
+            btnCall.style.backgroundColor = "gray"
+        })
     }
 }
 

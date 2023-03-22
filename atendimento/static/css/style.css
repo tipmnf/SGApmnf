@@ -220,10 +220,9 @@ p#quantProc {
     justify-content: center;
 }
 
-/* .proxima-senha #btnCall[href="/chamar-proxima-senha/"]:hover{
-    text-decoration: underline;
-    background: #04fc18; 
-} */
+.proxima-senha #btnCall[href="/chamar-proxima-senha/"]:hover{
+    text-decoration: underline; 
+} 
 
 .proxima-senha #btnCall[href="/chamar-proxima-senha/"] {
     background: gray;
