@@ -117,7 +117,7 @@ def tabela_dados(request):
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
         }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'em atendimento' or atendimento.status_atendimento == 'finalizado'
+        for atendimento in atendimentos if atendimento.status_atendimento == 'em atendimento' or atendimento.status_atendimento == 'finalizado' or atendimento.status_atendimento == 'registrando' or atendimento.status_atendimento == 'fila'
     ]
     return JsonResponse(dados[::-1][:12], safe=False)
 
