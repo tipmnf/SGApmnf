@@ -23,11 +23,6 @@ function montaTabela(dados) {
         corpoTabela.appendChild(linha);
     });
 }
-<<<<<<< HEAD
-function busca(){
-    fetch("/tabela-dados-fila/")
-        .then(function(response) {
-=======
 // function busca(){
 //   fetch("/tabela-dados-fila/")
 //         .then(function(response) {
@@ -92,7 +87,6 @@ function contaFila(dados) {
 function getFilas() {
     fetch("/tabela-dados-fila/")
         .then(function (response) {
->>>>>>> 86c0cba6ef9bd6a6b4d717949b1c254add095fc9
             return response.json();
         })
         .then(function (dados) {
