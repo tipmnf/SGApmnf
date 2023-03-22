@@ -13,6 +13,7 @@ class TipoAtendimento(models.Model):
 class Atendente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cabine = models.CharField(max_length=100)
+    registrador = models.BooleanField(default=False)
     tipo_atendimento = models.ForeignKey(TipoAtendimento, on_delete=models.PROTECT)
 
     def __str__(self):

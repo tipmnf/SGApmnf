@@ -17,14 +17,14 @@ def gerar_senha(request):
         if form.is_valid():
             atendimento = form.save(commit=False)
             atendimento.gerar_senha()
-            atendimento.status_atendimento='fila'
+            atendimento.status_atendimento='registrar'
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            # try:
-            imprimeSenha(request, atendimento)
-            # except:
-            #     return render(request, 'erro.html', context)
+            try:
+                imprimeSenha(request, atendimento)
+            except:
+                return render(request, 'erro.html', context)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -36,14 +36,23 @@ def chamar_proxima_senha(request):
     atendente = Atendente.objects.get(user=request.user) 
     limpaChamados(request)       
     try:
-        senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
-        if not senha_atual:
-            if atendente.tipo_atendimento.nome == 'Preferencial':
-                senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
-            elif not atendente.tipo_atendimento.nome == "Processos":
-                senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Preferencial').order_by('data_atendimento').first()    
-        else: print(senha_atual)
-        senha_atual.emAtendimento()
+
+        # primeiro momento para a cabine registro chamar preferindo a fila preferencial
+        if atendente.registrador == True:
+            senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Preferencial').order_by('data_atendimento').first()
+            if not senha_atual:
+                senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
+            senha_atual.status_atendimento = 'registrando'                
+        # else para caso a cabine não for de registro, chamar da fila registrada
+        else:    
+            senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
+            if not senha_atual:
+                if atendente.tipo_atendimento.nome == 'Preferencial':
+                    senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
+                else:
+                    senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Preferencial').order_by('data_atendimento').first()    
+
+            senha_atual.emAtendimento()
         senha_atual.atendente = atendente    
         senha_atual.save()
     except:
@@ -210,17 +219,29 @@ def emAtendimentoEspecifico(request, id, prefixo):
 @login_required
 def finalizarAtendimento(request, id):
     try:
+        atendente = Atendente.objects.get(user=request.user)
         atendimento = Atendimento.objects.get(id=id)
-        atendimento.finalizar()
+        if atendente.registrador == True:
+            print("cheguei")
+            atendimento.status_atendimento = 'fila'
+            atendimento.save()
+        else:
+            print("passei direto")
+            atendimento.finalizar()
     except:
+        print("nunca nem vi")
         pass
     return redirect('atendente')
 
 @login_required
 def finalizarAtendimentoEspecifico(request, id, prefixo):
     try:
+        atendente = Atendente.objects.get(user=request.user)
         atendimento = Atendimento.objects.get(id=id)
-        atendimento.finalizar()
+        if atendente.registrador == True:
+            atendimento.status_atendimento = 'fila'
+        else:
+            atendimento.finalizar()
     except:
         pass
     return redirect('atendente_especifico', prefixo)
