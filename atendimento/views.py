@@ -78,7 +78,7 @@ def ocioso(request):
         atendente.cabine = request.POST.get('cabine')
         atendente.save()
     senha_atual=None
-    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'cabine': atendente.cabine})
+    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'tipo_atendente': atendente.tipo_atendimento.nome})
 
 @login_required
 def ocioso_especifico(request, prefixo):

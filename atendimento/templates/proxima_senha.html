@@ -9,7 +9,7 @@
   <hr>
   <p>Tipo de atendimento: {{ senha.tipo_atendimento.nome }}</p>
   <p>Senha: {{ senha.numero_senha }}</p>
-  <p>Nome do cliente: {{ senha.nome_cliente }}</p>
+  <!-- <p>Nome do cliente: {{ senha.nome_cliente }}</p> -->
   <p>Data do atendimento: {{ senha.data_atendimento }}</p>
   
   {% if senha %}
@@ -22,29 +22,19 @@
   </a>
   {% endif %}
   
-  <!-- <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Senha</th>
-          <th>Tipo de Atendimento</th>          
-           <th>Data e hora da chamada</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">        
-      </tbody>
-    </table>
-  </div> -->
   <div class="peopleFila">
     <p>Quantidade de pessoas na fila:</p>
   </div>
   <div class="pessoas-fila">
+    {% if tipo_atendente == "Processos" %}
+    <p id="Paragrafo-C">Na fila:</p>
+    <p id="quantProc"></p>
+    {% else %}
     <p id="Paragrafo-G">G:</p>
     <p id="quantFila"></p>
     <p id="Paragrafo-P">P:</p>
     <p id="quantPref"></p>
-    <p id="Paragrafo-C">C:</p>
-    <p id="quantProc"></p>
+    {% endif %}
   </div> 
 
 <script src="/static/js/atendente.js"></script>

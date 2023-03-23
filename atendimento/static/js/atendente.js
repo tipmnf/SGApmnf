@@ -35,13 +35,13 @@ function montaTabela(dados) {
 
 // conta as filas para mostrar ao atendente
 function contaFila(dados) {
+    var pessoasProc = document.getElementById("quantProc");
     var pessoasFila = document.getElementById("quantFila");
     var pessoasPref = document.getElementById("quantPref");
-    var pessoasProc = document.getElementById("quantProc");
-
+    
     var numPessoas = 0;
     var numPessoasPref = 0;
-    var numPessoasProc = 0
+    var numPessoasProc = 0;
 
     for (var i = 0; i < dados.length; i++) {
         var dado = dados[i];
@@ -62,9 +62,14 @@ function contaFila(dados) {
         }
     }
 
-    pessoasFila.innerHTML = numPessoas;
-    pessoasPref.innerHTML = numPessoasPref;
-    pessoasProc.innerHTML = numPessoasProc;
+    try {
+        pessoasFila.innerHTML = numPessoas;
+        pessoasPref.innerHTML = numPessoasPref;
+    } catch (error) {}
+    try {
+        pessoasProc.innerHTML = numPessoasProc;
+    } catch (error) {}
+    
 
     fetch('/get-user/')
     .then(function(response){

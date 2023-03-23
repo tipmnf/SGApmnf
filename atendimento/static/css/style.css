@@ -207,6 +207,10 @@ p#quantProc {
 .proxima-senha p {
     margin-top: 35px;
     margin-bottom: 35px;
+    font-size: 40px;
+    text-align: center;
+    text-decoration: solid;
+    font-family: sans-serif ;
 }
 
 .proxima-senha a {
