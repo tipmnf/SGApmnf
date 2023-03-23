@@ -51,15 +51,17 @@ function contaFila(dados) {
     var numPessoas = 0;
     var numPessoasPref = 0;
     var numPessoasRegis = 0
-
-    for (var i = 0; i < dados.length; i++) {
-        var dado = dados[i];
-
-        if(atendente.registrador){
-            if (dado.status == 'registrar'){
-                numPessoasRegis++;
+    
+    if(atendente.registrador){
+        for (var i = 0; i < dados.length; i++) {
+            var dado = dados[i];
+                if (dado.status == 'registrar'){
+                    numPessoasRegis++;
+                }
             }
-        }else{
+    }else{
+        for (var i = 0; i < dados.length; i++) {
+            var dado = dados[i];
             if (dado.status == 'fila') {
                 switch (dado.tipo) {
                     case 'Geral':
@@ -72,11 +74,11 @@ function contaFila(dados) {
                         break;
                 }
             }
+        }
+    }        
+    
 
-        }        
-    }
-
-    console.log("contei:", numPessoas, numPessoasPref, numPessoasProc);
+    console.log("contei:", numPessoas, numPessoasPref, numPessoasRegis);
 
     pessoasFila.innerHTML = numPessoas;
     pessoasPref.innerHTML = numPessoasPref;
@@ -87,13 +89,20 @@ function contaFila(dados) {
     if (numPessoas != 0 || numPessoasPref != 0) {
         addEventListener('hover', function(){
             btnCall.style.backgroundColor = '#04fc18'
+            console.log("passou")
         })
-        btnCall.style.backgroundColor = '#20b92c';
-        console.log('ta')
+        btnCall.addEventListener('mouseout', function(){
+            btnCall.style.backgroundColor = '#20b92c';
+            console.log("saiu")
+        })
     }
     else {
-        btnCall.style.backgroundColor = 'gray';
-        console.log('ok')
+        btnCall.addEventListener('mouseover', function(){
+            btnCall.style.backgroundColor = "#4e4e4e"
+        })
+        btnCall.addEventListener('mouseout', function(){
+            btnCall.style.backgroundColor = "gray"
+        })
     }
 }
 
