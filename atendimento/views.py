@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Escpos
 from datetime import date
+import json
 # Create your views here.
 
 @login_required
@@ -277,6 +278,8 @@ def limpaChamados(request):
     for x in range (len(senhasChamando)):
         senhasChamando[x].finalizar()
 
-
-
-    
+@login_required
+def getUser(request):
+    atendente = Atendente.objects.get(user=request.user)
+    print(atendente.tipo_atendimento.nome)
+    return JsonResponse(atendente.tipo_atendimento.nome, safe=False)
