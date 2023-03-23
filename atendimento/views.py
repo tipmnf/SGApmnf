@@ -88,7 +88,7 @@ def ocioso(request):
         atendente.cabine = request.POST.get('cabine')
         atendente.save()
     senha_atual=None
-    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'cabine': atendente.cabine})
+    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'atendente': atendente})
 
 @login_required
 def ocioso_especifico(request, prefixo):
@@ -312,6 +312,11 @@ def limpaChamados(request):
 
     for x in range (len(senhasChamando)):
         senhasChamando[x].finalizar()
+
+def getUser(request):
+    atendente = Atendente.objects.get(user=request.user)
+    
+    return JsonResponse(atendente, safe=False)
 
 
 

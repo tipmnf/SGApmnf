@@ -38,14 +38,19 @@
   <div class="peopleFila">
     <p>Quantidade de pessoas na fila:</p>
   </div>
+  
   <div class="pessoas-fila">
+    {% if atendente.registrador %}
+    <p>Na fila:</p>
+    <p id="quantReg"></p>
+    {% else %}
     <p id="Paragrafo-G">G:</p>
     <p id="quantFila"></p>
     <p id="Paragrafo-P">P:</p>
     <p id="quantPref"></p>
-    <p id="Paragrafo-C">C:</p>
-    <p id="quantProc"></p>
-  </div> 
+    {% endif %} 
+  </div>
+  
 
 <script src="/static/js/atendente.js"></script>
   

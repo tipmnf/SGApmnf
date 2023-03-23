@@ -7,6 +7,7 @@ urlpatterns = [
         
     path('', views.ocioso, name='atendente'),
     path('atendente/<prefixo>', views.ocioso_especifico, name='atendente_especifico'),
+    path('get-user/', views.getUser, name='get-user'),
     
     path('chamar-proxima-senha/', views.chamar_proxima_senha, name='chamar_proxima_senha'),
     path('chamar-proxima-senha/<prefixo>', views.chamar_proxima_senha_especifica, name='chamar_proxima_senha_especifica'),

@@ -1,7 +1,7 @@
-function montaTabela(dados) {    
+function montaTabela(dados) {
     var corpoTabela = document.getElementById("tbody");
     corpoTabela.innerHTML = '';
-    dados.forEach(function(dado) {
+    dados.forEach(function (dado) {
         var linha = document.createElement("tr");
 
         var senha = document.createElement("td");
@@ -11,17 +11,17 @@ function montaTabela(dados) {
         var tipo = document.createElement("td");
         tipo.innerHTML = dado.tipo;
         linha.appendChild(tipo);
-        
+
         // var cliente = document.createElement("td");
         // cliente.innerHTML = dado.cliente;
         // linha.appendChild(cliente);
-      
+
         // var status = document.createElement("td");
         // status.innerHTML = dado.status;
         // linha.appendChild(status);
 
-        corpoTabela.appendChild(linha);        
-    });    
+        corpoTabela.appendChild(linha);
+    });
 }
 // function busca(){
 //   fetch("/tabela-dados-fila/")
@@ -34,13 +34,10 @@ function montaTabela(dados) {
 //     }
 
 // conta as filas para mostrar ao atendente
-function contaFila(dados) {    
+function contaFila(dados) {
     var pessoasFila = document.getElementById("quantFila");
-    pessoasFila.innerHTML = '0';
     var pessoasPref = document.getElementById("quantPref");
-    pessoasPref.innerHTML = '0';
     var pessoasProc = document.getElementById("quantProc");
-    pessoasProc.innerHTML = '0';
 
     console.log("estou contando");
 
@@ -48,48 +45,57 @@ function contaFila(dados) {
     var numPessoasPref = 0;
     var numPessoasProc = 0
 
-    dados.forEach(function(dado) {
-        if(dado.status == 'fila'){
-            if(dado.tipo == 'Geral'){
-                numPessoas = numPessoas + 1;
-            }
-            if(dado.tipo == 'Preferencial'){
-                numPessoasPref = numPessoasPref + 1;
-            }
-            if(dado.tipo == 'Processos'){
-                numPessoasProc = numPessoasProc + 1;
+    for (var i = 0; i < dados.length; i++) {
+        var dado = dados[i];
+        if (dado.status == 'fila') {
+            switch (dado.tipo) {
+                case 'Geral':
+                    numPessoas++;
+                    break;
+                case 'Preferencial':
+                    numPessoasPref++;
+                    break;
+                case 'Processos':
+                    numPessoasProc++;
+                    break;
+                default:
+                    break;
             }
         }
-        let btnCall = document.getElementById('btnCall')
-        if (numPessoas == 0 && numPessoasPref == 0 && numPessoasProc == 0) {
-            btnCall.style.backgroundColor = 'gray';
-            console.log('ta')
-        }
-        else {
-            btnCall.style.backgroundColor = '#04fc18';
-            console.log('ok')
-        }
-    });    
-    
+    }
+
     console.log("contei:", numPessoas, numPessoasPref, numPessoasProc);
 
     pessoasFila.innerHTML = numPessoas;
     pessoasPref.innerHTML = numPessoasPref;
     pessoasProc.innerHTML = numPessoasProc;
 
+    let btnCall = document.querySelector('#btnCall');
+    console.log(typeof (btnCall));
+    if (numPessoas != 0 || numPessoasPref != 0 || numPessoasProc != 0) {
+        addEventListener('hover', function(){
+            btnCall.style.backgroundColor = '#04fc18'
+        })
+        btnCall.style.backgroundColor = '#20b92c';
+        console.log('ta')
+    }
+    else {
+        btnCall.style.backgroundColor = 'gray';
+        console.log('ok')
+    }
 }
 
-function getFilas(){
+function getFilas() {
     fetch("/tabela-dados-fila/")
-        .then(function(response) {
+        .then(function (response) {
             return response.json();
         })
-        .then(function(dados) {
+        .then(function (dados) {
             contaFila(dados);
         });
 }
 
-busca()
-setInterval(function() {
+// busca()
+setInterval(function () {
     getFilas()
 }, 5000);
