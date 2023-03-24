@@ -45,6 +45,7 @@ function contaFila(dados) {
             return response.json();
         })
         .then(function (dado) {
+            atendente = dado;
             buttonLight(numPessoas, numPessoasPref, numPessoasRegis, atendente);
         });
 }
