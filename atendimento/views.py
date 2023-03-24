@@ -21,10 +21,10 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            try:
-                imprimeSenha(request, atendimento)
-            except:
-                return render(request, 'erro.html', context)
+            # try:
+            #     imprimeSenha(request, atendimento)
+            # except:
+            #     return render(request, 'erro.html', context)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -315,7 +315,7 @@ def limpaChamados(request):
 
 def getUser(request):
     atendente = Atendente.objects.get(user=request.user)
-    
+    print(atendente.registrador)
     return JsonResponse(atendente.registrador, safe=False)
 
 

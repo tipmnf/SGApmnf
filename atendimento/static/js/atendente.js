@@ -8,7 +8,9 @@ function contaFila(dados, atendente) {
     var numPessoasPref = 0;
     var numPessoasRegis = 0;
     
-    if(atendente.registrador){
+    console.log(atendente);
+
+    if(atendente){
         for (var i = 0; i < dados.length; i++) {
             var dado = dados[i];
                 if (dado.status == 'registrar'){
@@ -62,10 +64,10 @@ function buttonGray(btnCall){
     })
 }
 
-function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
+function buttonLight(numPessoas, numPessoasPref, numPessoasRegis, atendente) {
     let btnCall = document.querySelector('#btnCall');
-    if (atendente == "Processos") {
-        if (numPessoasProc != 0) {
+    if (atendente == true) {
+        if (numPessoasRegis != 0) {
             buttonGreen(btnCall);
         }
         else {
@@ -87,13 +89,13 @@ function getFilas() {
             return response.json();
         })
         .then(function (dados) {
+            let arrayDados = dados;
             fetch("/get-user/")
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (dados) {
-                    let atendente = dados;
-                    contaFila(dados, atendente);
+                    contaFila(arrayDados, dados);
                 });
             });
 }
