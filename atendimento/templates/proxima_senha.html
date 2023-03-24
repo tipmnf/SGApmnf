@@ -1,17 +1,26 @@
 <div class="proxima-senha">
-{% extends 'template.html' %}
-{% block subtitulo %}
-- Atendimento
-{% endblock %}
-{% block content %}
+  {% extends 'template.html' %}
+  {% block subtitulo %}
+  - Atendimento
+  {% endblock %}
+  {% block content %}
 
   <h1>Em espera</h1>
   <hr>
-  <p>Tipo de atendimento: {{ senha.tipo_atendimento.nome }}</p>
-  <p>Senha: {{ senha.numero_senha }}</p>
-  <!-- <p>Nome do cliente: {{ senha.nome_cliente }}</p> -->
-  <p>Data do atendimento: {{ senha.data_atendimento }}</p>
-  
+
+  <li>
+    Instrução 1
+  </li>
+  <li>
+    Instrução 2
+  </li>
+  <li>
+    Instrução 3
+  </li>
+  <li id="padding-li">
+    Instrução 4
+  </li>
+
   {% if senha %}
   <a href="/em-atendimento/{{senha.id}}/{{prefixo}}">
     Atender
@@ -21,23 +30,20 @@
     Chamar próximo da fila
   </a>
   {% endif %}
-  
-  <div class="peopleFila">
-    <p>Quantidade de pessoas na fila:</p>
-  </div>
-  <div class="pessoas-fila">
-    {% if tipo_atendente == "Processos" %}
-    <p id="Paragrafo-C">Na fila:</p>
-    <p id="quantProc"></p>
-    {% else %}
-    <p id="Paragrafo-G">G:</p>
-    <p id="quantFila"></p>
-    <p id="Paragrafo-P">P:</p>
-    <p id="quantPref"></p>
-    {% endif %}
-  </div> 
+</div>
+<div class="pessoas-fila">
+  {% if tipo_atendente == "Processos" %}
+  <h2>Lista de Pessoas na Fila:</h2>
+  <hr>
+  <p id="Paragrafo-C">Fila Processos: <span id="quantProc"></span></p>
+  {% else %}
+  <h2>Lista de Pessoas na Fila:</h2>
+  <hr>
+  <p id="Paragrafo-G">Fila Geral: <span id="quantFila"></span></p>
+  <p id="Paragrafo-P">Fila Preferencial: <span id="quantPref"></span></p>
+  {% endif %}
+</div>
 
 <script src="/static/js/atendente.js"></script>
-  
+
 {% endblock %}
-</div>
