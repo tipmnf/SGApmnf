@@ -92,6 +92,7 @@ function getFilas() {
                     return response.json();
                 })
                 .then(function (dados) {
+                    let atendente = dados;
                     contaFila(dados, atendente);
                 });
             });
