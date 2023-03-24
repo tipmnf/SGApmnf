@@ -1,5 +1,5 @@
 // conta as filas para mostrar ao atendente
-function contaFila(dados) {
+function contaFila(dados, atendente) {
     var pessoasFila = document.getElementById("quantFila");
     var pessoasPref = document.getElementById("quantPref");
     var pessoasRegis = document.getElementById("quantReg");
@@ -40,14 +40,7 @@ function contaFila(dados) {
         pessoasRegis.innerHTML = numPessoasRegis;
     } catch (error) {}
 
-    fetch('/get-user/')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (dado) {
-            atendente = dado;
-            buttonLight(numPessoas, numPessoasPref, numPessoasRegis, atendente);
-        });
+    buttonLight(numPessoas, numPessoasPref, numPessoasRegis, atendente);
 }
 
 function buttonGreen(btnCall){
@@ -94,8 +87,14 @@ function getFilas() {
             return response.json();
         })
         .then(function (dados) {
-            contaFila(dados);
-        });
+            fetch("/get-user/")
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (dados) {
+                    contaFila(dados, atendente);
+                });
+            });
 }
 
 setInterval(function () {
