@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import pytz
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -60,14 +61,8 @@ WSGI_APPLICATION = 'senhaFacil.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-
-        'NAME': 'dev_senhas_facil',
-        'PORT': '3306',
-
-        'USER': 'yan',
-        'PASSWORD': '1617021115fam9@@',
-        'HOST': '192.168.1.159',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -96,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 

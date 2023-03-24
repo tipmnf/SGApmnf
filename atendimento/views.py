@@ -316,7 +316,7 @@ def limpaChamados(request):
 def getUser(request):
     atendente = Atendente.objects.get(user=request.user)
     
-    return JsonResponse(atendente, safe=False)
+    return JsonResponse(atendente.registrador, safe=False)
 
 
 
