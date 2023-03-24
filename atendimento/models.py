@@ -23,8 +23,8 @@ class Atendente(models.Model):
 class Atendimento(models.Model):
     nome_cliente = models.CharField(max_length=255, verbose_name='Digite seu nome', null=True,   blank=True)
     data_atendimento = models.DateTimeField(auto_now_add=True)
-    data_inicio = models.DateTimeField(null=True, default=None)
-    data_fim = models.DateTimeField(null=True, default=None)    
+    data_inicio = models.DateTimeField(null=True, blank=True)
+    data_fim = models.DateTimeField(null=True, blank=True)    
     status_atendimento = models.CharField(max_length=255, default='fila')
     numero_senha = models.IntegerField()
     atendente = models.ForeignKey(Atendente, on_delete=models.PROTECT, null=True,blank= True)
