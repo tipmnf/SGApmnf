@@ -167,7 +167,7 @@ def tabela_dados_fila(request):
             'status': atendimento.status_atendimento,
             'tipo': atendimento.tipo_atendimento.nome
         }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'fila'
+        for atendimento in atendimentos if atendimento.status_atendimento == 'fila' or atendimento.status_atendimento == 'registrar'
     ]
     
     return JsonResponse(dados[::-1], safe=False)
