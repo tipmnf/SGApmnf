@@ -301,7 +301,7 @@ def imprimeSenha(request, atendimento):
 @login_required
 def getSenhaAtual(request):
     senhasChamando = Atendimento.objects.filter(status_atendimento='em atendimento').order_by('-data_atendimento')
-    senhasChamandoReg = Atendimento.objects.filter(status_atendimento='registrar').order_by('-data_atendimento')
+    senhasChamandoReg = Atendimento.objects.filter(status_atendimento='registrando').order_by('-data_atendimento')
     temChamando = len(senhasChamando) + len(senhasChamandoReg)
 
     return JsonResponse(temChamando, safe=False)
