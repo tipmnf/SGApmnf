@@ -4,7 +4,7 @@ from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Serial
-from datetime import date
+from datetime import date, datetime
 import win32printing, win32print
 import os
 # Create your views here.
@@ -42,7 +42,8 @@ def chamar_proxima_senha(request):
             senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Preferencial').order_by('data_atendimento').first()
             if not senha_atual:
                 senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
-            senha_atual.status_atendimento = 'registrando'                
+            senha_atual.status_atendimento = 'registrando'
+            senha_atual.data_inicio = datetime.now()                
         # else para caso a cabine não for de registro, chamar da fila registrada
         else:    
             senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
