@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from escpos.printer import Usb, Escpos
 from datetime import date
+import json
 # Create your views here.
 
 @login_required
@@ -77,7 +78,7 @@ def ocioso(request):
         atendente.cabine = request.POST.get('cabine')
         atendente.save()
     senha_atual=None
-    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'cabine': atendente.cabine})
+    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'tipo_atendente': atendente.tipo_atendimento.nome})
 
 @login_required
 def ocioso_especifico(request, prefixo):
@@ -277,6 +278,8 @@ def limpaChamados(request):
     for x in range (len(senhasChamando)):
         senhasChamando[x].finalizar()
 
-
-
-    
+@login_required
+def getUser(request):
+    atendente = Atendente.objects.get(user=request.user)
+    print(atendente.tipo_atendimento.nome)
+    return JsonResponse(atendente.tipo_atendimento.nome, safe=False)

@@ -35,52 +35,87 @@ function montaTabela(dados) {
 
 // conta as filas para mostrar ao atendente
 function contaFila(dados) {
-    var pessoasFila = document.getElementById("quantFila");
-    pessoasFila.innerHTML = '0';
-    var pessoasPref = document.getElementById("quantPref");
-    pessoasPref.innerHTML = '0';
     var pessoasProc = document.getElementById("quantProc");
-    pessoasProc.innerHTML = '0';
-
-    console.log("estou contando");
-
+    var pessoasFila = document.getElementById("quantFila");
+    var pessoasPref = document.getElementById("quantPref");
+    
     var numPessoas = 0;
     var numPessoasPref = 0;
-    var numPessoasProc = 0
+    var numPessoasProc = 0;
 
-    dados.forEach(function (dado) {
+    for (var i = 0; i < dados.length; i++) {
+        var dado = dados[i];
         if (dado.status == 'fila') {
-            if (dado.tipo == 'Geral') {
-                numPessoas = numPessoas + 1;
-            }
-            if (dado.tipo == 'Preferencial') {
-                numPessoasPref = numPessoasPref + 1;
-            }
-            if (dado.tipo == 'Processos') {
-                numPessoasProc = numPessoasProc + 1;
+            switch (dado.tipo) {
+                case 'Geral':
+                    numPessoas++;
+                    break;
+                case 'Preferencial':
+                    numPessoasPref++;
+                    break;
+                case 'Processos':
+                    numPessoasProc++;
+                    break;
+                default:
+                    break;
             }
         }
-
-    });
-
-    console.log("contei:", numPessoas, numPessoasPref, numPessoasProc);
-
-    pessoasFila.innerHTML = numPessoas;
-    pessoasPref.innerHTML = numPessoasPref;
-    pessoasProc.innerHTML = numPessoasProc;
-
-    let btnCall = document.querySelector('#btnCall');
-    console.log(typeof (btnCall));
-    if (numPessoas != 0 || numPessoasPref != 0 || numPessoasProc != 0) {
-        addEventListener('hover', function(){
-            btnCall.style.backgroundColor = '#04fc18'
-        })
-        btnCall.style.backgroundColor = '#20b92c';
-        console.log('ta')
     }
-    else {
-        btnCall.style.backgroundColor = 'gray';
-        console.log('ok')
+
+    try {
+        pessoasFila.innerHTML = numPessoas;
+        pessoasPref.innerHTML = numPessoasPref;
+    } catch (error) {}
+    try {
+        pessoasProc.innerHTML = numPessoasProc;
+    } catch (error) {}
+    
+
+    fetch('/get-user/')
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(dado){
+        atendente = dado;
+        buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente);
+    });
+}
+
+function buttonGreen(btnCall){
+    btnCall.style.backgroundColor = '#20b92c';
+    btnCall.addEventListener('mouseover', function () {
+        btnCall.style.backgroundColor = '#04fc18'
+    })
+    btnCall.addEventListener('mouseout', function () {
+        btnCall.style.backgroundColor = '#20b92c';
+    })
+}
+
+function buttonGray(btnCall){
+    btnCall.addEventListener('mouseover', function () {
+        btnCall.style.backgroundColor = "#4e4e4e"
+    })
+    btnCall.addEventListener('mouseout', function () {
+        btnCall.style.backgroundColor = "gray"
+    })
+}
+
+function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
+    let btnCall = document.querySelector('#btnCall');
+    if (atendente == "Processos") {
+        if (numPessoasProc != 0) {
+           buttonGreen(btnCall);
+        }
+        else {
+           buttonGray(btnCall);
+        }
+    } else {
+        if (numPessoas != 0 || numPessoasPref != 0) {
+            buttonGreen(btnCall);
+        }
+        else {
+           buttonGray(btnCall);
+        }
     }
 }
 
@@ -93,6 +128,7 @@ function getFilas() {
             contaFila(dados);
         });
 }
+
 
 // busca()
 setInterval(function () {
