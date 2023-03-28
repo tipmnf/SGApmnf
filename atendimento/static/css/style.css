@@ -624,6 +624,12 @@ p#erro-titulo {
     }
 }
 
+@media (max-width: 1333px) {
+    h2 {
+        font-size: 75%;
+    }
+}
+
 @media (max-width: 1024px) {
     .proxima-senha {
         width: 88%;
