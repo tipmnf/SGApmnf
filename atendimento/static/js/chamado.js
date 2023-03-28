@@ -77,11 +77,11 @@ function montaTabelaAnteriores(dados) {
         
     for (i=0; i<dados.length; i++){
         var dado = dados[i];
-        if(dado.tipo == "Preferencial"){
+        if(dado.tipo == "Alvará"){
             var linha = document.createElement("tr");
         
             var header = document.createElement("th");
-            header.innerHTML = "Preferencial";
+            header.innerHTML = "Alvará";
             cabecaTabela.appendChild(header);
 
             var senha = document.createElement("td");

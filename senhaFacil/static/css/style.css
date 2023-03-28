@@ -26,7 +26,7 @@ hr{
 }
 
 label[for="2"]::after {
-    content: url('/static/img/preferencial-img_resized_resized.png');
+    content: url('/static/img/Alvará-img_resized_resized.png');
     width: 0px;
     height: auto;
     display: inline;

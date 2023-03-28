@@ -25,7 +25,7 @@ function contaFila(dados, atendente) {
                     case 'Geral':
                         numPessoas++;
                         break;
-                    case 'Preferencial':
+                    case 'Alvará':
                         numPessoasPref++;
                         break;
                     default:

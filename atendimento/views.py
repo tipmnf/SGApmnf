@@ -37,9 +37,9 @@ def chamar_proxima_senha(request):
     limpaChamados(request)       
     try:
 
-        # primeiro momento para a cabine registro chamar preferindo a fila preferencial
+        # primeiro momento para a cabine registro chamar preferindo a fila Alvará
         if atendente.registrador == True:
-            senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Preferencial').order_by('data_atendimento').first()
+            senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Alvará').order_by('data_atendimento').first()
             if not senha_atual:
                 senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
             senha_atual.status_atendimento = 'registrando'
@@ -48,10 +48,10 @@ def chamar_proxima_senha(request):
         else:    
             senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
             if not senha_atual:
-                if atendente.tipo_atendimento.nome == 'Preferencial':
+                if atendente.tipo_atendimento.nome == 'Alvará':
                     senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
                 else:
-                    senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Preferencial').order_by('data_atendimento').first()    
+                    senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Alvará').order_by('data_atendimento').first()    
 
             senha_atual.emAtendimento()
         senha_atual.atendente = atendente    

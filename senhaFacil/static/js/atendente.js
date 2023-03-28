@@ -52,7 +52,7 @@ function contaFila(dados) {
                 case 'Geral':
                     numPessoas++;
                     break;
-                case 'Preferencial':
+                case 'Alvará':
                     numPessoasPref++;
                     break;
                 case 'Processos':

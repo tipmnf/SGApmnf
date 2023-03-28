@@ -15,7 +15,7 @@ function contaFila(dados) {
             if (dado.tipo == 'Geral') {
                 numPessoas = numPessoas + 1;
             }
-            if (dado.tipo == 'Preferencial') {
+            if (dado.tipo == 'Alvará') {
                 numPessoasPref = numPessoasPref + 1;
             }
             if (dado.tipo == 'Processos') {
