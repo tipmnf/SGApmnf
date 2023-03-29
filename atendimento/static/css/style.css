@@ -207,7 +207,7 @@ p#quantProc {
     float: left;
     border-radius: 35px;
     margin-top: 120px;
-    height: 52%;
+    height: 50%;
 }
 
 .proxima-senha h1 {
@@ -227,29 +227,6 @@ p#quantProc {
     font-family: sans-serif;
 }
 
-.proxima-senha a {
-    background: #cebd27;
-    color: #fff;
-    padding: 5% 1%;
-    border-radius: 45px;
-    text-decoration-line: none;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    font-size: 25px;
-    font-family: Arial, Helvetica, sans-serif;
-    ;
-}
-
-.proxima-senha #btnCall[href="/chamar-proxima-senha/"]:hover {
-    text-decoration: underline;
-}
-
-.proxima-senha #btnCall[href="/chamar-proxima-senha/"] {
-    background: gray;
-}
-
 .proxima-senha div table {
     margin-top: 20px;
     color: #000;
@@ -263,8 +240,7 @@ li {
     text-decoration: none;
     margin-top: 20px;
     padding: 2%;
-    border: 1px solid black;
-    border-radius: 20px;
+    border: 1px solid #0D578E;
     width: 50%;
     margin-right: auto;
     margin-left: auto;
@@ -279,34 +255,6 @@ h2 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 100%;
     height: 65px;
-}
-
-.pessoas-fila {
-    background: #fff;
-    color: #000;
-    font-size: 40px;
-    width: 38%;
-    padding: 2% 5%;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 35px;
-    float: right;
-    margin-top: 120px;
-    height: 52%
-}
-
-.pessoas-fila p {
-    font-size: 36px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    text-shadow: 1px 1px 0 #555
-}
-
-.peopleFila p {
-    margin-top: 10px;
-}
-
-.proxima-senha div table th {
-    padding: 0 30px;
 }
 
 
@@ -359,6 +307,59 @@ h2 {
     position: relative;
     padding-right: 45px;
     padding-left: 20px;
+}
+
+/* pessoas-fila */
+
+.pessoas-fila {
+    background: #fff;
+    color: #000;
+    font-size: 40px;
+    width: 38%;
+    padding: 2% 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 35px;
+    float: right;
+    margin-top: 120px;
+    height: 50%
+}
+
+.pessoas-fila a {
+    background: #cebd27;
+    color: #fff;
+    padding: 5% 1%;
+    border-radius: 45px;
+    text-decoration-line: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.pessoas-fila #btnCall[href="/chamar-proxima-senha/"]:hover {
+    text-decoration: underline;
+}
+
+.pessoas-fila #btnCall[href="/chamar-proxima-senha/"] {
+    background: gray;
+}
+
+
+.pessoas-fila p {
+    font-size: 36px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 1px 1px 0 #555
+}
+
+.peopleFila p {
+    margin-top: 10px;
+}
+
+.proxima-senha div table th {
+    padding: 0 30px;
 }
 
 
@@ -496,14 +497,147 @@ p#erro-titulo {
     -webkit-text-stroke-color: black;
 }
 
+@media (max-height: 751px) {
+    .proxima-senha {
+        width: 38%;
+        padding: 2% 5%;
+        float: left;
+        border-radius: 35px;
+        margin-top: 20px;
+        height: 57%;
+    }
+
+    .pessoas-fila {
+        width: 38%;
+        padding: 2% 5%;
+        margin-left: auto;
+        border-radius: 35px;
+        margin-top: 50px;
+        height: 57%;
+        float: right;
+        margin-top: 20px
+    }
+
+    h2 {
+        font-size: 75%
+    }
+
+    li {
+        font-size: 15px;
+        text-decoration: none;
+        margin-top: 10px;
+        padding: 2%;
+        border: 1px solid #0D578E;
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 0;
+        text-align: center;
+    }
+}
+
+@media (max-height: 659px) {
+    .proxima-senha {
+        width: 38%;
+        padding: 2% 5%;
+        float: left;
+        border-radius: 35px;
+        margin-top: 20px;
+        height: 65%;
+    }
+
+    .pessoas-fila {
+        width: 38%;
+        padding: 2% 5%;
+        margin-left: auto;
+        border-radius: 35px;
+        margin-top: 50px;
+        height: 65%;
+        float: right;
+        margin-top: 20px
+    }
+}
+
+@media (max-height: 576px) {
+    .proxima-senha {
+        width: 38%;
+        padding: 2% 5%;
+        float: left;
+        border-radius: 35px;
+        margin-top: 20px;
+        height: 73%;
+    }
+
+    .pessoas-fila {
+        width: 38%;
+        padding: 2% 5%;
+        margin-left: auto;
+        border-radius: 35px;
+        margin-top: 50px;
+        height: 73%;
+        float: right;
+        margin-top: 20px
+    }
+}
+
+@media (max-height: 500px) {
+    .proxima-senha {
+        width: 38%;
+        padding: 2% 5%;
+        float: left;
+        border-radius: 35px;
+        margin-top: 20px;
+        height: 80%;
+    }
+
+    .pessoas-fila {
+        width: 38%;
+        padding: 2% 5%;
+        margin-left: auto;
+        border-radius: 35px;
+        margin-top: 50px;
+        height: 80%;
+        float: right;
+        margin-top: 20px
+    }
+}
+
+@media (max-height: 300px) {
+    .proxima-senha {
+        width: 38%;
+        padding: 2% 5%;
+        float: left;
+        border-radius: 35px;
+        margin-top: 20px;
+        height: 90%;
+    }
+
+    .pessoas-fila {
+        width: 38%;
+        padding: 2% 5%;
+        margin-left: auto;
+        border-radius: 35px;
+        margin-top: 50px;
+        height: 90%;
+        float: right;
+        margin-top: 20px
+    }
+}
+
+@media (max-width: 1333px) {
+    h2 {
+        font-size: 75%;
+    }
+}
+
 @media (max-width: 1024px) {
     .proxima-senha {
         width: 88%;
         padding: 2% 5%;
         float: unset;
         border-radius: 35px;
-        margin-top: 120px;
-        height: 52%;
+        margin-top: 20px;
+        height: 57%;
     }
 
     .pessoas-fila {
@@ -513,35 +647,17 @@ p#erro-titulo {
         margin-right: auto;
         border-radius: 35px;
         float: unset;
-        margin-top: 120px;
-        height: 52%;
+        margin-top: 50px;
+        height: 57%;
+    }
+
+    html {
+        overflow-y: unset;
+        overflow-x: unset;
+    }
+
+    h2 {
+        font-size: 75%
     }
 }
 
-@media (max-width: 768) {
-    .proxima-senha {
-        width: 38%;
-        padding: 2% 5%;
-        float: unset;
-        border-radius: 35px;
-        margin-top: 120px;
-        height: 52%;
-    }
-
-    .pessoas-fila {
-        width: 38%;
-        padding: 2% 5%;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 35px;
-        float: unset;
-        margin-top: 120px;
-        height: 52%
-    }
-}
-
-@media (max-width: 1331px) {
-    .pessoas-fila hr{
-        margin-top: 5%;
-    }
-}

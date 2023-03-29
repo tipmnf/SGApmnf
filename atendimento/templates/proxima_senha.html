@@ -9,27 +9,27 @@
   <hr>
 
   <li>
-    Instrução 1
+    <em>
+      Aguarde o botão de "Chamar Próximo da Fila" ficar verde.
+    </em>
   </li>
   <li>
-    Instrução 2
+    <em>
+      Clique no botão verde para chamar um cliente.
+    </em>
   </li>
   <li>
-    Instrução 3
+    <em>
+      O chamado funcionará se, e somente se, houver algum cliente esperando em quaisquer fila.
+    </em>
+    
   </li>
   <li id="padding-li">
-    Instrução 4
+    <em>
+      Ao terminar o atendimento, finalize o chamado na tela de atendimento.
+    </em>
   </li>
 
-  {% if senha %}
-  <a href="/em-atendimento/{{senha.id}}/{{prefixo}}">
-    Atender
-  </a>
-  {% else %}
-  <a id="btnCall" href="/chamar-proxima-senha/{{prefixo}}">
-    Chamar próximo da fila
-  </a>
-  {% endif %}
 </div>
 <div class="pessoas-fila">
   {% if tipo_atendente == "Processos" %}
@@ -41,6 +41,15 @@
   <hr>
   <p id="Paragrafo-G">Fila Geral: <span id="quantFila"></span></p>
   <p id="Paragrafo-P">Fila Preferencial: <span id="quantPref"></span></p>
+  {% endif %}
+  {% if senha %}
+  <a href="/em-atendimento/{{senha.id}}/{{prefixo}}">
+    Atender
+  </a>
+  {% else %}
+  <a id="btnCall" href="/chamar-proxima-senha/{{prefixo}}">
+    Chamar Próximo da Fila
+  </a>
   {% endif %}
 </div>
 
