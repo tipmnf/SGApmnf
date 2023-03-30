@@ -46,7 +46,8 @@ label[for="2"]::after {
 
 .gerar-senha p#quantFila,
 p#quantPref,
-p#quantProc {
+p#quantProc,
+p#quantReg {
     align-self: end;
     position: relative;
     padding-right: 100px;

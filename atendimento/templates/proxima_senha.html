@@ -32,10 +32,11 @@
 
 </div>
 <div class="pessoas-fila">
-  {% if tipo_atendente == "Processos" %}
+  {% if atendente.registrador %}
   <h2>Lista de Pessoas na Fila:</h2>
   <hr>
-  <p id="Paragrafo-C">Fila Processos: <span id="quantProc"></span></p>
+  <p>Na fila para Registrar:</p>
+  <p id="quantReg"></p>
   {% else %}
   <h2>Lista de Pessoas na Fila:</h2>
   <hr>
@@ -51,36 +52,6 @@
     Chamar Próximo da Fila
   </a>
   {% endif %}
-  
-  <!-- <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Senha</th>
-          <th>Tipo de Atendimento</th>          
-           <th>Data e hora da chamada</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">        
-      </tbody>
-    </table>
-  </div> -->
-  <div class="peopleFila">
-    <p>Quantidade de pessoas na fila:</p>
-  </div>
-  
-  <div class="pessoas-fila">
-    {% if atendente.registrador %}
-    <p>Na fila:</p>
-    <p id="quantReg"></p>
-    {% else %}
-    <p id="Paragrafo-G">G:</p>
-    <p id="quantFila"></p>
-    <p id="Paragrafo-P">P:</p>
-    <p id="quantPref"></p>
-    {% endif %} 
-  </div>
-  
 
 <script src="/static/js/atendente.js"></script>
 
