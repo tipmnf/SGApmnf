@@ -63,8 +63,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-<<<<<<< HEAD
-=======
     },
 
     'remote_db': {
@@ -76,7 +74,6 @@ DATABASES = {
         'USER': 'yan',
         'PASSWORD': '1617021115fam9@@',
         'HOST': '192.168.1.159',
->>>>>>> 55daac35dfb6141c5c1a02057b52e41eb9b0a750
     }
 }
 
