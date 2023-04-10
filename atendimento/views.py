@@ -3,10 +3,11 @@ from .forms import GerarSenhaForm
 from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from escpos.printer import Usb, Escpos
 from datetime import date
-import json
-# Create your views here.
+from django.db import transaction
+import schedule, time
 
 @login_required
 def gerar_senha(request):
@@ -99,7 +100,7 @@ def senhas_chamadas(request):
 @login_required
 def tabela_dados(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
-    atendimentos = Atendimento.objects.all().order_by('data_inicio')
+    atendimentos = Atendimento.objects.filter(Q(status_atendimento='em atendimento') | Q(status_atendimento='finalizado')).order_by('data_inicio')
     dados = [
         {
             'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
@@ -107,24 +108,9 @@ def tabela_dados(request):
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
         }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'em atendimento' or atendimento.status_atendimento == 'finalizado'
+        for atendimento in atendimentos
     ]
     return JsonResponse(dados[::-1][:12], safe=False)
-
-# @login_required
-# def tabela_dados_anteriores(request):
-#     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
-#     atendimentos = Atendimento.objects.all()
-#     dados = [
-#         {
-#             'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
-#             'cabine': atendimento.atendente.cabine,
-#             'cliente': atendimento.nome_cliente,
-#             'status': atendimento.status_atendimento
-#         }
-#         for atendimento in atendimentos if atendimento.status_atendimento == 'finalizado'
-#     ]
-#     return JsonResponse(dados[::-1][:3], safe=False)
 
 @login_required
 def tabela_dados_anteriores(request):
@@ -146,7 +132,7 @@ def tabela_dados_anteriores(request):
 @login_required
 def tabela_dados_fila(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
-    atendimentos = Atendimento.objects.all()
+    atendimentos = Atendimento.objects.filter(status_atendimento='fila')
     atendente = Atendente.objects.get(user=request.user)
     atendimentos = sorted(atendimentos, key=lambda atendimento: (atendimento.tipo_atendimento.nome == atendente.tipo_atendimento.nome, -atendimento.numero_senha))  
 
@@ -157,7 +143,7 @@ def tabela_dados_fila(request):
             'status': atendimento.status_atendimento,
             'tipo': atendimento.tipo_atendimento.nome
         }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'fila'
+        for atendimento in atendimentos 
     ]
     
     return JsonResponse(dados[::-1], safe=False)
@@ -281,5 +267,48 @@ def limpaChamados(request):
 @login_required
 def getUser(request):
     atendente = Atendente.objects.get(user=request.user)
-    print(atendente.tipo_atendimento.nome)
     return JsonResponse(atendente.tipo_atendimento.nome, safe=False)
+
+# def copia_banco():
+
+#     atendimentos = Atendimento.objects.all()
+
+    
+#     for i in range(len(atendimentos)):
+#         atendimento_copia = atendimentos[i]
+
+#         # Copy the related objects
+#         atendente_copia = Atendente.objects.using('remote_db').get(id=atendimento_copia.atendente.id)
+            
+#         try:
+#             tipo_atendimento_copia = TipoAtendimento.objects.using('remote_db').get(id=atendimento_copia.tipo_atendimento.id)
+#         except TipoAtendimento.DoesNotExist:
+#             tipo_atendimento_copia = TipoAtendimento.objects.using('remote_db').create(
+#                 nome=atendimento_copia.tipo_atendimento.nome,
+#                 prefixo=atendimento_copia.tipo_atendimento.prefixo,
+#                 descricao= atendente_copia.tipo_atendimento.descricao
+#             )
+        
+
+#         # Create the new object and assign the related objects
+#         copia = Atendimento.objects.using('remote_db').create(
+#             nome_cliente = atendimento_copia.nome_cliente,
+#             data_atendimento = atendimento_copia.data_atendimento,
+#             data_inicio = atendimento_copia.data_inicio,
+#             data_fim = atendimento_copia.data_fim,
+#             status_atendimento = atendimento_copia.status_atendimento,
+#             numero_senha = atendimento_copia.numero_senha,
+#             atendente = atendente_copia,
+#             tipo_atendimento = tipo_atendimento_copia,
+#         )
+#         copia.save()
+    
+    
+
+# # Schedule the task to run every day at noon
+# schedule.every().day.at("22:00").do(copia_banco)
+
+# Run the scheduled tasks in the background
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)

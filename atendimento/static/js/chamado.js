@@ -136,8 +136,8 @@ function montaTabelaAnteriores(dados) {
     };
 }
 
-function getFilas(){
-        fetch("/tabela-dados/")
+async function getFilas(){
+        await fetch("/tabela-dados/")
             .then(function(response) {
                 return response.json();
             })
@@ -196,8 +196,8 @@ function piscaSenha(){
 var taChamando = 0;
 var auxChamando = 0;
 
-function getChamando(){
-    fetch("/ta-chamando/")
+async function getChamando(){
+    await fetch("/ta-chamando/")
     .then(function(response) {
         return response.json();
     })
@@ -205,11 +205,13 @@ function getChamando(){
         
         if(taChamando > auxChamando){
             cresceSenha();
+            getFilas();
             setTimeout(function(){
                 piscaSenha();
                 document.getElementById('toque').play();
             }, 1000);
             auxChamando = taChamando;
+            
         }else{
             auxChamando = taChamando;
         }
@@ -217,9 +219,9 @@ function getChamando(){
     });
 }
 
+getFilas();
 setInterval(function() {
     getChamando();
-    getFilas();
-}, 1000);
+}, 2000);
 
 
