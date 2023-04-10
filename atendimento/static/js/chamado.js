@@ -224,4 +224,8 @@ setInterval(function() {
     getChamando();
 }, 2000);
 
+setInterval(function() {
+    getFilas();
+}, 60 * 60 *1000);
+
 
