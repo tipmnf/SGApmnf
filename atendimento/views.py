@@ -3,6 +3,7 @@ from .forms import GerarSenhaForm
 from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from escpos.printer import Usb, Serial
 from datetime import date, datetime
 import win32printing, win32print
@@ -110,7 +111,7 @@ def senhas_chamadas(request):
 @login_required
 def tabela_dados(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
-    atendimentos = Atendimento.objects.all().order_by('data_inicio')
+    atendimentos = Atendimento.objects.filter((Q(status_atendimento='em atendimento') | Q(status_atendimento='finalizado') | Q(status_atendimento='registrando') | Q(status_atendimento='fila')) & Q(data_atendimento__gte=date.today())).order_by('data_inicio')
     dados = [
         {
             'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
@@ -118,7 +119,7 @@ def tabela_dados(request):
             'cliente': atendimento.nome_cliente,
             'status': atendimento.status_atendimento
         }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'em atendimento' or atendimento.status_atendimento == 'finalizado' or atendimento.status_atendimento == 'registrando' or atendimento.status_atendimento == 'fila'
+        for atendimento in atendimentos
     ]
     return JsonResponse(dados[::-1][:12], safe=False)
 
@@ -157,7 +158,7 @@ def tabela_dados_anteriores(request):
 @login_required
 def tabela_dados_fila(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
-    atendimentos = Atendimento.objects.all()
+    atendimentos = Atendimento.objects.filter(Q(status_atendimento='fila') | Q(status_atendimento='registrar'))
     atendente = Atendente.objects.get(user=request.user)
     atendimentos = sorted(atendimentos, key=lambda atendimento: (atendimento.tipo_atendimento.nome == atendente.tipo_atendimento.nome, -atendimento.numero_senha))  
 
@@ -168,7 +169,7 @@ def tabela_dados_fila(request):
             'status': atendimento.status_atendimento,
             'tipo': atendimento.tipo_atendimento.nome
         }
-        for atendimento in atendimentos if atendimento.status_atendimento == 'fila' or atendimento.status_atendimento == 'registrar'
+        for atendimento in atendimentos 
     ]
     
     return JsonResponse(dados[::-1], safe=False)

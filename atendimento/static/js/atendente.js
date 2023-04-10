@@ -83,14 +83,14 @@ function buttonLight(numPessoas, numPessoasPref, numPessoasRegis, atendente) {
     }
 }
 
-function getFilas() {
-    fetch("/tabela-dados-fila/")
+async function getFilas() {
+    await fetch("/tabela-dados-fila/")
         .then(function (response) {
             return response.json();
         })
-        .then(function (dados) {
+        .then(async function (dados) {
             let arrayDados = dados;
-            fetch("/get-user/")
+            await fetch("/get-user/")
                 .then(function (response) {
                     return response.json();
                 })
@@ -102,4 +102,4 @@ function getFilas() {
 
 setInterval(function () {
     getFilas()
-}, 5000);
+}, 1000);
