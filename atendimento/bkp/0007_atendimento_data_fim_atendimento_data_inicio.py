@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='atendimento',
             name='data_fim',
-            field=models.DateTimeField(default=None),
+            field=models.DateTimeField(default=None, null=True, blank=False),
         ),
         migrations.AddField(
             model_name='atendimento',
             name='data_inicio',
-            field=models.DateTimeField(default=None),
+            field=models.DateTimeField(default=None, null=True, blank=False),
         ),
     ]

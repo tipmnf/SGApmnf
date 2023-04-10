@@ -1,58 +1,58 @@
 <div class="proxima-senha">
-{% extends 'template.html' %}
-{% block subtitulo %}
-- Atendimento
-{% endblock %}
-{% block content %}
+  {% extends 'template.html' %}
+  {% block subtitulo %}
+  - Atendimento
+  {% endblock %}
+  {% block content %}
 
   <h1>Em espera</h1>
   <hr>
-  <p>Tipo de atendimento: {{ senha.tipo_atendimento.nome }}</p>
-  <p>Senha: {{ senha.numero_senha }}</p>
-  <p>Nome do cliente: {{ senha.nome_cliente }}</p>
-  <p>Data do atendimento: {{ senha.data_atendimento }}</p>
-  
+
+  <li>
+    <em>
+      Aguarde o botão de "Chamar Próximo da Fila" ficar verde.
+    </em>
+  </li>
+  <li>
+    <em>
+      Clique no botão verde para chamar um cliente.
+    </em>
+  </li>
+  <li>
+    <em>
+      O chamado funcionará se, e somente se, houver algum cliente esperando em quaisquer fila.
+    </em>
+    
+  </li>
+  <li id="padding-li">
+    <em>
+      Ao terminar o atendimento, finalize o chamado na tela de atendimento.
+    </em>
+  </li>
+
+</div>
+<div class="pessoas-fila">
+  {% if atendente.registrador %}
+  <h2>Lista de Pessoas na Fila:</h2>
+  <hr>
+  <p>Na fila para Registrar:</p>
+  <p id="quantReg"></p>
+  {% else %}
+  <h2>Lista de Pessoas na Fila:</h2>
+  <hr>
+  <p id="Paragrafo-G">Fila Geral: <span id="quantFila"></span></p>
+  <p id="Paragrafo-P">Fila Preferencial: <span id="quantPref"></span></p>
+  {% endif %}
   {% if senha %}
   <a href="/em-atendimento/{{senha.id}}/{{prefixo}}">
     Atender
   </a>
   {% else %}
   <a id="btnCall" href="/chamar-proxima-senha/{{prefixo}}">
-    Chamar próximo da fila
+    Chamar Próximo da Fila
   </a>
   {% endif %}
-  
-  <!-- <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Senha</th>
-          <th>Tipo de Atendimento</th>          
-           <th>Data e hora da chamada</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">        
-      </tbody>
-    </table>
-  </div> -->
-  <div class="peopleFila">
-    <p>Quantidade de pessoas na fila:</p>
-  </div>
-  
-  <div class="pessoas-fila">
-    {% if atendente.registrador %}
-    <p>Na fila:</p>
-    <p id="quantReg"></p>
-    {% else %}
-    <p id="Paragrafo-G">G:</p>
-    <p id="quantFila"></p>
-    <p id="Paragrafo-P">P:</p>
-    <p id="quantPref"></p>
-    {% endif %} 
-  </div>
-  
 
 <script src="/static/js/atendente.js"></script>
-  
+
 {% endblock %}
-</div>
