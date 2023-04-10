@@ -60,12 +60,12 @@ WSGI_APPLICATION = 'senhaFacil.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'remote_db': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
 
-    'remote_db': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
 
         'NAME': 'dev_senhas_facil',

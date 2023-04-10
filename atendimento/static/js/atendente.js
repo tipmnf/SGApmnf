@@ -34,7 +34,7 @@ function montaTabela(dados) {
 //     }
 
 // conta as filas para mostrar ao atendente
-function contaFila(dados) {
+async function contaFila(dados) {
     var pessoasProc = document.getElementById("quantProc");
     var pessoasFila = document.getElementById("quantFila");
     var pessoasPref = document.getElementById("quantPref");
@@ -71,7 +71,7 @@ function contaFila(dados) {
     } catch (error) {}
     
 
-    fetch('/get-user/')
+    await fetch('/get-user/')
     .then(function(response){
         return response.json();
     })
@@ -119,18 +119,19 @@ function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
     }
 }
 
-function getFilas() {
-    fetch("/tabela-dados-fila/")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (dados) {
-            contaFila(dados);
-        });
-}
+async function getFilas() {
+        await fetch("/tabela-dados-fila/")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (dados) {
+                contaFila(dados);
+            });
+    }
+
 
 
 // busca()
-setInterval(function () {
-    getFilas()
-}, 5000);
+setInterval(async function () {
+    getFilas();
+}, 1000);
