@@ -6,8 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from escpos.printer import Usb, Escpos
 from datetime import date
-from django.db import transaction
-import schedule, time
 
 @login_required
 def gerar_senha(request):
