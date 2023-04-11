@@ -39,103 +39,6 @@ function montaTabela(dados) {
 });    
 }
 
-function montaTabelaAnteriores(dados) {    
-    var corpoTabela = document.getElementById("tbodyanteriores");
-    var cabecaTabela = document.getElementById("tHeader");
-    cabecaTabela.innerHTML = '';
-    corpoTabela.innerHTML = '';
-
-    for (i=0; i<dados.length; i++){
-        var dado = dados[i];
-        if(dado.tipo == "Geral"){
-            var linha = document.createElement("tr");
-            
-            var header = document.createElement("th");
-            header.innerHTML = "Geral";
-            cabecaTabela.appendChild(header);
-            
-            var senha = document.createElement("td");
-            senha.innerHTML = dado.senha;
-            linha.appendChild(senha);
-            
-            // var cliente = document.createElement("td");
-            // cliente.innerHTML = dado.cliente;
-            // linha.appendChild(cliente);
-        
-            // var cabine = document.createElement("td");
-            // cabine.innerHTML = dado.cabine;
-            // linha.appendChild(cabine);
-        
-            // var status = document.createElement("td");
-            // status.innerHTML = dado.status;
-            // linha.appendChild(status);
-            
-            corpoTabela.appendChild(linha);
-            break;
-        }      
-    };
-        
-    for (i=0; i<dados.length; i++){
-        var dado = dados[i];
-        if(dado.tipo == "Alvará"){
-            var linha = document.createElement("tr");
-        
-            var header = document.createElement("th");
-            header.innerHTML = "Alvará";
-            cabecaTabela.appendChild(header);
-
-            var senha = document.createElement("td");
-            senha.innerHTML = dado.senha;
-            linha.appendChild(senha);
-            
-            // var cliente = document.createElement("td");
-            // cliente.innerHTML = dado.cliente;
-            // linha.appendChild(cliente);
-        
-            // var cabine = document.createElement("td");
-            // cabine.innerHTML = dado.cabine;
-            // linha.appendChild(cabine);
-        
-            // var status = document.createElement("td");
-            // status.innerHTML = dado.status;
-            // linha.appendChild(status);
-        
-            corpoTabela.appendChild(linha);
-            break;
-        }      
-    };
-
-    for (i=0; i<dados.length; i++){
-        var dado = dados[i];
-        if(dado.tipo == "Processos"){
-            var linha = document.createElement("tr");
-        
-            var header = document.createElement("th");
-            header.innerHTML = "Processos";
-            cabecaTabela.appendChild(header);
-
-            var senha = document.createElement("td");
-            senha.innerHTML = dado.senha;
-            linha.appendChild(senha);
-            
-            // var cliente = document.createElement("td");
-            // cliente.innerHTML = dado.cliente;
-            // linha.appendChild(cliente);
-        
-            // var cabine = document.createElement("td");
-            // cabine.innerHTML = dado.cabine;
-            // linha.appendChild(cabine);
-        
-            // var status = document.createElement("td");
-            // status.innerHTML = dado.status;
-            // linha.appendChild(status);
-        
-            corpoTabela.appendChild(linha);
-            break;
-        }      
-    };
-}
-
 async function getFilas(){
         await fetch("/tabela-dados/")
             .then(function(response) {
@@ -144,38 +47,20 @@ async function getFilas(){
             .then(function(dados) {
                 montaTabela(dados);
             });
-        
-        // fetch("/tabela-dados-anteriores/")
-        //     .then(function(response) {
-        //         return response.json();
-        //     })
-        //     .then(function(dados) {
-        //         montaTabelaAnteriores(dados);
-        //     });
-        
     }
 
 
 function cresceSenha(){
     var senha = document.getElementById("minha-div");
     aumentaSenha = [
-        {width:'50%'},
+        {width:'60%'},
         {width:'100%', offset: 0.2},
         {width:'100%', offset: 0.8},
-        {width:'50%', offset: 1},
+        {width:'60%', offset: 1},
     ];
     
     senha.animate(aumentaSenha, {duration: 5000});
 }
-
-// function encolheSenha(){
-//     var senha = document.getElementById("minha-div");
-//     var video = document.getElementById("videoDisplay");
-//     senha.style.width = '30%';
-//     senha.style.height = '55%';
-//     video.style.width = '70%';
-//     video.style.height = '45%';
-// }
 
 function piscaSenha(){
 
