@@ -1,48 +1,85 @@
+function montaTabela(dados) {
+    var corpoTabela = document.getElementById("tbody");
+    corpoTabela.innerHTML = '';
+    dados.forEach(function (dado) {
+        var linha = document.createElement("tr");
+
+        var senha = document.createElement("td");
+        senha.innerHTML = dado.senha;
+        linha.appendChild(senha);
+
+        var tipo = document.createElement("td");
+        tipo.innerHTML = dado.tipo;
+        linha.appendChild(tipo);
+
+        // var cliente = document.createElement("td");
+        // cliente.innerHTML = dado.cliente;
+        // linha.appendChild(cliente);
+
+        // var status = document.createElement("td");
+        // status.innerHTML = dado.status;
+        // linha.appendChild(status);
+
+        corpoTabela.appendChild(linha);
+    });
+}
+// function busca(){
+//   fetch("/tabela-dados-fila/")
+//         .then(function(response) {
+//             return response.json();
+//         })
+//         .then(function(dados) {
+//             montaTabela(dados);
+//         });
+//     }
+
 // conta as filas para mostrar ao atendente
-function contaFila(dados, atendente) {
+async function contaFila(dados) {
+    var pessoasProc = document.getElementById("quantReg");
     var pessoasFila = document.getElementById("quantFila");
     var pessoasPref = document.getElementById("quantPref");
-    var pessoasRegis = document.getElementById("quantReg");
-
+    
     var numPessoas = 0;
     var numPessoasPref = 0;
-    var numPessoasRegis = 0;
-    
-    console.log(atendente);
+    var numPessoasProc = 0;
 
-    if(atendente){
-        for (var i = 0; i < dados.length; i++) {
-            var dado = dados[i];
-                if (dado.status == 'registrar'){
-                    numPessoasRegis++;
-                }
-            }
-    }else{
-        for (var i = 0; i < dados.length; i++) {
-            var dado = dados[i];
-            if (dado.status == 'fila') {
-                switch (dado.tipo) {
-                    case 'Geral':
-                        numPessoas++;
-                        break;
-                    case 'Alvará':
-                        numPessoasPref++;
-                        break;
-                    default:
-                        break;
-                }
+    for (var i = 0; i < dados.length; i++) {
+        var dado = dados[i];
+        if (dado.status == 'fila') {
+            switch (dado.tipo) {
+                case 'Geral':
+                    numPessoas++;
+                    break;
+                case 'Alvará':
+                    numPessoasPref++;
+                    break;
+                default:
+                    break;
             }
         }
-    }        
+        
+        if(dado.status == 'registrar'){
+            numPessoasProc++;
+        }
+    }
+
     try {
         pessoasFila.innerHTML = numPessoas;
         pessoasPref.innerHTML = numPessoasPref;
     } catch (error) {}
     try {
-        pessoasRegis.innerHTML = numPessoasRegis;
+        pessoasProc.innerHTML = numPessoasProc;
     } catch (error) {}
+    
 
-    buttonLight(numPessoas, numPessoasPref, numPessoasRegis, atendente);
+    await fetch('/get-user/')
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(dado){
+        atendente = dado;
+        buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente);
+    });
 }
 
 function buttonGreen(btnCall){
@@ -64,42 +101,38 @@ function buttonGray(btnCall){
     })
 }
 
-function buttonLight(numPessoas, numPessoasPref, numPessoasRegis, atendente) {
+function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
     let btnCall = document.querySelector('#btnCall');
-    if (atendente == true) {
-        if (numPessoasRegis != 0) {
-            buttonGreen(btnCall);
+    if (atendente) {
+        if (numPessoasProc != 0) {
+           buttonGreen(btnCall);
         }
         else {
-            buttonGray(btnCall);
+           buttonGray(btnCall);
         }
     } else {
         if (numPessoas != 0 || numPessoasPref != 0) {
             buttonGreen(btnCall);
         }
         else {
-            buttonGray(btnCall);
+           buttonGray(btnCall);
         }
     }
 }
 
 async function getFilas() {
-    await fetch("/tabela-dados-fila/")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(async function (dados) {
-            let arrayDados = dados;
-            await fetch("/get-user/")
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (dados) {
-                    contaFila(arrayDados, dados);
-                });
+        await fetch("/tabela-dados-fila/")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (dados) {
+                contaFila(dados);
             });
-}
+    }
 
-setInterval(function () {
-    getFilas()
+
+
+// busca()
+setInterval(async function () {
+    getFilas();
 }, 1000);

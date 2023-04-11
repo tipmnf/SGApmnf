@@ -32,7 +32,7 @@ class Atendimento(models.Model):
 
     def gerar_senha(self):
         tipo_atendimento = self.tipo_atendimento
-        ultima_senha = Atendimento.objects.filter(tipo_atendimento=tipo_atendimento).order_by('-numero_senha').first()
+        ultima_senha = Atendimento.objects.filter(tipo_atendimento=tipo_atendimento).order_by('-data_atendimento').first()
         if ultima_senha:
             self.numero_senha = ultima_senha.numero_senha + 1
             if self.numero_senha > 999:
