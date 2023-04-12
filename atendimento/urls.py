@@ -27,4 +27,5 @@ urlpatterns = [
     path('tabela-dados-anteriores/', views.tabela_dados_anteriores, name='tabela_dados_anteriores'),
     path('tabela-dados-fila/', views.tabela_dados_fila, name='tabela_dados_fila'),
     path('tabela-dados-fila/<prefixo>', views.tabela_dados_fila_especifica, name='tabela_dados_fila_especifica'),
+    path('conta-fila/', views.conta_fila, name='conta_fila'),
 ]
