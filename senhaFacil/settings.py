@@ -69,7 +69,12 @@ DATABASES = {
         'USER': 'yan',
         'PASSWORD': '1617021115fam9@@',
         'HOST': '192.168.1.159',
-    }
+    },
+    
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 

@@ -383,6 +383,8 @@ h2 {
 
 .em-atendimento p {
     text-align: center;
+    margin-top: -15px;
+    margin-bottom: 20px;
 }
 
 .em-atendimento a:hover {

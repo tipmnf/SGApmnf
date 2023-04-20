@@ -65,8 +65,12 @@ async function contaFila(dados) {
 
     try {
         pessoasFila.innerHTML = numPessoas;
+    } catch (error) {}
+
+    try {
         pessoasPref.innerHTML = numPessoasPref;
     } catch (error) {}
+
     try {
         pessoasProc.innerHTML = numPessoasProc;
     } catch (error) {}
@@ -103,7 +107,7 @@ function buttonGray(btnCall){
 
 function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
     let btnCall = document.querySelector('#btnCall');
-    if (atendente) {
+    if (atendente.registrador) {
         if (numPessoasProc != 0) {
            buttonGreen(btnCall);
         }
@@ -111,11 +115,20 @@ function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
            buttonGray(btnCall);
         }
     } else {
-        if (numPessoas != 0 || numPessoasPref != 0) {
-            buttonGreen(btnCall);
-        }
-        else {
-           buttonGray(btnCall);
+        if(atendente.tipo == 'Geral'){
+            if (numPessoas != 0) {
+                buttonGreen(btnCall);
+            }
+            else {
+                buttonGray(btnCall);
+            }
+        } else {
+            if (numPessoasPref != 0) {
+                buttonGreen(btnCall);
+            }
+            else {
+                buttonGray(btnCall);
+            }
         }
     }
 }

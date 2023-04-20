@@ -18,7 +18,7 @@ def gerar_senha(request):
         if form.is_valid():
             atendimento = form.save(commit=False)
             atendimento.gerar_senha()
-            atendimento.status_atendimento='registrar'
+            atendimento.status_atendimento='fila'
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
@@ -39,22 +39,20 @@ def chamar_proxima_senha(request):
     try:
 
         # primeiro momento para a cabine registro chamar preferindo a fila Alvará
-        if atendente.registrador == True:
-            senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Alvará').order_by('data_atendimento').first()
-            if not senha_atual:
-                senha_atual = Atendimento.objects.filter(status_atendimento='registrar', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
-            senha_atual.status_atendimento = 'registrando'
-            senha_atual.data_inicio = datetime.now()                
-        # else para caso a cabine não for de registro, chamar da fila registrada
-        else:    
-            senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
-            if not senha_atual:
-                if atendente.tipo_atendimento.nome == 'Alvará':
-                    senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
-                else:
-                    senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Alvará').order_by('data_atendimento').first()    
+        # if atendente.registrador == True:
+        #     senha_atual = Atendimento.objects.filter(status_atendimento='registrar').order_by('data_atendimento').first()
+        #     senha_atual.status_atendimento = 'registrando'
+        #     senha_atual.data_inicio = datetime.now()                
+        # # else para caso a cabine não for de registro, chamar da fila registrada
+        # else:    
+        senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
+            # if not senha_atual:
+            #     if atendente.tipo_atendimento.nome == 'Alvará':
+            #         senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
+            #     else:
+            #         senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome='Alvará').order_by('data_atendimento').first()    
 
-            senha_atual.emAtendimento()
+        senha_atual.emAtendimento()
         senha_atual.atendente = atendente    
         senha_atual.save()
     except:
@@ -111,7 +109,7 @@ def senhas_chamadas(request):
 @login_required
 def tabela_dados(request):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
-    atendimentos = Atendimento.objects.filter((Q(status_atendimento='em atendimento') | Q(status_atendimento='finalizado') | Q(status_atendimento='registrando') | Q(status_atendimento='fila')) & Q(data_atendimento__gte=date.today())).order_by('data_inicio')
+    atendimentos = Atendimento.objects.filter((Q(status_atendimento='em atendimento') | Q(status_atendimento='finalizado')) & Q(data_atendimento__gte=date.today())).order_by('data_inicio')
     dados = [
         {
             'senha': f'{atendimento.tipo_atendimento.prefixo}'+str(atendimento.numero_senha).zfill(3),
@@ -303,8 +301,8 @@ def limpaChamados(request):
 
 def getUser(request):
     atendente = Atendente.objects.get(user=request.user)
-    print(atendente.registrador)
-    return JsonResponse(atendente.registrador, safe=False)
+    dados = {'tipo': atendente.tipo_atendimento.nome, 'registrador': atendente.registrador}
+    return JsonResponse(data=dados, safe=False)
 
 
 
