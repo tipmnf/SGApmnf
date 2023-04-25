@@ -32,20 +32,24 @@
 
 </div>
 <div class="pessoas-fila">
-  {% if atendente.registrador %}
+  {% comment %} {% if atendente.registrador %}
   <h2>Lista de Pessoas na Fila:</h2>
   <hr>
   <p>Na fila para Registrar:</p>
   <p id="quantReg"></p>
-  {% else %}
+  {% else %} {% endcomment %}
   <h2>Lista de Pessoas na Fila:</h2>
   <hr>
   {% if atendente.tipo_atendimento.nome == 'Geral' %}
   <p id="Paragrafo-G">Fila Geral: <span id="quantFila"></span></p>
-  {% else %}
-  <p id="Paragrafo-P">Fila Alvará: <span id="quantPref"></span></p>
   {% endif %}
+  {% if atendente.tipo_atendimento.nome == 'Alvará' %}
+  <p id="Paragrafo-G">Fila Alvará: <span id="quantPref"></span></p>
   {% endif %}
+  {% if atendente.tipo_atendimento.nome == 'Junta Comercial' %}
+  <p id="Paragrafo-P">Fila Junta Comercial: <span id="quantProc"></span></p>
+  {% endif %}
+  {% comment %} {% endif %} {% endcomment %}
   {% if senha %}
   <a href="/em-atendimento/{{senha.id}}/{{prefixo}}">
     Atender

@@ -35,7 +35,7 @@ function montaTabela(dados) {
 
 // conta as filas para mostrar ao atendente
 async function contaFila(dados) {
-    var pessoasProc = document.getElementById("quantReg");
+    var pessoasProc = document.getElementById("quantProc");
     var pessoasFila = document.getElementById("quantFila");
     var pessoasPref = document.getElementById("quantPref");
     
@@ -53,13 +53,12 @@ async function contaFila(dados) {
                 case 'Alvará':
                     numPessoasPref++;
                     break;
+                case 'Junta Comercial':
+                    numPessoasProc++;
+                    break;
                 default:
                     break;
             }
-        }
-        
-        if(dado.status == 'registrar'){
-            numPessoasProc++;
         }
     }
 
@@ -107,28 +106,27 @@ function buttonGray(btnCall){
 
 function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
     let btnCall = document.querySelector('#btnCall');
-    if (atendente.registrador) {
-        if (numPessoasProc != 0) {
-           buttonGreen(btnCall);
+
+    if(atendente.tipo == 'Geral'){
+        if (numPessoas != 0) {
+            buttonGreen(btnCall);
         }
         else {
-           buttonGray(btnCall);
+            buttonGray(btnCall);
+        }
+    } else if(atendente.tipo == 'Alvará'){
+        if (numPessoasPref != 0) {
+            buttonGreen(btnCall);
+        }
+        else {
+            buttonGray(btnCall);
         }
     } else {
-        if(atendente.tipo == 'Geral'){
-            if (numPessoas != 0) {
-                buttonGreen(btnCall);
-            }
-            else {
-                buttonGray(btnCall);
-            }
-        } else {
-            if (numPessoasPref != 0) {
-                buttonGreen(btnCall);
-            }
-            else {
-                buttonGray(btnCall);
-            }
+        if (numPessoasProc != 0) {
+            buttonGreen(btnCall);
+        }
+        else {
+            buttonGray(btnCall);
         }
     }
 }
