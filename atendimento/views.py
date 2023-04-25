@@ -269,18 +269,18 @@ def imprimeSenha(request, atendimento):
         printer.text(dataStr, align="center", font_config=font)
  
        
-    printer_cut = win32print.OpenPrinter(printer_name)
+    # printer_cut = win32print.OpenPrinter(printer_name)
     
-    try:
-        job = win32print.StartDocPrinter(printer_cut, 1, ('Test print', None, "RAW"))
-        try:
-            win32print.WritePrinter(printer_cut, "\n\n\n".encode('utf-8'))
-            win32print.WritePrinter(printer_cut, "\x1Bm".encode('utf-8'))
-        finally:
-            win32print.EndPagePrinter(printer_cut)
-            win32print.EndDocPrinter(printer_cut)
-    finally:
-        win32print.ClosePrinter(printer_cut)
+    # try:
+    #     job = win32print.StartDocPrinter(printer_cut, 1, ('Test print', None, "RAW"))
+    #     try:
+    #         win32print.WritePrinter(printer_cut, "\n\n\n".encode('utf-8'))
+    #         win32print.WritePrinter(printer_cut, "\x1Bm".encode('utf-8'))
+    #     finally:
+    #         win32print.EndPagePrinter(printer_cut)
+    #         win32print.EndDocPrinter(printer_cut)
+    # finally:
+    #     win32print.ClosePrinter(printer_cut)
 
 
 @login_required
