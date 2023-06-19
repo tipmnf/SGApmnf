@@ -112,5 +112,6 @@ setInterval(function() {
 
 setInterval(function() {
     getFilas();
-}, 60 * 60 * 1000);
+}, 60 * 60 *1000);
+
 

@@ -3,7 +3,7 @@ from .forms import GerarSenhaForm
 from .models import Atendimento, TipoAtendimento, Atendente
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, Count
 from escpos.printer import Usb, Escpos
 from datetime import date
 
@@ -145,6 +145,18 @@ def tabela_dados_fila(request):
     ]
     
     return JsonResponse(dados[::-1], safe=False)
+
+@login_required
+def conta_fila(request):
+    
+    atendimentos_contados = [0,0,0]
+    atendimentos_contados[0] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Geral')).count()
+    atendimentos_contados[1] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Preferencial')).count()
+    atendimentos_contados[2] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Processos')).count()
+    
+    print(atendimentos_contados)
+    
+    return JsonResponse(atendimentos_contados, safe=False)
 
 @login_required
 def tabela_dados_fila_especifica(request, prefixo):
