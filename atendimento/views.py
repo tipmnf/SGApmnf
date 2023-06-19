@@ -158,6 +158,18 @@ def tabela_dados_fila(request):
     return JsonResponse(dados[::-1], safe=False)
 
 @login_required
+def conta_fila(request):
+    
+    atendimentos_contados = [0,0,0]
+    atendimentos_contados[0] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Geral')).count()
+    atendimentos_contados[1] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Preferencial')).count()
+    atendimentos_contados[2] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Processos')).count()
+    
+    print(atendimentos_contados)
+    
+    return JsonResponse(atendimentos_contados, safe=False)
+
+@login_required
 def tabela_dados_fila_especifica(request, prefixo):
     # atendimentos = Atendimento.objects.filter(status_atendimento='chamando').order_by('data_atendimento').first()
     atendimentos = Atendimento.objects.all()

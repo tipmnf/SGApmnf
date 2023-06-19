@@ -39,28 +39,28 @@ async function contaFila(dados) {
     var pessoasFila = document.getElementById("quantFila");
     var pessoasPref = document.getElementById("quantPref");
     
-    var numPessoas = 0;
-    var numPessoasPref = 0;
-    var numPessoasProc = 0;
+    var numPessoas = dados[0];
+    var numPessoasPref = dados[1];
+    var numPessoasProc = dados[2];
 
-    for (var i = 0; i < dados.length; i++) {
-        var dado = dados[i];
-        if (dado.status == 'fila') {
-            switch (dado.tipo) {
-                case 'Geral':
-                    numPessoas++;
-                    break;
-                case 'Alvará':
-                    numPessoasPref++;
-                    break;
-                case 'Junta Comercial':
-                    numPessoasProc++;
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+    // for (var i = 0; i < dados.length; i++) {
+    //     var dado = dados[i];
+    //     if (dado.status == 'fila') {
+    //         switch (dado.tipo) {
+    //             case 'Geral':
+    //                 numPessoas++;
+    //                 break;
+    //             case 'Preferencial':
+    //                 numPessoasPref++;
+    //                 break;
+    //             case 'Processos':
+    //                 numPessoasProc++;
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     }
+    // }
 
     try {
         pessoasFila.innerHTML = numPessoas;
@@ -132,7 +132,7 @@ function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
 }
 
 async function getFilas() {
-        await fetch("/tabela-dados-fila/")
+        await fetch("/conta-fila/")
             .then(function (response) {
                 return response.json();
             })
@@ -140,6 +140,7 @@ async function getFilas() {
                 contaFila(dados);
             });
     }
+
 
 
 

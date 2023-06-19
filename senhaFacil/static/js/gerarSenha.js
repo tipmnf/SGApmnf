@@ -43,7 +43,11 @@ function contaFila(dados) {
 // }
 
 let radio = document.querySelectorAll('[type="radio"]');
-let submitInput = document.getElementById('submitButton')
+let submitInput = document.getElementById('submitButton');
+
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+});
 
 function animateShowInScreen() {
     submitInput.animate({
@@ -73,37 +77,3 @@ for (let i = 0; i < radio.length; i++) {
         }, 200)
     })
 }
-
-
-
-function imprimeSenha(cliente) {
-
-    const ThermalPrinter = require("thermal-printer");
-
-    const printer = new ThermalPrinter({
-        type: "epson",
-        interface: "usb",
-    });
-
-    printer
-        .align("center")
-        .bold(true)
-        .println("Hello World!")
-        .bold(false)
-        .println("Welcome to the world of thermal printers.")
-        .cut();
-
-    printer.execute(function (err) {
-        if (err) {
-            console.error("Print failed", err);
-        } else {
-            console.log("Print done");
-        }
-    });
-
-
-}
-
-setInterval(function () {
-    getFilas()
-}, 5000);

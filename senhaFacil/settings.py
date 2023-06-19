@@ -33,6 +33,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'senhaFacil.urls'
@@ -116,8 +117,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL='/admin'
+
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Making so accounts "never"
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_AGE = 31536000  

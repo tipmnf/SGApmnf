@@ -43,7 +43,7 @@ function contaFila(dados) {
 
     var numPessoas = 0;
     var numPessoasPref = 0;
-    var numPessoasProc = 0
+    var numPessoasProc = 0;
 
     for (var i = 0; i < dados.length; i++) {
         var dado = dados[i];

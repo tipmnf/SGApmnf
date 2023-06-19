@@ -90,12 +90,14 @@ async function getChamando(){
         
         if(taChamando > auxChamando){
             cresceSenha();
+            getFilas();
             setTimeout(function(){
                 getFilas();
                 piscaSenha();
                 document.getElementById('toque').play();
             }, 1000);
             auxChamando = taChamando;
+            
         }else{
             auxChamando = taChamando;
         }
