@@ -1,5 +1,9 @@
 let radio = document.querySelectorAll('[type="radio"]');
-let submitInput = document.getElementById('submitButton')
+let submitInput = document.getElementById('submitButton');
+
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+});
 
 function animateShowInScreen() {
     submitInput.animate({
