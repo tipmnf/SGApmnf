@@ -21,10 +21,10 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            try:
-                imprimeSenha(request, atendimento)
-            except:
-                return render(request, 'erro.html', context)
+            # try:
+            #     imprimeSenha(request, atendimento)
+            # except:
+            #     return render(request, 'erro.html', context)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -155,8 +155,6 @@ def conta_fila(request):
     atendimentos_contados[0] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Geral')).count()
     atendimentos_contados[1] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Preferencial')).count()
     atendimentos_contados[2] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Processos')).count()
-    
-    print(atendimentos_contados)
     
     return JsonResponse(atendimentos_contados, safe=False)
 
