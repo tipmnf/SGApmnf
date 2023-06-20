@@ -5,6 +5,11 @@ document.addEventListener('contextmenu', function(event) {
     event.preventDefault();
 });
 
+document.addEventListener('selectstart', function(e){
+    e.preventDefault();
+});
+
+
 function animateShowInScreen() {
     submitInput.animate({
         opacity: [0, 1],
