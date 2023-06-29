@@ -67,7 +67,7 @@ DATABASES = {
         'NAME': 'senhas_facil',
         'PORT': '3306',
 
-        'USER': 'senha_facil',
+        'USER': 'senhas_facil',
         'PASSWORD': 'senhas_facil_123654*mudar',
         'HOST': '192.168.1.220',
     }
