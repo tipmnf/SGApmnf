@@ -69,7 +69,7 @@ DATABASES = {
 
         'USER': 'senha_facil',
         'PASSWORD': 'senhas_facil_123654*mudar',
-        'HOST': '192.168.1.159',
+        'HOST': '192.168.1.220',
     }
 }
 
