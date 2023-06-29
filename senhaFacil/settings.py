@@ -67,9 +67,9 @@ DATABASES = {
         'NAME': 'senhas_facil_b',
         'PORT': '3306',
 
-        'USER': 'yan',
-        'PASSWORD': '1617021115fam9@@',
-        'HOST': '192.168.1.159',
+        'USER': 'senhas_facil',
+        'PASSWORD': 'senhas_facil_123654*mudar',
+        'HOST': '192.168.1.220',
     },
     
     # 'default': {
