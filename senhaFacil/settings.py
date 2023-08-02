@@ -8,7 +8,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 SECRET_KEY = 'django-insecure-)d1t%ekw9u0+#n-)*b=vw%n08)3g=#)^cn_2+@wqbb+-@-6woi'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
