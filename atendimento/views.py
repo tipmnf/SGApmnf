@@ -59,7 +59,7 @@ def chamar_proxima_senha(request):
         senha_atual=Atendimento.objects.filter(status_atendimento='em atendimento', atendente=atendente).order_by('data_atendimento').first()
     
     if not senha_atual:
-        return render(request, 'proxima_senha.html', {'senha': senha_atual})
+        return render(request, 'proxima_senha.html', {'senha': senha_atual, 'atendente': atendente})
 
     return render(request, 'em-atendimento.html', {'senha': senha_atual, 'cabine': atendente.cabine})
 
@@ -162,8 +162,8 @@ def conta_fila(request):
     
     atendimentos_contados = [0,0,0]
     atendimentos_contados[0] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Geral')).count()
-    atendimentos_contados[1] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Preferencial')).count()
-    atendimentos_contados[2] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Processos')).count()
+    atendimentos_contados[1] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Alvará')).count()
+    atendimentos_contados[2] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Bloqueio')).count()
     
     print(atendimentos_contados)
     

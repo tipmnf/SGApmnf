@@ -38,7 +38,7 @@ async function contaFila(dados) {
     var pessoasProc = document.getElementById("quantProc");
     var pessoasFila = document.getElementById("quantFila");
     var pessoasPref = document.getElementById("quantPref");
-    
+
     var numPessoas = dados[0];
     var numPessoasPref = dados[1];
     var numPessoasProc = dados[2];

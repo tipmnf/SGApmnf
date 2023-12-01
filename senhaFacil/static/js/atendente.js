@@ -34,68 +34,117 @@ function montaTabela(dados) {
 //     }
 
 // conta as filas para mostrar ao atendente
-function contaFila(dados) {
+async function contaFila(dados) {
+    var pessoasProc = document.getElementById("quantProc");
     var pessoasFila = document.getElementById("quantFila");
     var pessoasPref = document.getElementById("quantPref");
-    var pessoasProc = document.getElementById("quantProc");
 
-    console.log("estou contando");
+    var numPessoas = dados[0];
+    var numPessoasPref = dados[1];
+    var numPessoasProc = dados[2];
 
-    var numPessoas = 0;
-    var numPessoasPref = 0;
-    var numPessoasProc = 0;
+    // for (var i = 0; i < dados.length; i++) {
+    //     var dado = dados[i];
+    //     if (dado.status == 'fila') {
+    //         switch (dado.tipo) {
+    //             case 'Geral':
+    //                 numPessoas++;
+    //                 break;
+    //             case 'Preferencial':
+    //                 numPessoasPref++;
+    //                 break;
+    //             case 'Processos':
+    //                 numPessoasProc++;
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     }
+    // }
 
-    for (var i = 0; i < dados.length; i++) {
-        var dado = dados[i];
-        if (dado.status == 'fila') {
-            switch (dado.tipo) {
-                case 'Geral':
-                    numPessoas++;
-                    break;
-                case 'Alvará':
-                    numPessoasPref++;
-                    break;
-                case 'Processos':
-                    numPessoasProc++;
-                    break;
-                default:
-                    break;
-            }
+    try {
+        pessoasFila.innerHTML = numPessoas;
+    } catch (error) {}
+
+    try {
+        pessoasPref.innerHTML = numPessoasPref;
+    } catch (error) {}
+
+    try {
+        pessoasProc.innerHTML = numPessoasProc;
+    } catch (error) {}
+    
+
+    await fetch('/get-user/')
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(dado){
+        atendente = dado;
+        buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente);
+    });
+}
+
+function buttonGreen(btnCall){
+    btnCall.style.backgroundColor = '#20b92c';
+    btnCall.addEventListener('mouseover', function () {
+        btnCall.style.backgroundColor = '#04fc18'
+    })
+    btnCall.addEventListener('mouseout', function () {
+        btnCall.style.backgroundColor = '#20b92c';
+    })
+}
+
+function buttonGray(btnCall){
+    btnCall.addEventListener('mouseover', function () {
+        btnCall.style.backgroundColor = "#4e4e4e"
+    })
+    btnCall.addEventListener('mouseout', function () {
+        btnCall.style.backgroundColor = "gray"
+    })
+}
+
+function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
+    let btnCall = document.querySelector('#btnCall');
+
+    if(atendente.tipo == 'Geral'){
+        if (numPessoas != 0) {
+            buttonGreen(btnCall);
+        }
+        else {
+            buttonGray(btnCall);
+        }
+    } else if(atendente.tipo == 'Alvará'){
+        if (numPessoasPref != 0) {
+            buttonGreen(btnCall);
+        }
+        else {
+            buttonGray(btnCall);
+        }
+    } else {
+        if (numPessoasProc != 0) {
+            buttonGreen(btnCall);
+        }
+        else {
+            buttonGray(btnCall);
         }
     }
-
-    console.log("contei:", numPessoas, numPessoasPref, numPessoasProc);
-
-    pessoasFila.innerHTML = numPessoas;
-    pessoasPref.innerHTML = numPessoasPref;
-    pessoasProc.innerHTML = numPessoasProc;
-
-    let btnCall = document.querySelector('#btnCall');
-    console.log(typeof (btnCall));
-    if (numPessoas != 0 || numPessoasPref != 0 || numPessoasProc != 0) {
-        addEventListener('hover', function(){
-            btnCall.style.backgroundColor = '#04fc18'
-        })
-        btnCall.style.backgroundColor = '#20b92c';
-        console.log('ta')
-    }
-    else {
-        btnCall.style.backgroundColor = 'gray';
-        console.log('ok')
-    }
 }
 
-function getFilas() {
-    fetch("/tabela-dados-fila/")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (dados) {
-            contaFila(dados);
-        });
-}
+async function getFilas() {
+        await fetch("/conta-fila/")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (dados) {
+                contaFila(dados);
+            });
+    }
+
+
+
 
 // busca()
-setInterval(function () {
-    getFilas()
-}, 5000);
+setInterval(async function () {
+    getFilas();
+}, 1000);
