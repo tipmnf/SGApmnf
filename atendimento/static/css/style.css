@@ -323,7 +323,7 @@ h2 {
     border-radius: 35px;
     float: right;
     margin-top: 120px;
-    height: 50%
+    height: fit-content!important;
 }
 
 .pessoas-fila a {
@@ -340,11 +340,11 @@ h2 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.pessoas-fila #btnCall[href="/chamar-proxima-senha/"]:hover {
+.pessoas-fila .btnCall {
     text-decoration: underline;
 }
 
-.pessoas-fila #btnCall[href="/chamar-proxima-senha/"] {
+.pessoas-fila .btnCall {
     background: gray;
 }
 

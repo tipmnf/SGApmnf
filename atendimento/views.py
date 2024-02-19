@@ -22,10 +22,10 @@ def gerar_senha(request):
             atendimento.save()
             form = GerarSenhaForm()
             context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all(), 'atendimento': atendimento}
-            try:
-                imprimeSenha(request, atendimento)
-            except:
-                return render(request, 'erro.html', context)
+            # try:
+            #     # imprimeSenha(request, atendimento)
+            # except:
+                # return render(request, 'erro.html', context)
             return render(request, 'gerar_senha.html', context)        
     context={'form': form, 'tipos_atendimento': TipoAtendimento.objects.all()}
 
@@ -33,8 +33,9 @@ def gerar_senha(request):
     return render(request, 'gerar_senha.html', context)
 
 @login_required
-def chamar_proxima_senha(request):
+def chamar_proxima_senha(request, prefixo):
     atendente = Atendente.objects.get(user=request.user) 
+    tipo = TipoAtendimento.objects.get(prefixo=prefixo)
     limpaChamados(request)       
     try:
 
@@ -45,7 +46,7 @@ def chamar_proxima_senha(request):
         #     senha_atual.data_inicio = datetime.now()                
         # # else para caso a cabine não for de registro, chamar da fila registrada
         # else:    
-        senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = atendente.tipo_atendimento).order_by('data_atendimento').first()
+        senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento = tipo).order_by('data_atendimento').first()
             # if not senha_atual:
             #     if atendente.tipo_atendimento.nome == 'Alvará':
             #         senha_atual = Atendimento.objects.filter(status_atendimento='fila', tipo_atendimento__nome = 'Geral').order_by('data_atendimento').first()
@@ -59,9 +60,9 @@ def chamar_proxima_senha(request):
         senha_atual=Atendimento.objects.filter(status_atendimento='em atendimento', atendente=atendente).order_by('data_atendimento').first()
     
     if not senha_atual:
-        return render(request, 'proxima_senha.html', {'senha': senha_atual, 'atendente': atendente})
+        return render(request, 'proxima_senha.html', {'senha': senha_atual, 'atendente': atendente, 'tipos_atendimento': TipoAtendimento.objects.all()})
 
-    return render(request, 'em-atendimento.html', {'senha': senha_atual, 'cabine': atendente.cabine})
+    return render(request, 'em-atendimento.html', {'senha': senha_atual, 'cabine': atendente.cabine, 'tipos_atendimento': TipoAtendimento.objects.all()})
 
 @login_required
 def chamar_proxima_senha_especifica(request, prefixo):
@@ -88,7 +89,7 @@ def ocioso(request):
         atendente.cabine = request.POST.get('cabine')
         atendente.save()
     senha_atual=None
-    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'atendente': atendente})
+    return render(request, 'proxima_senha.html', {'senha': senha_atual, 'atendente': atendente, 'tipos_atendimento': TipoAtendimento.objects.all()})
 
 @login_required
 def ocioso_especifico(request, prefixo):
@@ -159,13 +160,11 @@ def tabela_dados_fila(request):
 
 @login_required
 def conta_fila(request):
-    
-    atendimentos_contados = [0,0,0]
-    atendimentos_contados[0] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Geral')).count()
-    atendimentos_contados[1] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Alvará')).count()
-    atendimentos_contados[2] = Atendimento.objects.filter(Q(status_atendimento='fila') & Q(tipo_atendimento__nome='Bloqueio')).count()
-    
-    print(atendimentos_contados)
+    atendimentos = TipoAtendimento.objects.all()
+    atendimentos_contados = []
+    for tipo in atendimentos:
+        aux = Atendimento.objects.filter(tipo_atendimento=tipo, status_atendimento="fila").count()
+        atendimentos_contados.append(aux)
     
     return JsonResponse(atendimentos_contados, safe=False)
 
@@ -313,7 +312,7 @@ def limpaChamados(request):
 
 def getUser(request):
     atendente = Atendente.objects.get(user=request.user)
-    dados = {'tipo': atendente.tipo_atendimento.nome, 'registrador': atendente.registrador}
+    dados = {'tipo': atendente.tipo_atendimento.first().nome, 'registrador': atendente.registrador}
     return JsonResponse(data=dados, safe=False)
 
 

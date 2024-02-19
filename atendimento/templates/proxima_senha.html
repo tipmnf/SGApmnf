@@ -51,15 +51,20 @@
   {% endif %}
   {% comment %} {% endif %} {% endcomment %}
   {% if senha %}
-  <a href="/em-atendimento/{{senha.id}}/{{prefixo}}">
+  <a href="/em-atendimento/{{senha.id}}">
     Atender
   </a>
   {% else %}
-  <a id="btnCall" href="/chamar-proxima-senha/{{prefixo}}">
-    Chamar Próximo da Fila
-  </a>
+  {% for tipo in tipos_atendimento %}
+  <div style="padding-bottom: 5px; {% if tipo not in atendente.tipo_atendimento.all %} display: none; {% endif %}">
+    Pessoas na fila {{tipo.nome}}: <b class="quant">{{tipo.naFila}}</b>
+    <a class="btnCall" href="/chamar-proxima-senha/{{tipo.prefixo}}">
+      Chamar Próximo da Fila {{tipo.nome}}
+    </a>
+  </div>
+  {% endfor %}
   {% endif %}
-
+</div>
 <script src="/static/js/atendente.js"></script>
 
 {% endblock %}

@@ -35,45 +35,14 @@ function montaTabela(dados) {
 
 // conta as filas para mostrar ao atendente
 async function contaFila(dados) {
-    var pessoasProc = document.getElementById("quantProc");
-    var pessoasFila = document.getElementById("quantFila");
-    var pessoasPref = document.getElementById("quantPref");
 
-    var numPessoas = dados[0];
-    var numPessoasPref = dados[1];
-    var numPessoasProc = dados[2];
+    var quantArray = document.querySelectorAll(".quant")
+    console.log(quantArray)
+    console.log(dados)
 
-    // for (var i = 0; i < dados.length; i++) {
-    //     var dado = dados[i];
-    //     if (dado.status == 'fila') {
-    //         switch (dado.tipo) {
-    //             case 'Geral':
-    //                 numPessoas++;
-    //                 break;
-    //             case 'Preferencial':
-    //                 numPessoasPref++;
-    //                 break;
-    //             case 'Processos':
-    //                 numPessoasProc++;
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //     }
-    // }
-
-    try {
-        pessoasFila.innerHTML = numPessoas;
-    } catch (error) {}
-
-    try {
-        pessoasPref.innerHTML = numPessoasPref;
-    } catch (error) {}
-
-    try {
-        pessoasProc.innerHTML = numPessoasProc;
-    } catch (error) {}
-    
+    for (let index = 0; index < quantArray.length; index++) {
+        quantArray[index].innerText = dados[index]
+    }
 
     await fetch('/get-user/')
     .then(function(response){
@@ -81,7 +50,7 @@ async function contaFila(dados) {
     })
     .then(function(dado){
         atendente = dado;
-        buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente);
+        buttonLight(dados);
     });
 }
 
@@ -104,29 +73,14 @@ function buttonGray(btnCall){
     })
 }
 
-function buttonLight(numPessoas, numPessoasPref, numPessoasProc, atendente) {
-    let btnCall = document.querySelector('#btnCall');
+function buttonLight(dados) {
+    let btnCall = document.querySelectorAll('.btnCall');
 
-    if(atendente.tipo == 'Geral'){
-        if (numPessoas != 0) {
-            buttonGreen(btnCall);
-        }
-        else {
-            buttonGray(btnCall);
-        }
-    } else if(atendente.tipo == 'Alvará'){
-        if (numPessoasPref != 0) {
-            buttonGreen(btnCall);
-        }
-        else {
-            buttonGray(btnCall);
-        }
-    } else {
-        if (numPessoasProc != 0) {
-            buttonGreen(btnCall);
-        }
-        else {
-            buttonGray(btnCall);
+    for (let index = 0; index < btnCall.length; index++) {
+        if(dados[index] != 0){
+            buttonGreen(btnCall[index]);
+        }else{
+            buttonGray(btnCall[index]);
         }
     }
 }

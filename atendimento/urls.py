@@ -10,7 +10,7 @@ urlpatterns = [
     path('get-user/', views.getUser, name='get-user'),
     
     path('chamar-proxima-senha/', views.chamar_proxima_senha, name='chamar_proxima_senha'),
-    path('chamar-proxima-senha/<prefixo>', views.chamar_proxima_senha_especifica, name='chamar_proxima_senha_especifica'),
+    path('chamar-proxima-senha/<prefixo>', views.chamar_proxima_senha, name='chamar_proxima_senha_especifica'),
     path('ta-chamando/', views.getSenhaAtual, name= 'ta_chamando'),
     
     path('em-atendimento/', views.proximo, name='proximo'),

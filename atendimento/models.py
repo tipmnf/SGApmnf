@@ -8,6 +8,9 @@ class TipoAtendimento(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.CharField(max_length=255)
 
+    def naFila(self):
+        return Atendimento.objects.filter(tipo_atendimento=self, status_atendimento='fila').count()
+    
     def __str__(self):
         return self.nome
 
@@ -15,7 +18,7 @@ class Atendente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cabine = models.CharField(max_length=100)
     registrador = models.BooleanField(default=False)
-    tipo_atendimento = models.ForeignKey(TipoAtendimento, on_delete=models.PROTECT)
+    tipo_atendimento = models.ManyToManyField(TipoAtendimento, verbose_name="Tipo")
 
     def __str__(self):
         return self.user.username
