@@ -66,12 +66,13 @@ p#quantReg {
 .gerar-senha form label {
     background: #fff;
     color: #0d578e;
-    padding: 25px;
+    padding: 15px;
     border: 5px solid #0d578e;
     display: flex;
     justify-content: center;
     width: 100%;
     margin: auto 10px;
+    margin-bottom: -20px;
 }
 
 .gerar-senha form input:checked+label {
